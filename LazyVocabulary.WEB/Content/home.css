@@ -1,0 +1,176 @@
+﻿html,
+body {
+	height: 100%;
+	font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font: inherit;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 100;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+p {
+    font-size: 1em;
+}
+
+.navbar-default {
+
+}
+
+.navbar-default.transparent {
+    background-color: transparent;
+    border: none;
+}
+
+.navbar-default.transparent .navbar-nav>li>a {
+    color: #fff;
+}
+
+#cover {
+	background: #2d3655 url('../Content/Images/night-sky.jpg') center top no-repeat;
+	background-size: cover;
+	color: #fff;
+	height: 100%;
+	text-align: center;
+	display: flex;
+	align-items: center;
+}
+
+#cover-caption {
+	width: 100%;
+}
+
+#cover-caption p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-bottom: 3rem;
+}
+
+#cover-caption a {
+    font-size: 1.2rem;
+    font-weight: 300;
+    padding: 0.75rem 2rem;
+    min-width: 140px;
+    background-color: rgba(91, 192, 222, 0.7);
+    outline: none;
+    transition: background-color ease-in 0.5s;
+}
+
+#cover-caption a:hover {
+    background-color: rgba(91, 192, 222, 1);
+    transition: background-color ease-in 0.5s;
+}
+
+#cover-caption a:active {
+    box-shadow: none;
+}
+
+.arrow-down {
+    position: absolute;
+    left: 50%;
+    bottom: 2rem;
+    margin-left: -10px;
+    font-size: 40px;
+    cursor: default;
+    opacity: 0.7;
+    animation: arrow-animation linear 1.5s infinite;
+}
+
+@-webkit-keyframes arrow-animation {
+    0% {
+        -ms-transform: translate(0, 0);
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+
+    50% {
+        -ms-transform: translate(0, 50%);
+        -webkit-transform: translate(0, 50%);
+        -moz-transform: translate(0, 50%);
+        transform: translate(0, 50%);
+    }
+
+    100% {
+        -ms-transform: translate(0, 0);
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+}
+
+@-moz-keyframes arrow-animation {
+    0% {
+        -ms-transform: translate(0, 0);
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+
+    50% {
+        -ms-transform: translate(0, 50%);
+        -webkit-transform: translate(0, 50%);
+        -moz-transform: translate(0, 50%);
+        transform: translate(0, 50%);
+    }
+
+    100% {
+        -ms-transform: translate(0, 0);
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+}
+
+@-ms-keyframes arrow-animation {
+    0% {
+        -ms-transform: translate(0, 0);
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+
+    50% {
+        -ms-transform: translate(0, 50%);
+        -webkit-transform: translate(0, 50%);
+        -moz-transform: translate(0, 50%);
+        transform: translate(0, 50%);
+    }
+
+    100% {
+        -ms-transform: translate(0, 0);
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes arrow-animation {
+    0% {
+        -ms-transform: translate(0, 0);
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+
+    50% {
+        -ms-transform: translate(0, 50%);
+        -webkit-transform: translate(0, 50%);
+        -moz-transform: translate(0, 50%);
+        transform: translate(0, 50%);
+    }
+
+    100% {
+        -ms-transform: translate(0, 0);
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+}
