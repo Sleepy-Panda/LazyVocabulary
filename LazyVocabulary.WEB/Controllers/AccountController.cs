@@ -64,8 +64,8 @@ namespace LazyVocabulary.WEB.Controllers
         {
             ViewBag.ReturnUrl = returnUrl;
 
-            var user = new UserDTO { UserName = "UserName", Email = "llol@gmail.com" };
-            await UserService.Create(user);
+            //var user = new UserDTO { UserName = "UserName", Email = "llol@gmail.com" };
+            //await UserService.Create(user);
 
             return View();
         }

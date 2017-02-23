@@ -1,7 +1,56 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
-<h2>Login</h2>
-
+<div id="cover">
+    <div id="cover-caption">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 form-box">
+                    <div class="form-top">
+                        <div class="form-top-left">
+                            <h3>Вход на сайт</h3>
+                            <p>Для входа введите адрес электронной почты и пароль, использованные при <a>регистрации</a>:</p>
+                        </div>
+                        <div class="form-top-right">
+                            <i class="fa fa-key"></i>
+                        </div>
+                    </div>
+                    <div class="form-bottom">
+                        <form role="form" action="" method="post" class="login-form">
+                            <div class="form-group">
+                                <label class="sr-only" for="form-username">Email</label>
+                                <input type="text" name="form-username" placeholder="Email..." class="form-username form-control" id="form-username">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="form-password">Пароль</label>
+                                <input type="password" name="form-password" placeholder="Пароль..." class="form-password form-control" id="form-password">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn">Войти</button>
+                            </div>                 
+                            <a href="" class="form-restore-password">Восстановить пароль</a>
+                        </form>
+                    </div>
+                </div>
+            </div>           
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 social-login">
+                    <p>...или войдите с помощью:</p>
+                    <div class="social-login-buttons">
+                        <a class="btn btn-link-2" href="#">
+                            <i class="fa fa-facebook"></i> Facebook
+                        </a>
+                        <a class="btn btn-link-2" href="#">
+                            <i class="fa fa-twitter"></i> Twitter
+                        </a>
+                        <a class="btn btn-link-2" href="#">
+                            <i class="fa fa-google-plus"></i> Google Plus
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
