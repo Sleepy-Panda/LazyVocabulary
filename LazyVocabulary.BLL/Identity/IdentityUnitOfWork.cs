@@ -43,6 +43,14 @@ namespace LazyVocabulary.BLL.Identity
             }
         }
 
+        public ApplicationContext ApplicationContext
+        {
+            get
+            {
+                return db;
+            }
+        }
+
         public void Save()
         {
             db.SaveChanges();

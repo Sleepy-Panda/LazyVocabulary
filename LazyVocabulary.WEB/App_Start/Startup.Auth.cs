@@ -15,7 +15,6 @@ namespace LazyVocabulary.WEB
 
         public void ConfigureAuth(IAppBuilder app)
         {
-
             app.CreatePerOwinContext<IUserService>(CreateUserService);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 

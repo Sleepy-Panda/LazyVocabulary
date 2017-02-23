@@ -1,4 +1,5 @@
 ﻿using LazyVocabulary.BLL.Identity;
+using LazyVocabulary.DAL.EF;
 using System;
 using System.Threading.Tasks;
 
@@ -8,6 +9,7 @@ namespace LazyVocabulary.BLL.Interfaces
     {
         ApplicationUserManager UserManager { get; }
         ApplicationRoleManager RoleManager { get; }
+        ApplicationContext ApplicationContext { get; }
 
         void Save();
         Task SaveAsync();

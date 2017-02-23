@@ -22,7 +22,7 @@ namespace LazyVocabulary.BLL.Identity
 
         public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
         {
-            return new ApplicationSignInManager(context.Get<IUserService>(), context.Authentication);
+            return new ApplicationSignInManager(context.Get<IUserService>().GetUserManager(), context.Authentication);
         }
     }
 }

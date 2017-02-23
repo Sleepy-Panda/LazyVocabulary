@@ -16,19 +16,37 @@ namespace LazyVocabulary.WEB.Controllers
         private ApplicationSignInManager _signInManager;
         private IAuthenticationManager _authenticationManager;
 
-        private IUserService UserService
+        public AccountController()
+        {
+        }
+
+        public AccountController(IUserService userService, ApplicationSignInManager signInManager)
+        {
+            UserService = userService;
+            SignInManager = signInManager;
+        }
+
+        public IUserService UserService
         {
             get
             {
                 return _userService ?? HttpContext.GetOwinContext().Get<IUserService>();
             }
+            private set
+            {
+                _userService = value;
+            }
         }
 
-        private ApplicationSignInManager SignInManager
+        public ApplicationSignInManager SignInManager
         {
             get
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -46,8 +64,8 @@ namespace LazyVocabulary.WEB.Controllers
         {
             ViewBag.ReturnUrl = returnUrl;
 
-            var user = new UserDTO { UserName = "llol@gmail.com", Email = "llol@gmail.com" };
-            UserService.Create(user);
+            var user = new UserDTO { UserName = "UserName", Email = "llol@gmail.com" };
+            await UserService.Create(user);
 
             return View();
         }

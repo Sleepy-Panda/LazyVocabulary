@@ -8,6 +8,7 @@ namespace LazyVocabulary.DAL.Entities
         public string Name { get; set; }
         public string Code { get; set; }
         public string FlagImagePath { get; set; }
+        public bool IsDefault { get; set; } = false;
 
         public virtual ICollection<UserProfile> UserProfiles { get; set; }
 

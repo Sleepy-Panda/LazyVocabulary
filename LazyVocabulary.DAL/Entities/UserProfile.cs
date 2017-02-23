@@ -8,12 +8,14 @@ namespace LazyVocabulary.DAL.Entities
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime UpdatedAt { get; set; }
+        public DateTime PasswordUpdatedAt { get; set; } = DateTime.Now;
         public string AvatarImagePath { get; set; }
 
-        public Guid ApplicationUserId { get; set; }
         public int GuiLanguageId { get; set; }
+        public virtual GuiLanguage GuiLanguage { get; set; }
 
         public virtual ApplicationUser ApplicationUser { get; set; }
-        public virtual GuiLanguage GuiLanguage { get; set; }
     }
 }

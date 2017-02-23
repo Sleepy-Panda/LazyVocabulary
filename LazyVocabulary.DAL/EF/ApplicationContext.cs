@@ -1,16 +1,15 @@
 ﻿using LazyVocabulary.DAL.Entities;
+using LazyVocabulary.DAL.Mapping;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure.Annotations;
 
 namespace LazyVocabulary.DAL.EF
 {
     public class ApplicationContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<GuiLanguage> GuiLanguages { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Dictionary> Dictionaries { get; set; }
 
         public ApplicationContext(string conectionString) 
@@ -21,13 +20,13 @@ namespace LazyVocabulary.DAL.EF
         {
             base.OnModelCreating(modelBuilder);
 
-            GetLanguageMapping(modelBuilder);
-            GetGuiLanguageMapping(modelBuilder);
-            GetUserProfileMapping(modelBuilder);
-            GetDictionaryMapping(modelBuilder);
+            modelBuilder.Configurations.Add(new LanguageMapping());
+            modelBuilder.Configurations.Add(new GuiLanguageMapping());
+            modelBuilder.Configurations.Add(new UserProfileMapping());
+            modelBuilder.Configurations.Add(new DictionaryMapping());
         }
 
-        protected void GetLanguageMapping(DbModelBuilder modelBuilder)
+        /*protected void GetLanguageMapping(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Language>()
                 .HasKey(l => l.Id);
@@ -100,8 +99,6 @@ namespace LazyVocabulary.DAL.EF
             modelBuilder.Entity<UserProfile>().Property(u => u.AvatarImagePath)
                 .IsOptional()
                 .HasMaxLength(256);
-
-            modelBuilder.Entity<UserProfile>().HasRequired(u => u.ApplicationUser).WithOptional(au => au.UserProfile);
         }
 
         protected void GetDictionaryMapping(DbModelBuilder modelBuilder)
@@ -142,6 +139,6 @@ namespace LazyVocabulary.DAL.EF
 
             modelBuilder.Entity<Dictionary>().Property(d => d.CreatedAt)
                 .IsRequired();
-        }
+        }*/
     }
 }
