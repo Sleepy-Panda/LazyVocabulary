@@ -6,6 +6,11 @@ namespace LazyVocabulary.WEB.Controllers
     {
         public ActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return View("Test");
+            }
+
             return View();
         }
     }

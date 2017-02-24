@@ -1,5 +1,4 @@
 ﻿using LazyVocabulary.BLL.Identity;
-using LazyVocabulary.BLL.Interfaces;
 using LazyVocabulary.BLL.Services;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
@@ -11,11 +10,9 @@ namespace LazyVocabulary.WEB
 {
     public partial class Startup
     {
-        IServiceCreator serviceCreator = new ServiceCreator();
-
         public void ConfigureAuth(IAppBuilder app)
         {
-            app.CreatePerOwinContext<IUserService>(CreateUserService);
+            app.CreatePerOwinContext<UserService>(CreateUserService);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
@@ -35,9 +32,10 @@ namespace LazyVocabulary.WEB
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
         }
 
-        private IUserService CreateUserService()
+        private UserService CreateUserService()
         {
-            return serviceCreator.CreateUserService("DefaultConnection");
+            return new UserService("DefaultConnection");
+            //return serviceCreator.CreateUserService("DefaultConnection");
         }
     }
 }

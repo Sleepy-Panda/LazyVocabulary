@@ -1,4 +1,4 @@
-﻿using LazyVocabulary.BLL.Interfaces;
+﻿using LazyVocabulary.BLL.Services;
 using LazyVocabulary.DAL.Entities;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -22,7 +22,7 @@ namespace LazyVocabulary.BLL.Identity
 
         public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
         {
-            return new ApplicationSignInManager(context.Get<IUserService>().GetUserManager(), context.Authentication);
+            return new ApplicationSignInManager(context.Get<UserService>().GetUserManager(), context.Authentication);
         }
     }
 }

@@ -89,12 +89,9 @@
     <Compile Include="Identity\ApplicationRoleManager.cs" />
     <Compile Include="Identity\ApplicationSignInManager.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
-    <Compile Include="Identity\IdentityUnitOfWork.cs" />
-    <Compile Include="Interfaces\IIdentityUnitOfWork.cs" />
-    <Compile Include="Interfaces\IServiceCreator.cs" />
-    <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ServiceCreator.cs" />
+    <Compile Include="OperationDetails\Result.cs" />
+    <Compile Include="OperationDetails\ResultWithData.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -9,7 +9,8 @@ namespace LazyVocabulary.DAL.Mapping
         {
             HasKey(u => u.Id);
 
-            HasRequired(u => u.ApplicationUser);
+            HasRequired(u => u.ApplicationUser)
+                .WithOptional(u => u.UserProfile);
 
             Property(u => u.Name)
                 .IsRequired()

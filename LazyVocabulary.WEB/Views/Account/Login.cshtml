@@ -1,51 +1,60 @@
-﻿@{
+﻿@using LazyVocabulary.WEB.Models;
+@model LoginViewModel
+
+@{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
 <div id="cover">
     <div id="cover-caption">
+        <div class="home">
+            <a href="/Home/Index" title="На домашнюю страницу"><i class="fa fa-home"></i></a>
+        </div>
+
         <div class="container">
             <div class="row">
-                <div class="col-sm-6 col-sm-offset-3 form-box">
+                <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3 form-box">
                     <div class="form-top">
                         <div class="form-top-left">
                             <h3>Вход на сайт</h3>
-                            <p>Для входа введите адрес электронной почты и пароль, использованные при <a>регистрации</a>:</p>
+                            <p>Для входа введите имя пользователя или адрес электронной почты и пароль, использованные при @Html.ActionLink("регистрации", "Register"):</p>
                         </div>
                         <div class="form-top-right">
                             <i class="fa fa-key"></i>
                         </div>
                     </div>
                     <div class="form-bottom">
-                        <form role="form" action="" method="post" class="login-form">
+                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
                             <div class="form-group">
-                                <label class="sr-only" for="form-username">Email</label>
-                                <input type="text" name="form-username" placeholder="Email..." class="form-username form-control" id="form-username">
+                                @Html.TextBoxFor(m => m.Login, new { @class = "form-control", @placeholder = "Имя пользователя или Email..." })
+                                @Html.ValidationMessageFor(m => m.Login, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
-                                <label class="sr-only" for="form-password">Пароль</label>
-                                <input type="password" name="form-password" placeholder="Пароль..." class="form-password form-control" id="form-password">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Пароль..." })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn">Войти</button>
-                            </div>                 
-                            <a href="" class="form-restore-password">Восстановить пароль</a>
-                        </form>
+                                <button type="submit" class="btn"><i class="fa fa-sign-in"></i> Войти</button>
+                            </div>
+                            @Html.ActionLink("Восстановить пароль", "Login")
+                        }
                     </div>
                 </div>
-            </div>           
+            </div>
             <div class="row">
-                <div class="col-sm-6 col-sm-offset-3 social-login">
+                <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3 social-login">
                     <p>...или войдите с помощью:</p>
                     <div class="social-login-buttons">
-                        <a class="btn btn-link-2" href="#">
+                        <a class="btn btn-transparent social-login-button" href="#">
                             <i class="fa fa-facebook"></i> Facebook
                         </a>
-                        <a class="btn btn-link-2" href="#">
+                        <a class="btn btn-transparent social-login-button disabled" href="#">
                             <i class="fa fa-twitter"></i> Twitter
                         </a>
-                        <a class="btn btn-link-2" href="#">
+                        <a class="btn btn-transparent social-login-button disabled" href="#">
                             <i class="fa fa-google-plus"></i> Google Plus
                         </a>
                     </div>
