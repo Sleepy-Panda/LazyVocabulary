@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LazyVocabulary.DAL.UnitOfWork
 {
-    public class EFUnitOfWork : IEFUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private ApplicationContext db;
 
@@ -16,7 +16,7 @@ namespace LazyVocabulary.DAL.UnitOfWork
         private UserProfileRepository userProfileRepository;
         private DictionaryRepository dictionaryRepository;
 
-        public EFUnitOfWork(string connectionString)
+        public UnitOfWork(string connectionString)
         {
             db = new ApplicationContext(connectionString);
         }

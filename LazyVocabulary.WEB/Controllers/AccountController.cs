@@ -1,32 +1,24 @@
-﻿using Microsoft.Owin.Security;
+﻿using LazyVocabulary.BLL.DTO;
+using LazyVocabulary.BLL.Services;
+using LazyVocabulary.WEB.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using System;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity.Owin;
-using LazyVocabulary.BLL.Identity;
-using LazyVocabulary.BLL.Services;
-using System.Threading.Tasks;
-using LazyVocabulary.BLL.DTO;
-using LazyVocabulary.WEB.Models;
-using System.Security.Claims;
-using Microsoft.AspNet.Identity;
-using System;
 
 namespace LazyVocabulary.WEB.Controllers
 {
     public class AccountController : Controller
     {
         private UserService _userService;
-        //private ApplicationSignInManager _signInManager;
-        private IAuthenticationManager _authenticationManager;
+        private UserProfileService _userProfileService;
 
-        public AccountController()
+        public AccountController(UserProfileService service)
         {
-        }
-
-        public AccountController(UserService userService, ApplicationSignInManager signInManager)
-        {
-            UserService = userService;
-            //SignInManager = signInManager;
+            _userProfileService = service;
         }
 
         public UserService UserService
@@ -41,23 +33,23 @@ namespace LazyVocabulary.WEB.Controllers
             }
         }
 
-        /*public ApplicationSignInManager SignInManager
+        public UserProfileService UserProfileService
         {
             get
             {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+                return _userProfileService;
             }
             private set
             {
-                _signInManager = value;
+                _userProfileService = value;
             }
-        }*/
+        }
 
         private IAuthenticationManager AuthenticationManager
         {
             get
             {
-                return _authenticationManager ?? HttpContext.GetOwinContext().Authentication;
+                return HttpContext.GetOwinContext().Authentication;
             }
         }
 
@@ -66,6 +58,11 @@ namespace LazyVocabulary.WEB.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             ViewBag.ReturnUrl = returnUrl;
 
             return View();
@@ -90,6 +87,13 @@ namespace LazyVocabulary.WEB.Controllers
             };
 
             var resultWithData = await UserService.CreateIdentityAsync(user);
+
+            if (!resultWithData.Success)
+            {
+                ModelState.AddModelError("", resultWithData.Message);
+                return View(model);
+            }
+
             var claim = resultWithData.ResultData;
 
             AuthenticationManager.SignOut();
@@ -120,6 +124,11 @@ namespace LazyVocabulary.WEB.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
@@ -134,34 +143,54 @@ namespace LazyVocabulary.WEB.Controllers
                 return View(model);
             }
 
+            // Create default user profile and get its ID.
+            //var resultWithIntData = await UserProfileService.CreateDefaultProfileForUserAsync();
+
+            //if (!resultWithIntData.Success)
+            //{
+            //    ModelState.AddModelError("", resultWithIntData.Message);
+            //    return View(model);
+            //}
+
+            //var userId = resultWithIntData.ResultData;
+
+            // Create application user.
             var user = new UserDTO {
                 UserName = model.UserName,
                 Email = model.Email,
                 Password = model.Password,
             };
 
-            var result = await UserService.CreateUserAsync(user);
+            var resultWithStringData = await UserService.CreateUserAsync(user);
 
-            if (result.Success)
+            if (!resultWithStringData.Success)
             {
-                var resultWithData = await UserService.CreateIdentityAsync(user);
-                var claim = resultWithData.ResultData;
-
-                AuthenticationManager.SignOut();
-                AuthenticationManager.SignIn(
-                    new AuthenticationProperties
-                    {
-                        IsPersistent = true,
-                        ExpiresUtc = DateTimeOffset.UtcNow.AddDays(7),
-                    }, 
-                    claim
-                );
-
-                return RedirectToAction("Index", "Home");
+                ModelState.AddModelError("", resultWithStringData.Message);
+                return View(model);
             }
 
-            ModelState.AddModelError("", result.Message);
-            return View(model);
+            // Log in created user using claim.
+            var resultWithClaimData = await UserService.CreateIdentityAsync(user);
+
+            if (!resultWithClaimData.Success)
+            {
+                ModelState.AddModelError("", resultWithClaimData.Message);
+                return View(model);
+            }
+
+            var claim = resultWithClaimData.ResultData;
+
+            AuthenticationManager.SignOut();
+            AuthenticationManager.SignIn(
+                new AuthenticationProperties
+                {
+                    IsPersistent = true,
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddDays(7),
+                }, 
+                claim
+            );
+
+            return RedirectToAction("Index", "Home");
         }
 
         private ActionResult RedirectToLocal(string returnUrl)
@@ -170,6 +199,7 @@ namespace LazyVocabulary.WEB.Controllers
             {
                 return Redirect(returnUrl);
             }
+
             return RedirectToAction("Index", "Home");
         }
 

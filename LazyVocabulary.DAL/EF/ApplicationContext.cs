@@ -12,6 +12,9 @@ namespace LazyVocabulary.DAL.EF
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Dictionary> Dictionaries { get; set; }
 
+        public ApplicationContext()
+        { }
+
         public ApplicationContext(string conectionString) 
             : base(conectionString)
         { }
@@ -24,6 +27,7 @@ namespace LazyVocabulary.DAL.EF
             modelBuilder.Configurations.Add(new GuiLanguageMapping());
             modelBuilder.Configurations.Add(new UserProfileMapping());
             modelBuilder.Configurations.Add(new DictionaryMapping());
+            modelBuilder.Configurations.Add(new ApplicationUserMapping());
         }
 
         /*protected void GetLanguageMapping(DbModelBuilder modelBuilder)

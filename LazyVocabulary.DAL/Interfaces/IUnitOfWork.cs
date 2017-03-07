@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace LazyVocabulary.DAL.Interfaces
 {
-    public interface IEFUnitOfWork : IDisposable
+    public interface IUnitOfWork : IDisposable
     {
         IRepository<Language> Languages { get; }
         IRepository<GuiLanguage> GuiLanguages { get; }

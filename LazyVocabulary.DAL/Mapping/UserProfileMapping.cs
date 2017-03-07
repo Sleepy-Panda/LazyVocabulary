@@ -9,25 +9,22 @@ namespace LazyVocabulary.DAL.Mapping
         {
             HasKey(u => u.Id);
 
-            HasRequired(u => u.ApplicationUser)
-                .WithOptional(u => u.UserProfile);
-
             Property(u => u.Name)
-                .IsRequired()
+                .IsOptional()
                 .HasMaxLength(64);
 
             Property(u => u.Surname)
-                .IsRequired()
+                .IsOptional()
                 .HasMaxLength(64);
 
             Property(u => u.DateOfBirth)
-                .IsRequired();
+                .IsOptional();
 
             Property(u => u.CreatedAt)
                 .IsRequired();
 
             Property(u => u.UpdatedAt)
-                .IsOptional();
+                .IsRequired();
 
             Property(u => u.PasswordUpdatedAt)
                 .IsRequired();
@@ -35,6 +32,10 @@ namespace LazyVocabulary.DAL.Mapping
             Property(u => u.AvatarImagePath)
                 .IsRequired()
                 .HasMaxLength(256);
+
+            // Temp
+            Property(u => u.GuiLanguageId)
+                .IsOptional();
         }
     }
 }

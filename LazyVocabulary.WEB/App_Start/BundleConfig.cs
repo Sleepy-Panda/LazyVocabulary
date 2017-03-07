@@ -29,9 +29,9 @@ namespace LazyVocabulary.WEB
                       "~/Content/home.css",
                       "~/Content/font-awesome.min.css"));
 
-            bundles.Add(new StyleBundle("~/Content/logincss").Include(
+            bundles.Add(new StyleBundle("~/Content/authcss").Include(
                       "~/Content/bootstrap.min.css",
-                      "~/Content/login.css",
+                      "~/Content/auth.css",
                       "~/Content/font-awesome.min.css"));
         }
     }

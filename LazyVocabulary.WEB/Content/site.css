@@ -22,3 +22,17 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.dropdown-inverse {
+  background-color: #222;
+  border-color: #080808;
+}
+
+.dropdown-inverse>li>a {
+    color: #999;
+}
+
+.dropdown-inverse>li>a:hover {
+      color: #fff;
+      background-color: #000;
+}
