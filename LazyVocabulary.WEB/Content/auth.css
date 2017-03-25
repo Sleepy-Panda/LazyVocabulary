@@ -32,6 +32,7 @@ a:active {
 
 .container {
 	margin: 0 50px 0 130px;
+    padding: 0;
 }
 
 .left-menu-container {

@@ -253,3 +253,12 @@ body {
     font-size: 12px;
     color: #CCC;
 }
+
+.top-buttons-container {
+	padding: 20px 50px 20px 50px;
+	border-bottom: 1px solid #f1f1f1;
+}
+
+.row {
+    margin: 0;
+}
