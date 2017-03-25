@@ -7,7 +7,7 @@ namespace LazyVocabulary.DAL.Mapping
     {
         internal ApplicationUserMapping()
         {
-            ToTable("AspNetUsers");
+            ToTable("ApplicationUsers");
 
             HasOptional(u => u.UserProfile)
                 .WithRequired(u => u.ApplicationUser)

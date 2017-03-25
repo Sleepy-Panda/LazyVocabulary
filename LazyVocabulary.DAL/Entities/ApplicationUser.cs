@@ -12,9 +12,15 @@ namespace LazyVocabulary.DAL.Entities
 
         public virtual ICollection<Dictionary> Dictionaries { get; set; }
 
+        public virtual ICollection<Subscription> TargetSubscriptions { get; set; }
+
+        public virtual ICollection<Subscription> SubscriberSubscriptions { get; set; }
+
         public ApplicationUser()
         {
             Dictionaries = new List<Dictionary>();
+            TargetSubscriptions = new List<Subscription>();
+            SubscriberSubscriptions = new List<Subscription>();
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

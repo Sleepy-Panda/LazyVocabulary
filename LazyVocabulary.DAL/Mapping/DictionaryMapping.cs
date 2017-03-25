@@ -11,6 +11,11 @@ namespace LazyVocabulary.DAL.Mapping
         {
             HasKey(d => d.Id);
 
+            HasRequired(d => d.ApplicationUser)
+                .WithMany(u => u.Dictionaries)
+                .HasForeignKey(d => d.ApplicationUserId)
+                .WillCascadeOnDelete(false);
+
             HasRequired(d => d.SourceLanguage)
                 .WithMany(d => d.SourceDictionaries)
                 .HasForeignKey(d => d.SourceLanguageId)

@@ -63,6 +63,9 @@
     <Compile Include="Entities\Dictionary.cs" />
     <Compile Include="Entities\GuiLanguage.cs" />
     <Compile Include="Entities\Language.cs" />
+    <Compile Include="Entities\SourcePhrase.cs" />
+    <Compile Include="Entities\Subscription.cs" />
+    <Compile Include="Entities\TranslatedPhrase.cs" />
     <Compile Include="Entities\UserProfile.cs" />
     <Compile Include="Enums\DictionaryAccessModifier.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
@@ -71,6 +74,9 @@
     <Compile Include="Mapping\DictionaryMapping.cs" />
     <Compile Include="Mapping\GuiLanguageMapping.cs" />
     <Compile Include="Mapping\LanguageMapping.cs" />
+    <Compile Include="Mapping\SourcePhraseMapping.cs" />
+    <Compile Include="Mapping\SubscriptionMapping.cs" />
+    <Compile Include="Mapping\TranslatedPhraseMapping.cs" />
     <Compile Include="Mapping\UserProfileMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DictionaryRepository.cs" />
