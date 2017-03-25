@@ -26,7 +26,7 @@ body {
 	height: 100%;
 	width: 80px;
 	z-index: 1000;
-	background-color: #333;
+	background-color: #262626;
 }
 
 .left-menu-item-container {
@@ -45,6 +45,21 @@ body {
 .left-menu-item-container > span i {
 	color: #fff;
 	font-size: 20px;
+    opacity: 0.8;
+    -webkit-transition: all .3s ease-in-out;
+       -moz-transition: all .3s ease-in-out;
+        -ms-transition: all .3s ease-in-out; 
+         -o-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
+}
+
+.left-menu-item-container > span:hover i {
+    opacity: 1;
+    -webkit-transition: all .3s ease-in-out;
+       -moz-transition: all .3s ease-in-out;
+        -ms-transition: all .3s ease-in-out; 
+         -o-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
 }
 
 .left-menu-block-container {
@@ -56,32 +71,48 @@ body {
     height: 100%;
     opacity: 0;
     background: rgba(247, 248, 249, .95);
-    transition: all 0.3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+       -moz-transition: all .3s ease-in-out;
+        -ms-transition: all .3s ease-in-out; 
+         -o-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
 }
 
 .left-menu-item-container:hover .left-menu-block-container {
 	visibility: visible;
 	width: 300px;
     opacity: 1;
-    transition: all 0.3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+       -moz-transition: all .3s ease-in-out;
+        -ms-transition: all .3s ease-in-out; 
+         -o-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
 }
 
 .left-menu-block-container.closed {
 	width: 0;
     opacity: 0;
-    transition: all 0.3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+       -moz-transition: all .3s ease-in-out;
+        -ms-transition: all .3s ease-in-out; 
+         -o-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
 }
 
 .left-menu-block-container.opened {
 	visibility: visible;
 	width: 300px;
     opacity: 1;
-    transition: all 0.3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+       -moz-transition: all .3s ease-in-out;
+        -ms-transition: all .3s ease-in-out; 
+         -o-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
 }
 
 .left-menu-block-container span,
 .left-menu-block-container ul {
-	color: #333;
+	color: #262626;
 	font-weight: 300;
 	text-transform: uppercase;
 	letter-spacing: 2px;
@@ -129,8 +160,12 @@ body {
 }
 
 .menu-block-links ul a {
-	color: #333;
-	transition: all 0.3s ease-in-out;
+	color: #262626;
+	-webkit-transition: all .3s ease-in-out;
+       -moz-transition: all .3s ease-in-out;
+        -ms-transition: all .3s ease-in-out; 
+         -o-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
 }
 
 .menu-block-links ul a:hover,
@@ -138,7 +173,11 @@ body {
 .menu-block-links ul a:focus {
 	color: #999;
 	text-decoration: none;
-	transition: all 0.3s ease-in-out;
+	-webkit-transition: all .3s ease-in-out;
+       -moz-transition: all .3s ease-in-out;
+        -ms-transition: all .3s ease-in-out; 
+         -o-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
 }
 
 .menu-block-buttons {

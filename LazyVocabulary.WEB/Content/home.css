@@ -17,7 +17,7 @@ h1 {
 }
 
 p {
-    font-size: 1em;
+
 }
 
 .container {
@@ -51,6 +51,21 @@ p {
 .left-menu-item-container > a i {
 	color: #fff;
 	font-size: 20px;
+    opacity: 0.8;
+    -webkit-transition: all .3s ease-in-out;
+       -moz-transition: all .3s ease-in-out;
+        -ms-transition: all .3s ease-in-out; 
+         -o-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
+}
+
+.left-menu-item-container > a:hover i {
+    opacity: 1;
+    -webkit-transition: all .3s ease-in-out;
+       -moz-transition: all .3s ease-in-out;
+        -ms-transition: all .3s ease-in-out; 
+         -o-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
 }
 
 #cover {
@@ -69,26 +84,33 @@ p {
 }
 
 #cover-caption p {
-    font-size: 1.2rem;
+    font-size: 18px;
     font-weight: 300;
     margin-bottom: 3rem;
 }
 
 #cover-caption a {
-    font-size: 1.2rem;
-    font-weight: 300;
-    padding: 0.75rem 2rem;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 14px 40px;
     margin-bottom: 3rem;
-    min-width: 140px;
     background-color: rgba(91, 192, 222, 0.7);
     outline: none;
     border: none;
-    transition: background-color ease-in 0.5s;
+    -webkit-transition: all .3s ease-in-out;
+       -moz-transition: all .3s ease-in-out;
+        -ms-transition: all .3s ease-in-out; 
+         -o-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
 }
 
 #cover-caption a:hover {
     background-color: rgba(91, 192, 222, 1);
-    transition: background-color ease-in 0.5s;
+    -webkit-transition: all .3s ease-in-out;
+       -moz-transition: all .3s ease-in-out;
+        -ms-transition: all .3s ease-in-out; 
+         -o-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
 }
 
 #cover-caption a:active {
