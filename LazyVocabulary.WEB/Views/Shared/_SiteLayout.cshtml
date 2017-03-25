@@ -8,7 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -38,8 +38,66 @@
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
+    </div>*@
+
+    <div class="left-menu-container">
+        <div class="left-menu-item-container">
+            <span>
+                <i class="fa fa-book"></i>
+            </span>
+            <div class="left-menu-block-container">
+                <div class="animated flipInY">
+                    <div class="menu-block-header">
+                        <i class="fa fa-book"></i>
+                        <!--<img class="img-rounded" src="assets/images/notepad.png"></img>-->
+                        <span>ИЗУЧЕНИЕ</span>
+                    </div>
+                    <hr />
+                    <div class="menu-block-links">
+                        <ul>
+                            <li>
+                                <a href="#">Словари</a>
+                            </li>
+                            <li>
+                                <a href="#">Переводы</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <hr />
+                    <div class="menu-block-buttons">
+                        <a href="#" class="btn btn-info">Добавить словарь</a>
+                        <a href="#" class="btn btn-info">Добавить перевод</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="left-menu-item-container">
+            <span>
+                <i class="fa fa-user"></i>
+            </span>
+            <div class="left-menu-block-container">
+                Настройки, язык, выход
+            </div>
+        </div>
+        <div class="left-menu-item-container">
+            <span>
+                <i class="fa fa-users"></i>
+            </span>
+            <div class="left-menu-block-container">
+                Подписки, уведомления, комментарии
+            </div>
+        </div>
+        <div class="left-menu-item-container">
+            <span>
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="left-menu-block-container">
+                Пользователи, словари
+            </div>
+        </div>
     </div>
-    <div class="container body-content">
+
+    <div class="body-content">
         @RenderBody()
     </div>
 

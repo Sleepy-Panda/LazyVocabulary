@@ -5,6 +5,31 @@ body {
     font-size: 16px;
 }
 
+a {
+    font-size: 16px;
+    font-weight: 500;
+    color: #428bca;
+    opacity: 0.8;
+    -webkit-transition: all .3s;
+       -moz-transition: all .3s;
+        -ms-transition: all .3s; 
+         -o-transition: all .3s;
+            transition: all .3s;
+}
+
+a:hover,
+a:focus,
+a:active {
+    opacity: 1;
+    text-decoration: none;
+    color: #428bca;
+    -webkit-transition: all .3s;
+       -moz-transition: all .3s;
+        -ms-transition: all .3s; 
+         -o-transition: all .3s;
+            transition: all .3s;
+}
+
 .container {
 	margin: 0 50px 0 130px;
 }
@@ -36,6 +61,21 @@ body {
 .left-menu-item-container > a i {
 	color: #fff;
 	font-size: 20px;
+    opacity: 0.8;
+    -webkit-transition: all .3s;
+       -moz-transition: all .3s;
+        -ms-transition: all .3s; 
+         -o-transition: all .3s;
+            transition: all .3s;
+}
+
+.left-menu-item-container > a:hover i {
+    opacity: 1;
+    -webkit-transition: all .3s;
+       -moz-transition: all .3s;
+        -ms-transition: all .3s; 
+         -o-transition: all .3s;
+            transition: all .3s;
 }
 
 #cover {
@@ -59,34 +99,6 @@ h3 {
 
 p {
     font-weight: 300;
-}
-
-a {
-    font-weight: 500;
-    color: #5BC0DE;
-}
-
-a:hover {
-    color: #5BC0DE;
-    opacity: 0.6;
-}
-
-.home {
-    position: absolute;
-    left: 0.5rem;
-    top: 0.5rem;
-    margin-left: 0.5rem;
-}
-
-.home a {
-    font-size: 2rem;
-    line-height: 2rem;
-    opacity: 0.6;
-    color: #fff;
-}
-
-.home a:hover {
-    opacity: 0.4;
 }
 
 .form-box {
@@ -237,7 +249,6 @@ input[type="password"]::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder, 
 textarea.form-control::-webkit-input-placeholder { 
     color: #888; 
-
 }
 
 button.btn {
@@ -267,8 +278,13 @@ button.btn {
 }
 
 button.btn:hover {
-    opacity: 0.6;
+    opacity: 0.8;
     color: #fff;
+    -webkit-transition: all .3s;
+       -moz-transition: all .3s;
+        -ms-transition: all .3s; 
+         -o-transition: all .3s;
+            transition: all .3s;
 }
 
 button.btn:active { 
@@ -282,7 +298,7 @@ button.btn:active {
 
 button.btn:focus { 
     outline: 0; 
-    opacity: 0.6; 
+    opacity: 0.8; 
     background: #1abc9c; 
     color: #fff; 
 }
@@ -290,7 +306,7 @@ button.btn:focus {
 button.btn:active:focus, 
 button.btn.active:focus { 
     outline: 0; 
-    opacity: 0.6; 
+    opacity: 0.8; 
     background: #5BC0DE; 
     color: #fff; 
 }

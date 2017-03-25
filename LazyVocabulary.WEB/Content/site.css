@@ -1,38 +1,216 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿html,
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: "Roboto", sans-serif;
+	font-size: 16px;
+	font-weight: 300;
 }
 
-/* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+	margin: 0 0 0 80px;
+    padding: 0;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.container {
+    margin: 0 50px 0 50px;
+    padding: 0;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.left-menu-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	position: fixed;
+	height: 100%;
+	width: 80px;
+	z-index: 1000;
+	background-color: #333;
 }
 
-.dropdown-inverse {
-  background-color: #222;
-  border-color: #080808;
+.left-menu-item-container {
+	text-align: center;
+	width: 100%;
+	margin: 10px 0;
+	line-height: 40px;
 }
 
-.dropdown-inverse>li>a {
-    color: #999;
+.left-menu-item-container > span {
+	display: inline-block;
+	width: 100%;
+	cursor: pointer;
 }
 
-.dropdown-inverse>li>a:hover {
-      color: #fff;
-      background-color: #000;
+.left-menu-item-container > span i {
+	color: #fff;
+	font-size: 20px;
+}
+
+.left-menu-block-container {
+	position: absolute;
+	visibility: hidden;
+    left: 80px;
+    top: 0;
+    width: 0;
+    height: 100%;
+    opacity: 0;
+    background: rgba(247, 248, 249, .95);
+    transition: all 0.3s ease-in-out;
+}
+
+.left-menu-item-container:hover .left-menu-block-container {
+	visibility: visible;
+	width: 300px;
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+}
+
+.left-menu-block-container.closed {
+	width: 0;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.left-menu-block-container.opened {
+	visibility: visible;
+	width: 300px;
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+}
+
+.left-menu-block-container span,
+.left-menu-block-container ul {
+	color: #333;
+	font-weight: 300;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+
+.left-menu-block-container hr {
+	margin: 5px auto;
+	background-color: #CCC;
+    height: 2px;
+    width: 50px;
+    border: none;
+}
+
+.menu-block-header {
+	margin-top: 50px;
+}
+
+.menu-block-header .img-rounded {
+	width: 150px;
+	height: 150px;
+	border: none;
+}
+
+.menu-block-header i {
+	display: block;
+	font-size: 40px;
+	color: #999;
+}
+
+.menu-block-header span {
+	display: block;
+	margin-top: 1em;
+	font-size: 20px;
+}
+
+.menu-block-links {
+
+}
+
+.menu-block-links ul {
+	margin: 0;
+	padding: 40px 0 0;
+	list-style-type: none;
+	font-size: 14px;
+}
+
+.menu-block-links ul a {
+	color: #333;
+	transition: all 0.3s ease-in-out;
+}
+
+.menu-block-links ul a:hover,
+.menu-block-links ul a:active,
+.menu-block-links ul a:focus {
+	color: #999;
+	text-decoration: none;
+	transition: all 0.3s ease-in-out;
+}
+
+.menu-block-buttons {
+	padding: 40px 0 0;
+}
+
+.menu-block-buttons a.btn {
+	margin-bottom: 1em;
+    display: block;
+}
+
+.top-menu-container {
+	padding: 10px 50px 10px 130px;
+	height: 80px;
+	background-color: #FFF;
+	border-bottom: 2px solid #f1f1f1;
+}
+
+.top-menu-container .top-menu-logo {
+	display: inline-block;
+	height: 100%;
+}
+
+.top-menu-container .top-menu-logo img {
+	max-height: 100%;
+}
+
+.top-menu-container .top-menu-user-section {
+	display: inline-block;
+	height: 100%;
+}
+
+.top-menu-container .top-menu-logout {
+	display: inline-block;
+	position: absolute;
+    right: 50px;
+	height: 100%;
+}
+
+.top-menu-container .top-menu-user-section .user-name {
+	display: inline-block;
+	height: 100%;
+}
+
+.top-menu-container .top-menu-user-section .user-avatar {
+	display: inline-block;
+	height: 100%;
+	margin: 0 20px 0 20px;
+}
+
+.top-menu-container .top-menu-user-section .user-avatar img {
+	height: 60px;
+	width: 60px;
+	border-radius: 30px;
+}
+
+.breadcrump-container {
+	padding: 10px 50px 10px 50px;
+	background-color: #f7f8f9;
+	border-bottom: 2px solid #f1f1f1;
+	font-size: 14px;
+	color: #999;
+}
+
+.breadcrump-container i {
+	padding-right: 5px;
+}
+
+.breadcrump-container .separator:after {
+	padding: 0 5px;
+	font-family: "FontAwesome";
+    content: "\f101";
+    font-size: 12px;
+    color: #CCC;
 }

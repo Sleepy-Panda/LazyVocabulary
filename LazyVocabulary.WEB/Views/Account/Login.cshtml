@@ -25,31 +25,26 @@
 </div>
 
 <div id="cover">
-    <div id="cover-caption">
-        <div class="home">
-            <a href="/Home/Index" title="На домашнюю страницу"><i class="fa fa-home"></i></a>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3 form-box">
-                    <div class="form-top">
-                        <div class="form-top-left">
-                            <h3>Вход на сайт</h3>
-                            <p>Для входа введите имя пользователя или адрес электронной почты и пароль, использованные при @Html.ActionLink("регистрации", "Register"):</p>
-                        </div>
-                        <div class="form-top-right">
-                            <i class="fa fa-key"></i>
-                        </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3 form-box">
+                <div class="form-top">
+                    <div class="form-top-left">
+                        <h3>Вход на сайт</h3>
+                        <p>Для входа введите имя пользователя или адрес электронной почты и пароль, использованные при регистрации:</p>
                     </div>
-                    <div class="form-bottom">
-                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <div class="form-group">
-                                @Html.TextBoxFor(m => m.Login, new { @class = "form-control", @placeholder = "Имя пользователя или Email..." })
-                                @Html.ValidationMessageFor(m => m.Login, "", new { @class = "text-danger" })
-                            </div>
+                    <div class="form-top-right">
+                        <i class="fa fa-key"></i>
+                    </div>
+                </div>
+                <div class="form-bottom">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Login, new { @class = "form-control", @placeholder = "Имя пользователя или Email..." })
+                            @Html.ValidationMessageFor(m => m.Login, "", new { @class = "text-danger" })
+                        </div>
                             <div class="form-group">
                                 @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Пароль..." })
                                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
@@ -58,24 +53,23 @@
                                 <button type="submit" class="btn"><i class="fa fa-sign-in"></i> Войти</button>
                             </div>
                             @Html.ActionLink("Восстановить пароль", "Login")
-                        }
-                    </div>
+                    }
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3 social-login-container">
-                    <p>...или войдите с помощью:</p>
-                    <div class="social-login-buttons">
-                        <a class="btn btn-transparent social-login-button" href="#">
-                            <i class="fa fa-facebook"></i> Facebook
-                        </a>
-                        <a class="btn btn-transparent social-login-button disabled" href="#">
-                            <i class="fa fa-twitter"></i> Twitter
-                        </a>
-                        <a class="btn btn-transparent social-login-button disabled" href="#">
-                            <i class="fa fa-google-plus"></i> Google Plus
-                        </a>
-                    </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3 social-login-container">
+                <p>...или войдите с помощью:</p>
+                <div class="social-login-buttons">
+                    <a class="btn btn-transparent social-login-button" href="#">
+                        <i class="fa fa-facebook"></i> Facebook
+                    </a>
+                    <a class="btn btn-transparent social-login-button disabled" href="#">
+                        <i class="fa fa-twitter"></i> Twitter
+                    </a>
+                    <a class="btn btn-transparent social-login-button disabled" href="#">
+                        <i class="fa fa-google-plus"></i> Google Plus
+                    </a>
                 </div>
             </div>
         </div>
