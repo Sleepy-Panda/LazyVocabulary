@@ -143,17 +143,6 @@ namespace LazyVocabulary.WEB.Controllers
                 return View(model);
             }
 
-            // Create default user profile and get its ID.
-            //var resultWithIntData = await UserProfileService.CreateDefaultProfileForUserAsync();
-
-            //if (!resultWithIntData.Success)
-            //{
-            //    ModelState.AddModelError("", resultWithIntData.Message);
-            //    return View(model);
-            //}
-
-            //var userId = resultWithIntData.ResultData;
-
             // Create application user.
             var user = new UserDTO {
                 UserName = model.UserName,

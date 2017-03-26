@@ -15,12 +15,21 @@ namespace LazyVocabulary.DAL.EF
         public DbSet<SourcePhrase> SourcePhrases { get; set; }
         public DbSet<TranslatedPhrase> TranslatedPhrases { get; set; }
 
+        static ApplicationContext()
+        {
+            Database.SetInitializer<ApplicationContext>(new DbInitializer());
+        }
+
         public ApplicationContext()
-        { }
+        {
+
+        }
 
         public ApplicationContext(string conectionString) 
             : base(conectionString)
-        { }
+        {
+            
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

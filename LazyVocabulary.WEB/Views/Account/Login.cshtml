@@ -38,6 +38,7 @@
                     </div>
                 </div>
                 <div class="form-bottom">
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
                     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form" }))
                     {
                         @Html.AntiForgeryToken()

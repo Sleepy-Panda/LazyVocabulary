@@ -1,0 +1,52 @@
+﻿@using LazyVocabulary.WEB.Models;
+@model CreateDictionaryViewModel
+
+@{
+    ViewBag.Title = "Новый словарь";
+}
+
+<div class="breadcrump-container">
+    <i class="fa fa-home"></i>
+    <a href="/Home/Index">Главная</a>
+    <span class="separator"></span>
+    <a href="/Dictionary/Index">Мои словари</a>
+    <span class="separator"></span>
+    Новый словарь
+</div>
+
+<div class="top-buttons-container">
+    <div class="row">
+        <a href="/Dictionary/Create" class="btn btn-info pull-right">
+            <i class="fa fa-plus"></i> Очистить форму
+        </a>
+    </div>
+</div>
+
+@using (Ajax.BeginForm("Create", "Dictionary", new AjaxOptions
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    OnBegin = "onBegin",
+    OnComplete = "onComplete",
+    UpdateTargetId = "target",
+    LoadingElementId = "loader",
+}))
+{
+    <div id="target" class="container">
+        @Html.Partial("_Create")
+    </div>
+}
+
+
+@section Scripts {
+    <script>
+        function onBegin() {
+            $("#btn").attr("disabled", "disabled");
+        };
+
+        function onComplete() {
+            $('#btn').attr('disabled', false);
+            $('#result').attr('style', 'display:normal');
+        };
+    </script>
+}

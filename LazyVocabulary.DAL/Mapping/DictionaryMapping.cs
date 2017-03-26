@@ -42,7 +42,7 @@ namespace LazyVocabulary.DAL.Mapping
                 );
 
             Property(d => d.Description)
-                .IsRequired()
+                .IsOptional()
                 .HasMaxLength(256);
 
             Property(d => d.CreatedAt)

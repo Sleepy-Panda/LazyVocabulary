@@ -23,13 +23,7 @@ function bindForm(dialog) {
                 if (result.success) {
                     $('#myModal').modal('hide');
                     $('#progress').hide();
-
-                    $('#target').load('/Song/PostFilter #ajaxGrid',
-                        {
-                            searchString: document.getElementById("searchString").value,
-                            albumID: document.getElementById("AlbumID").value
-                        });
-                    //location.reload();
+                   // location.reload();
                     //alert("Информация об альбоме была успешно удалена.");
                 } else {
                     $('#myModalContent').html(result);

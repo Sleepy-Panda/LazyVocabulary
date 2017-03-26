@@ -1,10 +1,12 @@
 ﻿using LazyVocabulary.BLL.DTO;
 using LazyVocabulary.BLL.Interfaces;
 using LazyVocabulary.BLL.OperationDetails;
+using LazyVocabulary.DAL.Entities;
 using LazyVocabulary.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LazyVocabulary.BLL.Services
 {
@@ -46,6 +48,44 @@ namespace LazyVocabulary.BLL.Services
             }
 
             return resultWithData;
+        }
+
+        public async Task<Result> Create(DictionaryDTO dto)
+        {
+            var result = new Result();
+
+            try
+            {
+                var dictionary = new Dictionary
+                {
+                    Name = dto.Name,
+                    Description = dto.Description,
+                    ApplicationUserId = dto.ApplicationUserId,
+                    SourceLanguageId = dto.SourceLanguageId,
+                    TargetLanguageId = dto.TargetLanguageId,
+                };
+                Database.Dictionaries.Create(dictionary);
+                await Database.SaveAsync();
+
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+                result.StackTrace = ex.StackTrace;
+            }
+
+            return result;
+        }
+
+        public bool IsDictionaryNameAvailable(string dictionaryName)
+        {
+            bool result = Database.Dictionaries
+                .Find(d => d.Name.Equals(dictionaryName))
+                .SingleOrDefault() == null;
+
+            return result;
         }
 
         private bool disposed = false;
