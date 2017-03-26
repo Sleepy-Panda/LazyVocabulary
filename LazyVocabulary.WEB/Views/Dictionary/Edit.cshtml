@@ -1,8 +1,8 @@
 ﻿@using LazyVocabulary.WEB.Models;
-@model CreateDictionaryViewModel
+@model EditDictionaryViewModel
 
 @{
-    ViewBag.Title = "Новый словарь";
+    ViewBag.Title = "Редактировать словарь";
 }
 
 <div class="breadcrump-container">
@@ -11,7 +11,7 @@
     <span class="separator"></span>
     <a href="/Dictionary/Index">Мои словари</a>
     <span class="separator"></span>
-    Новый словарь
+    Редактировать словарь
 </div>
 
 <div class="top-buttons-container">
@@ -22,7 +22,7 @@
     </div>
 </div>
 
-@using (Ajax.BeginForm("Create", "Dictionary", new AjaxOptions
+@using (Ajax.BeginForm("Edit", "Dictionary", new AjaxOptions
 {
     HttpMethod = "POST",
     InsertionMode = InsertionMode.Replace,
@@ -33,7 +33,7 @@
 }))
 {
     <div id="target" class="container">
-        @Html.Partial("_Create")
+        @Html.Partial("_Edit")
     </div>
 }
 

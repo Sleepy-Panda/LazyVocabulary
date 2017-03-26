@@ -1,5 +1,5 @@
 ﻿@using LazyVocabulary.WEB.Models;
-@model CreateDictionaryViewModel
+@model EditDictionaryViewModel
 
 <div id="form" class="form-horizontal">
     @Html.AntiForgeryToken()
@@ -7,6 +7,10 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <h3>Основные настройки</h3>
+
+    <div class="form-group">
+        @Html.HiddenFor(m => m.Id)
+    </div>
 
     <div class="form-group">
         @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "* Название..." })
@@ -42,7 +46,7 @@
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <span>Запись успешно добавлена.</span>
+                    <span>Запись успешно обновлена.</span>
                 </div>
             }
             if (ViewBag.Result == "Error")
@@ -51,7 +55,7 @@
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <span>Произошла ошибка, запись не была добавлена.</span>
+                    <span>Произошла ошибка, запись не была обновлена.</span>
                 </div>
             }
         }

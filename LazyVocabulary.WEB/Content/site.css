@@ -242,7 +242,7 @@ input {
 
 .breadcrump-container {
 	padding: 10px 50px 10px 50px;
-	background-color: #f7f8f9;
+	background-color: #fff;
 	border-bottom: 2px solid #f1f1f1;
 	font-size: 14px;
 	color: #999;
@@ -263,6 +263,7 @@ input {
 .top-buttons-container {
 	padding: 20px 50px 20px 50px;
 	border-bottom: 1px solid #f1f1f1;
+    background-color: #f7f8f9;
 }
 
 .row {
@@ -279,7 +280,6 @@ input[type="password"],
 textarea,
 textarea.form-control,
 .alert {
-    width: 350px;
     max-width: 350px;
     font-weight: 400;
 }

@@ -50,6 +50,36 @@ namespace LazyVocabulary.BLL.Services
             return resultWithData;
         }
 
+        public ResultWithData<DictionaryDTO> GetById(int id)
+        {
+            var resultWithData = new ResultWithData<DictionaryDTO>();
+
+            try
+            {
+                var item = Database.Dictionaries.Get(id);
+                resultWithData.ResultData = new DictionaryDTO
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Description = item.Description,
+                    CreatedAt = item.CreatedAt,
+                    ViewsCount = item.ViewsCount,
+                    ApplicationUserId = item.ApplicationUserId,
+                    SourceLanguageId = item.SourceLanguageId,
+                    TargetLanguageId = item.TargetLanguageId,
+                };
+                resultWithData.Success = true;
+            }
+            catch (Exception ex)
+            {
+                resultWithData.Success = false;
+                resultWithData.Message = ex.Message;
+                resultWithData.StackTrace = ex.StackTrace;
+            }
+
+            return resultWithData;
+        }
+
         public async Task<Result> Create(DictionaryDTO dto)
         {
             var result = new Result();
@@ -65,6 +95,36 @@ namespace LazyVocabulary.BLL.Services
                     TargetLanguageId = dto.TargetLanguageId,
                 };
                 Database.Dictionaries.Create(dictionary);
+                await Database.SaveAsync();
+
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+                result.StackTrace = ex.StackTrace;
+            }
+
+            return result;
+        }
+
+        public async Task<Result> Update(DictionaryDTO dto)
+        {
+            var result = new Result();
+
+            try
+            {
+                var dictionary = new Dictionary
+                {
+                    Id = dto.Id,
+                    Name = dto.Name,
+                    Description = dto.Description,
+                    ApplicationUserId = dto.ApplicationUserId,
+                    SourceLanguageId = dto.SourceLanguageId,
+                    TargetLanguageId = dto.TargetLanguageId,
+                };
+                Database.Dictionaries.Update(dictionary);
                 await Database.SaveAsync();
 
                 result.Success = true;

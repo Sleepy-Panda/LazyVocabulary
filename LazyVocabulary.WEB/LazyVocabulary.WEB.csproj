@@ -178,6 +178,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CreateDictionaryViewModel.cs" />
+    <Compile Include="Models\EditDictionaryViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -240,6 +241,8 @@
     <Content Include="Views\Dictionary\Index.cshtml" />
     <Content Include="Views\Dictionary\Create.cshtml" />
     <Content Include="Views\Dictionary\_Create.cshtml" />
+    <Content Include="Views\Dictionary\Edit.cshtml" />
+    <Content Include="Views\Dictionary\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

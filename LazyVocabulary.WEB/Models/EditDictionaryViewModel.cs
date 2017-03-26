@@ -3,13 +3,17 @@ using System.Web.Mvc;
 
 namespace LazyVocabulary.WEB.Models
 {
-    public class CreateDictionaryViewModel
+    public class EditDictionaryViewModel
     {
+        [Required]
+        public int Id { get; set; }
+
         [Required]
         [Display(Name = "Название")]
         [MaxLength(64)]
-        [Remote("IsDictionaryNameAvailable", "Dictionary", 
-            ErrorMessage = "Словарь с таким названием уже существует.")]
+        //[Remote("IsDictionaryNameAvailable", "Dictionary",
+        //    ErrorMessage = "Словарь с таким названием уже существует.",
+        //    AdditionalFields = "Id")]
         public string Name { get; set; }
 
         [Display(Name = "Описание")]
