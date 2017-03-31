@@ -1,4 +1,5 @@
 ﻿using LazyVocabulary.BLL.DTO;
+using LazyVocabulary.BLL.Helpers;
 using LazyVocabulary.BLL.Services;
 using LazyVocabulary.WEB.Models;
 using Microsoft.AspNet.Identity;
@@ -178,6 +179,19 @@ namespace LazyVocabulary.WEB.Controllers
                 }, 
                 claim
             );
+
+            // Send message to user's email.
+            var text = String.Format("Для подтверждения email перейдите по ссылке: " +
+                "<a href=\"{0}\" title=\"Подтвердить адрес электронной почты\">Подтвердить адрес электронной почты</a>",
+                Url.Action("VerifyToken", "Account", new { token = "asd", email = user.Email }, Request.Url.Scheme));
+
+            var result = await EmailHelper.SendEmail(user.Email, "Подтверждение email", text);
+
+            if (!result.Success)
+            {
+                ModelState.AddModelError("", result.Message);
+                return View(model);
+            }
 
             return RedirectToAction("Index", "Home");
         }
