@@ -61,6 +61,7 @@
     <Compile Include="EF\DbInitializer.cs" />
     <Compile Include="Entities\ApplicationRole.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
+    <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Dictionary.cs" />
     <Compile Include="Entities\GuiLanguage.cs" />
     <Compile Include="Entities\Language.cs" />
