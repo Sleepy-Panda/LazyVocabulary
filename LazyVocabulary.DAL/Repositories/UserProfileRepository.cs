@@ -10,45 +10,45 @@ namespace LazyVocabulary.DAL.Repositories
 {
     public class UserProfileRepository : IRepository<UserProfile>
     {
-        private readonly ApplicationContext db;
+        private readonly ApplicationContext _db;
 
         public UserProfileRepository(ApplicationContext context)
         {
-            this.db = context;
+            _db = context;
         }
 
         public IEnumerable<UserProfile> GetAll()
         {
-            return db.UserProfiles;
+            return _db.UserProfiles;
         }
 
         public UserProfile Get(int id)
         {
-            return db.UserProfiles.Find(id);
+            return _db.UserProfiles.Find(id);
         }
 
         public void Create(UserProfile item)
         {
-            db.UserProfiles.Add(item);
+            _db.UserProfiles.Add(item);
         }
 
         public void Update(UserProfile item)
         {
-            db.Entry(item).State = EntityState.Modified;
+            _db.Entry(item).State = EntityState.Modified;
         }
 
         public void Delete(int id)
         {
-            UserProfile item = db.UserProfiles.Find(id);
+            UserProfile item = _db.UserProfiles.Find(id);
             if (item != null)
             {
-                db.UserProfiles.Remove(item);
+                _db.UserProfiles.Remove(item);
             }
         }
 
         public IEnumerable<UserProfile> Find(Func<UserProfile, bool> predicate)
         {
-            return db.UserProfiles
+            return _db.UserProfiles
                 .Where(predicate);
         }
     }

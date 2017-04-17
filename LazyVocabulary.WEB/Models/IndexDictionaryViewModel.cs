@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace LazyVocabulary.WEB.Models
 {
@@ -8,12 +9,9 @@ namespace LazyVocabulary.WEB.Models
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "Название")]
-        [MaxLength(64)]
         public string Name { get; set; }
 
-        [Display(Name = "Описание")]
-        [MaxLength(256)]
+        [Required]
         public string Description { get; set; }
 
         [Required]
@@ -24,5 +22,8 @@ namespace LazyVocabulary.WEB.Models
 
         [Required]
         public int PhrasesCount { get; set; }
+
+        [Required]
+        public DateTime CreatedAt { get; set; }
     }
 }

@@ -52,11 +52,9 @@
                                     <img class="image-flag" src="@Url.Content("~/Content/Images/flags/" + item.TargetLanguageImagePath)" />
                                 </td>
                                 <td>
-                                    Создан
-                                    <br />
-                                    Обновлён
+                                    <span class="text-muted">Создан:</span> @item.CreatedAt.ToString("dd.mm.yyyy HH:mm")
                                 </td>
-                                <td>
+                                <td style="width: 50px; text-align: center;">
                                     <a href='javascript:;' class='toggle'><i class='fa fa-ellipsis-v'></i></a>
                                     <ul class="menu" data-menu data-menu-toggle=".toggle">
                                         <li>

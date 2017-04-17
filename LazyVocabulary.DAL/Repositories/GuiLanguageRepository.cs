@@ -10,45 +10,45 @@ namespace LazyVocabulary.DAL.Repositories
 {
     public class GuiLanguageRepository : IRepository<GuiLanguage>
     {
-        private readonly ApplicationContext db;
+        private readonly ApplicationContext _db;
 
         public GuiLanguageRepository(ApplicationContext context)
         {
-            this.db = context;
+            _db = context;
         }
 
         public IEnumerable<GuiLanguage> GetAll()
         {
-            return db.GuiLanguages;
+            return _db.GuiLanguages;
         }
 
         public GuiLanguage Get(int id)
         {
-            return db.GuiLanguages.Find(id);
+            return _db.GuiLanguages.Find(id);
         }
 
         public void Create(GuiLanguage item)
         {
-            db.GuiLanguages.Add(item);
+            _db.GuiLanguages.Add(item);
         }
 
         public void Update(GuiLanguage item)
         {
-            db.Entry(item).State = EntityState.Modified;
+            _db.Entry(item).State = EntityState.Modified;
         }
 
         public void Delete(int id)
         {
-            GuiLanguage item = db.GuiLanguages.Find(id);
+            GuiLanguage item = _db.GuiLanguages.Find(id);
             if (item != null)
             {
-                db.GuiLanguages.Remove(item);
+                _db.GuiLanguages.Remove(item);
             }
         }
 
         public IEnumerable<GuiLanguage> Find(Func<GuiLanguage, bool> predicate)
         {
-            return db.GuiLanguages
+            return _db.GuiLanguages
                 .Where(predicate);
         }
     }

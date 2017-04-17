@@ -9,27 +9,28 @@ namespace LazyVocabulary.DAL.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private ApplicationContext db;
+        private ApplicationContext _db;
 
-        private LanguageRepository languageRepository;
-        private GuiLanguageRepository guiLanguageRepository;
-        private UserProfileRepository userProfileRepository;
-        private DictionaryRepository dictionaryRepository;
+        private LanguageRepository _languageRepository;
+        private GuiLanguageRepository _guiLanguageRepository;
+        private UserProfileRepository _userProfileRepository;
+        private DictionaryRepository _dictionaryRepository;
 
         public UnitOfWork(string connectionString)
         {
-            db = new ApplicationContext(connectionString);
+            _db = new ApplicationContext(connectionString);
         }
 
         public IRepository<Language> Languages
         {
             get
             {
-                if (languageRepository == null)
+                if (_languageRepository == null)
                 {
-                    languageRepository = new LanguageRepository(db);
+                    _languageRepository = new LanguageRepository(_db);
                 }
-                return languageRepository;
+
+                return _languageRepository;
             }
         }
 
@@ -37,11 +38,12 @@ namespace LazyVocabulary.DAL.UnitOfWork
         {
             get
             {
-                if (guiLanguageRepository == null)
+                if (_guiLanguageRepository == null)
                 {
-                    guiLanguageRepository = new GuiLanguageRepository(db);
+                    _guiLanguageRepository = new GuiLanguageRepository(_db);
                 }
-                return guiLanguageRepository;
+
+                return _guiLanguageRepository;
             }
         }
 
@@ -49,11 +51,12 @@ namespace LazyVocabulary.DAL.UnitOfWork
         {
             get
             {
-                if (userProfileRepository == null)
+                if (_userProfileRepository == null)
                 {
-                    userProfileRepository = new UserProfileRepository(db);
+                    _userProfileRepository = new UserProfileRepository(_db);
                 }
-                return userProfileRepository;
+
+                return _userProfileRepository;
             }
         }
 
@@ -61,22 +64,23 @@ namespace LazyVocabulary.DAL.UnitOfWork
         {
             get
             {
-                if (dictionaryRepository == null)
+                if (_dictionaryRepository == null)
                 {
-                    dictionaryRepository = new DictionaryRepository(db);
+                    _dictionaryRepository = new DictionaryRepository(_db);
                 }
-                return dictionaryRepository;
+
+                return _dictionaryRepository;
             }
         }
 
         public void Save()
         {
-            db.SaveChanges();
+            _db.SaveChanges();
         }
 
         public async Task SaveAsync()
         {
-            await db.SaveChangesAsync();
+            await _db.SaveChangesAsync();
         }
 
         private bool disposed = false;
@@ -87,7 +91,7 @@ namespace LazyVocabulary.DAL.UnitOfWork
             {
                 if (disposing)
                 {
-                    db.Dispose();
+                    _db.Dispose();
                 }
                 this.disposed = true;
             }

@@ -330,3 +330,7 @@ a.toggle {
     color: #555;
     padding: 0 10px;
 }
+
+td {
+    padding: 10px !important;
+}

@@ -43,6 +43,7 @@ namespace LazyVocabulary.WEB.Controllers
                     SourceLanguageImagePath = d.SourceLanguage.FlagImagePath,
                     TargetLanguageImagePath = d.TargetLanguage.FlagImagePath,
                     PhrasesCount = d.SourcePhrases.Count,
+                    CreatedAt = d.CreatedAt,
                 });
 
             return View(model);

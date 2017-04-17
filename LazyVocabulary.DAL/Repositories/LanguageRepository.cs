@@ -10,45 +10,45 @@ namespace LazyVocabulary.DAL.Repositories
 {
     public class LanguageRepository : IRepository<Language>
     {
-        private readonly ApplicationContext db;
+        private readonly ApplicationContext _db;
 
         public LanguageRepository(ApplicationContext context)
         {
-            this.db = context;
+            _db = context;
         }
 
         public IEnumerable<Language> GetAll()
         {
-            return db.Languages;
+            return _db.Languages;
         }
 
         public Language Get(int id)
         {
-            return db.Languages.Find(id);
+            return _db.Languages.Find(id);
         }
 
         public void Create(Language item)
         {
-            db.Languages.Add(item);
+            _db.Languages.Add(item);
         }
 
         public void Update(Language item)
         {
-            db.Entry(item).State = EntityState.Modified;
+            _db.Entry(item).State = EntityState.Modified;
         }
 
         public void Delete(int id)
         {
-            Language item = db.Languages.Find(id);
+            Language item = _db.Languages.Find(id);
             if (item != null)
             {
-                db.Languages.Remove(item);
+                _db.Languages.Remove(item);
             }
         }
 
         public IEnumerable<Language> Find(Func<Language, bool> predicate)
         {
-            return db.Languages
+            return _db.Languages
                 .Where(predicate);
         }
     }
