@@ -90,14 +90,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\DictionaryDTO.cs" />
-    <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="Helpers\ConfigurationHelper.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Identity\ApplicationRoleManager.cs" />
     <Compile Include="Identity\ApplicationSignInManager.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
-    <Compile Include="Interfaces\IService.cs" />
     <Compile Include="Ninject\ServiceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OperationDetails\Result.cs" />
@@ -108,18 +105,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LazyVocabulary.Common\LazyVocabulary.Common.csproj">
+      <Project>{27776F56-5C24-406F-9CFF-8342F5965F12}</Project>
+      <Name>LazyVocabulary.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LazyVocabulary.DAL\LazyVocabulary.DAL.csproj">
       <Project>{797cc3aa-c35b-4ff2-9d25-b3eebe365e7b}</Project>
       <Name>LazyVocabulary.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="bin\Debug\" />
-    <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,19 +1,18 @@
-﻿using LazyVocabulary.BLL.Interfaces;
-using LazyVocabulary.BLL.OperationDetails;
-using LazyVocabulary.DAL.Entities;
+﻿using LazyVocabulary.BLL.OperationDetails;
+using LazyVocabulary.Common.Entities;
 using LazyVocabulary.DAL.Interfaces;
 using System;
 using System.Threading.Tasks;
 
 namespace LazyVocabulary.BLL.Services
 {
-    public class UserProfileService : IService
+    public class UserProfileService
     {
-        public IUnitOfWork Database { get; set; }
+        public IUnitOfWork _database { get; set; }
 
         public UserProfileService(IUnitOfWork database)
         {
-            Database = database;
+            _database = database;
         }
 
         public async Task<ResultWithData<int>> CreateDefaultProfileForUserAsync()
@@ -30,8 +29,8 @@ namespace LazyVocabulary.BLL.Services
                     AvatarImagePath = "default_avatar.png",
                 };
 
-                Database.UserProfiles.Create(profile);
-                await Database.SaveAsync();
+                _database.UserProfiles.Create(profile);
+                await _database.SaveAsync();
 
                 resultWithData.ResultData = profile.Id;
                 resultWithData.Success = true;
@@ -54,7 +53,7 @@ namespace LazyVocabulary.BLL.Services
             {
                 if (disposing)
                 {
-                    Database.Dispose();
+                    _database.Dispose();
                 }
 
                 this.disposed = true;

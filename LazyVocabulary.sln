@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LazyVocabulary.DAL", "LazyV
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LazyVocabulary.BLL", "LazyVocabulary.BLL\LazyVocabulary.BLL.csproj", "{25C0BB32-88B3-40FB-BE15-A2439D4B256C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LazyVocabulary.Common", "LazyVocabulary.Common\LazyVocabulary.Common.csproj", "{27776F56-5C24-406F-9CFF-8342F5965F12}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{25C0BB32-88B3-40FB-BE15-A2439D4B256C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25C0BB32-88B3-40FB-BE15-A2439D4B256C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25C0BB32-88B3-40FB-BE15-A2439D4B256C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27776F56-5C24-406F-9CFF-8342F5965F12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27776F56-5C24-406F-9CFF-8342F5965F12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27776F56-5C24-406F-9CFF-8342F5965F12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27776F56-5C24-406F-9CFF-8342F5965F12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

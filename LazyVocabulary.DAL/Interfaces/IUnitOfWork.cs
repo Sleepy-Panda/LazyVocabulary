@@ -1,4 +1,4 @@
-﻿using LazyVocabulary.DAL.Entities;
+﻿using LazyVocabulary.Common.Entities;
 using System;
 using System.Threading.Tasks;
 

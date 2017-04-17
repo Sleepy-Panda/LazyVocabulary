@@ -1,5 +1,5 @@
 ﻿using LazyVocabulary.BLL.Services;
-using LazyVocabulary.DAL.Entities;
+using LazyVocabulary.Common.Entities;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;

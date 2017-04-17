@@ -1,13 +1,10 @@
-﻿using LazyVocabulary.BLL.DTO;
-using LazyVocabulary.BLL.Services;
+﻿using LazyVocabulary.BLL.Services;
 using LazyVocabulary.WEB.Models;
 using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace LazyVocabulary.WEB.Controllers
@@ -35,16 +32,17 @@ namespace LazyVocabulary.WEB.Controllers
                 // TODO
             }
 
-            var dto = resultWithData.ResultData;
+            var dictionaries = resultWithData.ResultData;
 
-            var model = dto
+            var model = dictionaries
                 .Select(d => new IndexDictionaryViewModel
                 {
                     Id = d.Id,
                     Name = d.Name,
                     Description = d.Description,
-                    SourceLanguageImagePath = d.SourceLanguageImagePath,
-                    TargetLanguageImagePath = d.TargetLanguageImagePath,
+                    SourceLanguageImagePath = d.SourceLanguage.FlagImagePath,
+                    TargetLanguageImagePath = d.TargetLanguage.FlagImagePath,
+                    PhrasesCount = d.SourcePhrases.Count,
                 });
 
             return View(model);
@@ -68,17 +66,15 @@ namespace LazyVocabulary.WEB.Controllers
                 return PartialView("_Create", model);
             }
 
-            var dto = new DictionaryDTO
-            {
-                Name = model.Name,
-                Description = model.Description,
-                ApplicationUserId = User.Identity.GetUserId(),
-                // TODO
-                SourceLanguageId = 1,
-                TargetLanguageId = 2,
-            };
+            dynamic dictionary = new ExpandoObject();
+            dictionary.Name = model.Name;
+            dictionary.Description = model.Description;
+            dictionary.ApplicationUserId = User.Identity.GetUserId();
+            dictionary.SourceLanguageId = 1;
+            dictionary.TargetLanguageId = 2;
 
-            var result = await _dictionaryService.Create(dto);
+            // TODO: 1 и 2
+            var result = await _dictionaryService.Create(dictionary);
 
             if (!result.Success)
             {
@@ -114,18 +110,18 @@ namespace LazyVocabulary.WEB.Controllers
                 // TODO
             }
 
-            var dto = resultWithData.ResultData;
+            var dictionary = resultWithData.ResultData;
 
-            if (dto == null)
+            if (dictionary == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound);
             }
 
             var model = new EditDictionaryViewModel
             {
-                Id = dto.Id,
-                Name = dto.Name,
-                Description = dto.Description,
+                Id = dictionary.Id,
+                Name = dictionary.Name,
+                Description = dictionary.Description,
             };
 
             return View("Edit", model);
@@ -142,18 +138,16 @@ namespace LazyVocabulary.WEB.Controllers
                 return PartialView("_Edit", model);
             }
 
-            var dto = new DictionaryDTO
-            {
-                Id = model.Id,
-                Name = model.Name,
-                Description = model.Description,
-                ApplicationUserId = User.Identity.GetUserId(),
-                // TODO
-                SourceLanguageId = 1,
-                TargetLanguageId = 2,
-            };
+            dynamic dictionary = new ExpandoObject();
+            dictionary.Id = model.Id;
+            dictionary.Name = model.Name;
+            dictionary.Description = model.Description;
+            dictionary.ApplicationUserId = User.Identity.GetUserId();
+            dictionary.SourceLanguageId = 1;
+            dictionary.TargetLanguageId = 2;
 
-            var result = await _dictionaryService.Update(dto);
+            // TODO - 1, 2
+            var result = await _dictionaryService.Update(dictionary);
 
             if (!result.Success)
             {

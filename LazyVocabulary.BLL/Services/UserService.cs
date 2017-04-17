@@ -1,8 +1,7 @@
-﻿using LazyVocabulary.BLL.DTO;
-using LazyVocabulary.BLL.Identity;
+﻿using LazyVocabulary.BLL.Identity;
 using LazyVocabulary.BLL.OperationDetails;
+using LazyVocabulary.Common.Entities;
 using LazyVocabulary.DAL.EF;
-using LazyVocabulary.DAL.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -14,14 +13,14 @@ namespace LazyVocabulary.BLL.Services
 {
     public class UserService : IDisposable
     {
-        private ApplicationContext _db;
+        private ApplicationContext _context;
 
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
 
         public UserService(string connectionString)
         {
-            _db = new ApplicationContext(connectionString);
+            _context = new ApplicationContext(connectionString);
         }
 
         public ApplicationUserManager UserManager
@@ -30,7 +29,7 @@ namespace LazyVocabulary.BLL.Services
             {
                 if (_userManager == null)
                 {
-                    _userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(_db));
+                    _userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(_context));
                 }
 
                 return _userManager;
@@ -43,18 +42,10 @@ namespace LazyVocabulary.BLL.Services
             {
                 if (_roleManager == null)
                 {
-                    _roleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(_db));
+                    _roleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(_context));
                 }
 
                 return _roleManager;
-            }
-        }
-
-        public ApplicationContext Database
-        {
-            get
-            {
-                return _db;
             }
         }
 
@@ -63,7 +54,7 @@ namespace LazyVocabulary.BLL.Services
             return UserManager;
         }
 
-        public async Task<ResultWithData<string>> CreateUserAsync(UserDTO user)
+        public async Task<ResultWithData<string>> CreateUserAsync(string userName, string password, string email)
         {
             var resultWithData = new ResultWithData<string>();
 
@@ -71,12 +62,12 @@ namespace LazyVocabulary.BLL.Services
             {
                 var appUser = new ApplicationUser
                 {
-                    UserName = user.UserName,
-                    Email = user.Email,
+                    UserName = userName,
+                    Email = email,
                     UserProfile = new UserProfile(),
                 };
 
-                var identityResult = await UserManager.CreateAsync(appUser, user.Password);
+                var identityResult = await UserManager.CreateAsync(appUser, password);
 
                 if (!identityResult.Succeeded)
                 {
@@ -103,22 +94,22 @@ namespace LazyVocabulary.BLL.Services
             return resultWithData;
         }
 
-        public async Task<ResultWithData<ClaimsIdentity>> CreateIdentityAsync(UserDTO userDTO)
+        public async Task<ResultWithData<ClaimsIdentity>> CreateIdentityAsync(string userName, string password, string email)
         {
             var result = new ResultWithData<ClaimsIdentity>();
 
             try
             {
                 ApplicationUser appUser;
-                var appUserByEmail = await UserManager.FindByEmailAsync(userDTO.Email);
+                var appUserByEmail = await UserManager.FindByEmailAsync(email);
 
                 if (appUserByEmail != null)
                 {
-                    appUser = await UserManager.FindAsync(appUserByEmail.UserName, userDTO.Password);
+                    appUser = await UserManager.FindAsync(appUserByEmail.UserName, password);
                 }
                 else
                 {
-                    appUser = await UserManager.FindAsync(userDTO.UserName, userDTO.Password);
+                    appUser = await UserManager.FindAsync(userName, password);
                 }
 
                 if (appUser == null)
@@ -151,7 +142,7 @@ namespace LazyVocabulary.BLL.Services
 
         public bool IsUserNameAvailable(string userName)
         {
-            bool result = _db.Users
+            bool result = _context.Users
                 .Where(u => u.UserName.Equals(userName))
                 .SingleOrDefault() == null;
 
@@ -160,7 +151,7 @@ namespace LazyVocabulary.BLL.Services
 
         public bool IsEmailAvailable(string email)
         {
-            bool result = _db.Users
+            bool result = _context.Users
                 .Where(u => u.Email.Equals(email))
                 .SingleOrDefault() == null;
 
@@ -175,7 +166,7 @@ namespace LazyVocabulary.BLL.Services
             {
                 if (disposing)
                 {
-                    _db?.Dispose();
+                    _context?.Dispose();
                     _userManager?.Dispose();
                     _roleManager?.Dispose();
                 }

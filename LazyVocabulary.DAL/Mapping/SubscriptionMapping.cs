@@ -1,4 +1,4 @@
-﻿using LazyVocabulary.DAL.Entities;
+﻿using LazyVocabulary.Common.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Infrastructure.Annotations;
 using System.Data.Entity.ModelConfiguration;

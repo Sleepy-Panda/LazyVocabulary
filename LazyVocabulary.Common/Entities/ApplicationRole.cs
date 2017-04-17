@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace LazyVocabulary.DAL.Entities
+namespace LazyVocabulary.Common.Entities
 {
     public class ApplicationRole : IdentityRole
     {

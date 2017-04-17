@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace LazyVocabulary.DAL.Entities
+namespace LazyVocabulary.Common.Entities
 {
     public class Language
     {

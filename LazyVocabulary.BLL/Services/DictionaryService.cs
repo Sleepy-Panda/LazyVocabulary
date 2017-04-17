@@ -1,7 +1,5 @@
-﻿using LazyVocabulary.BLL.DTO;
-using LazyVocabulary.BLL.Interfaces;
-using LazyVocabulary.BLL.OperationDetails;
-using LazyVocabulary.DAL.Entities;
+﻿using LazyVocabulary.BLL.OperationDetails;
+using LazyVocabulary.Common.Entities;
 using LazyVocabulary.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,36 +8,23 @@ using System.Threading.Tasks;
 
 namespace LazyVocabulary.BLL.Services
 {
-    public class DictionaryService : IService
+    public class DictionaryService
     {
-        public IUnitOfWork Database { get; set; }
+        public IUnitOfWork _database { get; set; }
 
         public DictionaryService(IUnitOfWork database)
         {
-            Database = database;
+            _database = database;
         }
 
-        public ResultWithData<List<DictionaryDTO>> GetByUserId(string userId)
+        public ResultWithData<List<Dictionary>> GetByUserId(string userId)
         {
-            var resultWithData = new ResultWithData<List<DictionaryDTO>>();
+            var resultWithData = new ResultWithData<List<Dictionary>>();
 
             try
             {
-                resultWithData.ResultData = Database.Dictionaries
+                resultWithData.ResultData = _database.Dictionaries
                     .Find(d => d.ApplicationUserId == userId)
-                    .Select(d => new DictionaryDTO {
-                        Id = d.Id,
-                        Name = d.Name,
-                        Description = d.Description,
-                        CreatedAt = d.CreatedAt,
-                        ViewsCount = d.ViewsCount,
-                        ApplicationUserId = d.ApplicationUserId,
-                        SourceLanguageId = d.SourceLanguageId,
-                        SourceLanguageImagePath = d.SourceLanguage.FlagImagePath,
-                        TargetLanguageId = d.TargetLanguageId,
-                        TargetLanguageImagePath = d.TargetLanguage.FlagImagePath,
-                        PhrasesCount = d.SourcePhrases.Count,
-                    })
                     .ToList();
                 resultWithData.Success = true;
             }
@@ -53,24 +38,13 @@ namespace LazyVocabulary.BLL.Services
             return resultWithData;
         }
 
-        public ResultWithData<DictionaryDTO> GetById(int id)
+        public ResultWithData<Dictionary> GetById(int id)
         {
-            var resultWithData = new ResultWithData<DictionaryDTO>();
+            var resultWithData = new ResultWithData<Dictionary>();
 
             try
             {
-                var item = Database.Dictionaries.Get(id);
-                resultWithData.ResultData = new DictionaryDTO
-                {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Description = item.Description,
-                    CreatedAt = item.CreatedAt,
-                    ViewsCount = item.ViewsCount,
-                    ApplicationUserId = item.ApplicationUserId,
-                    SourceLanguageId = item.SourceLanguageId,
-                    TargetLanguageId = item.TargetLanguageId,
-                };
+                resultWithData.ResultData = _database.Dictionaries.Get(id);
                 resultWithData.Success = true;
             }
             catch (Exception ex)
@@ -83,7 +57,7 @@ namespace LazyVocabulary.BLL.Services
             return resultWithData;
         }
 
-        public async Task<Result> Create(DictionaryDTO dto)
+        public async Task<Result> Create(dynamic dictionaryFromView)
         {
             var result = new Result();
 
@@ -91,14 +65,14 @@ namespace LazyVocabulary.BLL.Services
             {
                 var dictionary = new Dictionary
                 {
-                    Name = dto.Name,
-                    Description = dto.Description,
-                    ApplicationUserId = dto.ApplicationUserId,
-                    SourceLanguageId = dto.SourceLanguageId,
-                    TargetLanguageId = dto.TargetLanguageId,
+                    Name = dictionaryFromView.Name,
+                    Description = dictionaryFromView.Description,
+                    ApplicationUserId = dictionaryFromView.ApplicationUserId,
+                    SourceLanguageId = dictionaryFromView.SourceLanguageId,
+                    TargetLanguageId = dictionaryFromView.TargetLanguageId,
                 };
-                Database.Dictionaries.Create(dictionary);
-                await Database.SaveAsync();
+                _database.Dictionaries.Create(dictionary);
+                await _database.SaveAsync();
 
                 result.Success = true;
             }
@@ -112,7 +86,7 @@ namespace LazyVocabulary.BLL.Services
             return result;
         }
 
-        public async Task<Result> Update(DictionaryDTO dto)
+        public async Task<Result> Update(dynamic dictionaryFromView)
         {
             var result = new Result();
 
@@ -120,15 +94,15 @@ namespace LazyVocabulary.BLL.Services
             {
                 var dictionary = new Dictionary
                 {
-                    Id = dto.Id,
-                    Name = dto.Name,
-                    Description = dto.Description,
-                    ApplicationUserId = dto.ApplicationUserId,
-                    SourceLanguageId = dto.SourceLanguageId,
-                    TargetLanguageId = dto.TargetLanguageId,
+                    Id = dictionaryFromView.Id,
+                    Name = dictionaryFromView.Name,
+                    Description = dictionaryFromView.Description,
+                    ApplicationUserId = dictionaryFromView.ApplicationUserId,
+                    SourceLanguageId = dictionaryFromView.SourceLanguageId,
+                    TargetLanguageId = dictionaryFromView.TargetLanguageId,
                 };
-                Database.Dictionaries.Update(dictionary);
-                await Database.SaveAsync();
+                _database.Dictionaries.Update(dictionary);
+                await _database.SaveAsync();
 
                 result.Success = true;
             }
@@ -142,9 +116,10 @@ namespace LazyVocabulary.BLL.Services
             return result;
         }
 
+        // TODO: для пользователя
         public bool IsDictionaryNameAvailable(string dictionaryName)
         {
-            bool result = Database.Dictionaries
+            bool result = _database.Dictionaries
                 .Find(d => d.Name.Equals(dictionaryName))
                 .SingleOrDefault() == null;
 
@@ -159,7 +134,7 @@ namespace LazyVocabulary.BLL.Services
             {
                 if (disposing)
                 {
-                    Database.Dispose();
+                    _database.Dispose();
                 }
 
                 this.disposed = true;

@@ -194,6 +194,10 @@
     <Content Include="Content\home.css" />
     <Content Include="Content\Images\cover-1.jpg" />
     <Content Include="Content\auth.css" />
+    <Content Include="Content\Images\flags\de.png" />
+    <Content Include="Content\Images\flags\en.png" />
+    <Content Include="Content\Images\flags\ru.png" />
+    <Content Include="Content\menu.css" />
     <Content Include="Content\menu.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -263,6 +267,10 @@
     <ProjectReference Include="..\LazyVocabulary.BLL\LazyVocabulary.BLL.csproj">
       <Project>{25c0bb32-88b3-40fb-be15-a2439d4b256c}</Project>
       <Name>LazyVocabulary.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LazyVocabulary.Common\LazyVocabulary.Common.csproj">
+      <Project>{27776f56-5c24-406f-9cff-8342f5965f12}</Project>
+      <Name>LazyVocabulary.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

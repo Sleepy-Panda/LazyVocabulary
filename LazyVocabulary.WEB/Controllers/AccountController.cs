@@ -1,5 +1,4 @@
-﻿using LazyVocabulary.BLL.DTO;
-using LazyVocabulary.BLL.Helpers;
+﻿using LazyVocabulary.BLL.Helpers;
 using LazyVocabulary.BLL.Services;
 using LazyVocabulary.WEB.Models;
 using Microsoft.AspNet.Identity;
@@ -80,14 +79,7 @@ namespace LazyVocabulary.WEB.Controllers
                 return View(model);
             }
 
-            var user = new UserDTO
-            {
-                Email = model.Login,
-                UserName = model.Login,
-                Password = model.Password,
-            };
-
-            var resultWithData = await UserService.CreateIdentityAsync(user);
+            var resultWithData = await UserService.CreateIdentityAsync(model.Login, model.Password, model.Login);
 
             if (!resultWithData.Success)
             {
@@ -145,13 +137,7 @@ namespace LazyVocabulary.WEB.Controllers
             }
 
             // Create application user.
-            var user = new UserDTO {
-                UserName = model.UserName,
-                Email = model.Email,
-                Password = model.Password,
-            };
-
-            var resultWithStringData = await UserService.CreateUserAsync(user);
+            var resultWithStringData = await UserService.CreateUserAsync(model.UserName, model.Password, model.Email);
 
             if (!resultWithStringData.Success)
             {
@@ -160,7 +146,7 @@ namespace LazyVocabulary.WEB.Controllers
             }
 
             // Log in created user using claim.
-            var resultWithClaimData = await UserService.CreateIdentityAsync(user);
+            var resultWithClaimData = await UserService.CreateIdentityAsync(model.UserName, model.Password, model.Email);
 
             if (!resultWithClaimData.Success)
             {
@@ -183,9 +169,9 @@ namespace LazyVocabulary.WEB.Controllers
             // Send message to user's email.
             var text = String.Format("Для подтверждения email перейдите по ссылке: " +
                 "<a href=\"{0}\" title=\"Подтвердить адрес электронной почты\">Подтвердить адрес электронной почты</a>",
-                Url.Action("VerifyToken", "Account", new { token = "asd", email = user.Email }, Request.Url.Scheme));
+                Url.Action("VerifyToken", "Account", new { token = "asd", email = model.Email }, Request.Url.Scheme));
 
-            var result = await EmailHelper.SendEmail(user.Email, "Подтверждение email", text);
+            var result = await EmailHelper.SendEmail(model.Email, "Подтверждение email", text);
 
             if (!result.Success)
             {

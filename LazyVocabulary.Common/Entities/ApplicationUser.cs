@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace LazyVocabulary.DAL.Entities
+namespace LazyVocabulary.Common.Entities
 {
     public class ApplicationUser : IdentityUser
     {

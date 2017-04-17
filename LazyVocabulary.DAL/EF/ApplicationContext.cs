@@ -1,4 +1,4 @@
-﻿using LazyVocabulary.DAL.Entities;
+﻿using LazyVocabulary.Common.Entities;
 using LazyVocabulary.DAL.Mapping;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;

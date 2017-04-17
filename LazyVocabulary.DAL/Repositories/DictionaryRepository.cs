@@ -1,5 +1,5 @@
-﻿using LazyVocabulary.DAL.EF;
-using LazyVocabulary.DAL.Entities;
+﻿using LazyVocabulary.Common.Entities;
+using LazyVocabulary.DAL.EF;
 using LazyVocabulary.DAL.Interfaces;
 using System;
 using System.Collections.Generic;

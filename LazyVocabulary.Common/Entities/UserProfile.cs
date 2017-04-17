@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LazyVocabulary.DAL.Entities
+namespace LazyVocabulary.Common.Entities
 {
     public class UserProfile
     {
