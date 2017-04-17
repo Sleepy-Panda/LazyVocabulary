@@ -35,7 +35,10 @@ namespace LazyVocabulary.BLL.Services
                         ViewsCount = d.ViewsCount,
                         ApplicationUserId = d.ApplicationUserId,
                         SourceLanguageId = d.SourceLanguageId,
+                        SourceLanguageImagePath = d.SourceLanguage.FlagImagePath,
                         TargetLanguageId = d.TargetLanguageId,
+                        TargetLanguageImagePath = d.TargetLanguage.FlagImagePath,
+                        PhrasesCount = d.SourcePhrases.Count,
                     })
                     .ToList();
                 resultWithData.Success = true;

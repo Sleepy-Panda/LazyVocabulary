@@ -35,9 +35,19 @@ namespace LazyVocabulary.WEB.Controllers
                 // TODO
             }
 
-            var dictionaries = resultWithData.ResultData;
+            var dto = resultWithData.ResultData;
 
-            return View();
+            var model = dto
+                .Select(d => new IndexDictionaryViewModel
+                {
+                    Id = d.Id,
+                    Name = d.Name,
+                    Description = d.Description,
+                    SourceLanguageImagePath = d.SourceLanguageImagePath,
+                    TargetLanguageImagePath = d.TargetLanguageImagePath,
+                });
+
+            return View(model);
         }
 
         // GET: Dictionary/Create

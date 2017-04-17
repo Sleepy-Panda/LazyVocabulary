@@ -1,7 +1,11 @@
-﻿
+﻿@using LazyVocabulary.WEB.Models;
+@model IEnumerable<IndexDictionaryViewModel>
+
 @{
     ViewBag.Title = "Мои словари";
 }
+
+@Styles.Render("~/Content/menu.min.css")
 
 <div class="breadcrump-container">
     <i class="fa fa-home"></i>
@@ -19,17 +23,74 @@
 </div>
 
 <div class="container">
-    <h2>Мои словари</h2>
-</div>
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item active">
+            <a class="nav-link" href="#my" data-toggle="tab" role="tab">Мои словари</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#available" data-toggle="tab" role="tab">Доступные мне</a>
+        </li>
+    </ul>
 
-<div id='myModal' class='modal fade in'>
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div id='myModalContent'></div>
+    <div class="tab-content">
+        <div class="tab-pane active" id="my" role="tabpanel">
+            <table class="table table-bordered table-hover table-striped">
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <b>@item.Name</b> <span class="text-muted">@item.PhrasesCount записей</span>
+                                <br />
+                                @item.Description
+                            </td>
+                            <td>
+                                <img class="image-flag" src="@Url.Content("~/Content/Images/flags/" + item.SourceLanguageImagePath)" />
+                                &rarr;
+                                <img class="image-flag" src="@Url.Content("~/Content/Images/flags/" + item.TargetLanguageImagePath)" />
+                            </td>
+                            <td>
+                                Создан
+                                <br />
+                                Обновлён
+                            </td>
+                            <td>
+                                <a href='javascript:;' class='toggle'><i class='fa fa-ellipsis-v'></i></a>
+                                <ul class="menu" data-menu data-menu-toggle=".toggle">
+                                    <li>
+                                        <a href="@item.Id">Список переводов</a>
+                                    </li>
+                                    <li>
+                                        <a href="@item.Id">Подробнее о словаре</a>
+                                    </li>
+                                    <li class="menu-separator"></li>
+                                    <li>
+                                        <a href="#">Редактировать словарь</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Удалить словарь</a>
+                                    </li>
+                                    <li class="menu-separator"></li>
+                                    <li>
+                                        <a href="#">Экспортировать словарь в pdf</a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane" id="available" role="tabpanel">
+
         </div>
     </div>
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/scripts/app-js/dictionary.js")
+    @Scripts.Render("~/scripts/menu.min.js")
+
+    <script>
+        $('[data-menu]').menu();
+    </script>
 }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LazyVocabulary.BLL.DTO
 {
@@ -22,6 +18,12 @@ namespace LazyVocabulary.BLL.DTO
 
         public int SourceLanguageId { get; set; }
 
+        public string SourceLanguageImagePath { get; set; }
+
         public int TargetLanguageId { get; set; }
+
+        public string TargetLanguageImagePath { get; set; }
+
+        public int PhrasesCount { get; set; }
     }
 }
