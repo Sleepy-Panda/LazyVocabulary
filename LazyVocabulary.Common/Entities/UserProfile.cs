@@ -36,6 +36,19 @@ namespace LazyVocabulary.Common.Entities
             UpdatedAt = DateTime.Now;
             PasswordUpdatedAt = DateTime.Now;
             AvatarImagePath = "default_avatar.png";
+            Locale = _defaultLocale;
+        }
+
+        public UserProfile(string locale) : this()
+        {
+            try
+            {
+                Locale = (LocaleLanguage)Enum.Parse(typeof(LocaleLanguage), locale, true);
+            }
+            catch (Exception)
+            {
+                Locale = _defaultLocale;
+            }
         }
 
         static UserProfile()

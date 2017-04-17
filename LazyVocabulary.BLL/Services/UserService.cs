@@ -64,7 +64,7 @@ namespace LazyVocabulary.BLL.Services
                 {
                     UserName = userFromView.UserName,
                     Email = userFromView.Email,
-                    UserProfile = new UserProfile(),
+                    UserProfile = new UserProfile(userFromView.Locale.ToString()),
                 };
 
                 var identityResult = await UserManager.CreateAsync(appUser, userFromView.Password);

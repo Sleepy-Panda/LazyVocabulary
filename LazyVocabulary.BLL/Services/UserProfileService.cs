@@ -16,36 +16,36 @@ namespace LazyVocabulary.BLL.Services
             _database = database;
         }
 
-        public async Task<ResultWithData<int>> CreateDefaultProfileForUserAsync()
-        {
-            var resultWithData = new ResultWithData<int>();
+        //public async Task<ResultWithData<int>> CreateDefaultProfileForUserAsync()
+        //{
+        //    var resultWithData = new ResultWithData<int>();
 
-            try
-            {
-                var profile = new UserProfile
-                {
-                    CreatedAt = DateTime.Now,
-                    UpdatedAt = DateTime.Now,
-                    PasswordUpdatedAt = DateTime.Now,
-                    AvatarImagePath = "default_avatar.png",
-                    Locale = LocaleLanguage.Ru,
-                };
+        //    try
+        //    {
+        //        var profile = new UserProfile
+        //        {
+        //            CreatedAt = DateTime.Now,
+        //            UpdatedAt = DateTime.Now,
+        //            PasswordUpdatedAt = DateTime.Now,
+        //            AvatarImagePath = "default_avatar.png",
+        //            Locale = LocaleLanguage.Ru,
+        //        };
 
-                _database.UserProfiles.Create(profile);
-                await _database.SaveAsync();
+        //        _database.UserProfiles.Create(profile);
+        //        await _database.SaveAsync();
 
-                resultWithData.ResultData = profile.Id;
-                resultWithData.Success = true;
-            }
-            catch (Exception ex)
-            {
-                resultWithData.Success = false;
-                resultWithData.Message = ex.Message;
-                resultWithData.StackTrace = ex.StackTrace;
-            }
+        //        resultWithData.ResultData = profile.Id;
+        //        resultWithData.Success = true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        resultWithData.Success = false;
+        //        resultWithData.Message = ex.Message;
+        //        resultWithData.StackTrace = ex.StackTrace;
+        //    }
 
-            return resultWithData;
-        }
+        //    return resultWithData;
+        //}
 
         private bool disposed = false;
 

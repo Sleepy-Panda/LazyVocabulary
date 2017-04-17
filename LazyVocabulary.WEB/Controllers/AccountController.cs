@@ -145,6 +145,7 @@ namespace LazyVocabulary.WEB.Controllers
             user.UserName = model.UserName;
             user.Password = model.Password;
             user.Email = model.Email;
+            user.Locale = HttpContext.Request.Cookies["locale"]?.Value;
 
             // Create application user.
             var resultWithStringData = await UserService.CreateUserAsync(user);
