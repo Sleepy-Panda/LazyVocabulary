@@ -10,6 +10,7 @@ namespace LazyVocabulary.WEB.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
+                ViewBag.Culture = HttpContext.Request.Cookies["locale"].Value;
                 return View("Test");
             }
 
