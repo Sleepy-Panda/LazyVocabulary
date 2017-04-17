@@ -198,7 +198,6 @@
     <Content Include="Content\Images\flags\en.png" />
     <Content Include="Content\Images\flags\ru.png" />
     <Content Include="Content\menu.css" />
-    <Content Include="Content\menu.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

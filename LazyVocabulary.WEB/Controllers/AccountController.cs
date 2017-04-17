@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System;
+using System.Dynamic;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -79,7 +80,11 @@ namespace LazyVocabulary.WEB.Controllers
                 return View(model);
             }
 
-            var resultWithData = await UserService.CreateIdentityAsync(model.Login, model.Password, model.Login);
+            dynamic user = new ExpandoObject();
+            user.UserName = user.Email = model.Login;
+            user.Password = model.Password;
+
+            var resultWithData = await UserService.CreateIdentityAsync(user);
 
             if (!resultWithData.Success)
             {
@@ -136,8 +141,13 @@ namespace LazyVocabulary.WEB.Controllers
                 return View(model);
             }
 
+            dynamic user = new ExpandoObject();
+            user.UserName = model.UserName;
+            user.Password = model.Password;
+            user.Email = model.Email;
+
             // Create application user.
-            var resultWithStringData = await UserService.CreateUserAsync(model.UserName, model.Password, model.Email);
+            var resultWithStringData = await UserService.CreateUserAsync(user);
 
             if (!resultWithStringData.Success)
             {
@@ -146,7 +156,7 @@ namespace LazyVocabulary.WEB.Controllers
             }
 
             // Log in created user using claim.
-            var resultWithClaimData = await UserService.CreateIdentityAsync(model.UserName, model.Password, model.Email);
+            var resultWithClaimData = await UserService.CreateIdentityAsync(user);
 
             if (!resultWithClaimData.Success)
             {

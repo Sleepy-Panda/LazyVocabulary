@@ -54,7 +54,7 @@ namespace LazyVocabulary.BLL.Services
             return UserManager;
         }
 
-        public async Task<ResultWithData<string>> CreateUserAsync(string userName, string password, string email)
+        public async Task<ResultWithData<string>> CreateUserAsync(dynamic userFromView)
         {
             var resultWithData = new ResultWithData<string>();
 
@@ -62,12 +62,12 @@ namespace LazyVocabulary.BLL.Services
             {
                 var appUser = new ApplicationUser
                 {
-                    UserName = userName,
-                    Email = email,
+                    UserName = userFromView.UserName,
+                    Email = userFromView.Email,
                     UserProfile = new UserProfile(),
                 };
 
-                var identityResult = await UserManager.CreateAsync(appUser, password);
+                var identityResult = await UserManager.CreateAsync(appUser, userFromView.Password);
 
                 if (!identityResult.Succeeded)
                 {
@@ -94,22 +94,22 @@ namespace LazyVocabulary.BLL.Services
             return resultWithData;
         }
 
-        public async Task<ResultWithData<ClaimsIdentity>> CreateIdentityAsync(string userName, string password, string email)
+        public async Task<ResultWithData<ClaimsIdentity>> CreateIdentityAsync(dynamic userFromView)
         {
             var result = new ResultWithData<ClaimsIdentity>();
 
             try
             {
                 ApplicationUser appUser;
-                var appUserByEmail = await UserManager.FindByEmailAsync(email);
+                var appUserByEmail = await UserManager.FindByEmailAsync(userFromView.Email);
 
                 if (appUserByEmail != null)
                 {
-                    appUser = await UserManager.FindAsync(appUserByEmail.UserName, password);
+                    appUser = await UserManager.FindAsync(appUserByEmail.UserName, userFromView.Password);
                 }
                 else
                 {
-                    appUser = await UserManager.FindAsync(userName, password);
+                    appUser = await UserManager.FindAsync(userFromView.UserName, userFromView.Password);
                 }
 
                 if (appUser == null)
