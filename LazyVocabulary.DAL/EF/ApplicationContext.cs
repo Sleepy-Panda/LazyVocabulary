@@ -8,7 +8,6 @@ namespace LazyVocabulary.DAL.EF
     public class ApplicationContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Language> Languages { get; set; }
-        public DbSet<GuiLanguage> GuiLanguages { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<Dictionary> Dictionaries { get; set; }
@@ -36,7 +35,6 @@ namespace LazyVocabulary.DAL.EF
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Configurations.Add(new LanguageMapping());
-            modelBuilder.Configurations.Add(new GuiLanguageMapping());
             modelBuilder.Configurations.Add(new UserProfileMapping());
             modelBuilder.Configurations.Add(new DictionaryMapping());
             modelBuilder.Configurations.Add(new ApplicationUserMapping());

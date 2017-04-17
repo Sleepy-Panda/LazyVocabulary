@@ -1,4 +1,7 @@
-﻿using System;
+﻿using LazyVocabulary.Common.Enums;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 
 namespace LazyVocabulary.Common.Entities
 {
@@ -22,8 +25,10 @@ namespace LazyVocabulary.Common.Entities
 
         public ApplicationUser ApplicationUser { get; set; }
 
-        public int? GuiLanguageId { get; set; }
-        public virtual GuiLanguage GuiLanguage { get; set; }
+        public LocaleLanguage Locale { get; set; }
+
+        private static readonly Dictionary<LocaleLanguage, CultureInfo> _cultures;
+        private static readonly LocaleLanguage _defaultLocale;
 
         public UserProfile()
         {
@@ -31,6 +36,33 @@ namespace LazyVocabulary.Common.Entities
             UpdatedAt = DateTime.Now;
             PasswordUpdatedAt = DateTime.Now;
             AvatarImagePath = "default_avatar.png";
+        }
+
+        static UserProfile()
+        {
+            _defaultLocale = LocaleLanguage.Ru;
+            _cultures = new Dictionary<LocaleLanguage, CultureInfo>();
+
+            foreach (LocaleLanguage language in Enum.GetValues(typeof(LocaleLanguage)))
+            {
+                _cultures.Add(language, new CultureInfo(language.ToString()));
+            }
+        }
+
+        public CultureInfo UserCulture
+        {
+            get
+            {
+                return _cultures[Locale];
+            }
+        }
+
+        public static CultureInfo DefaultCulture
+        {
+            get
+            {
+                return _cultures[_defaultLocale];
+            }
         }
     }
 }

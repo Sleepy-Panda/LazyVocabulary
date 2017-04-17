@@ -33,9 +33,8 @@ namespace LazyVocabulary.DAL.Mapping
                 .IsRequired()
                 .HasMaxLength(256);
 
-            // Temp
-            Property(u => u.GuiLanguageId)
-                .IsOptional();
+            Property(u => u.Locale)
+                .IsRequired();
         }
     }
 }

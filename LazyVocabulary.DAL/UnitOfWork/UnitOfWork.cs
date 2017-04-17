@@ -12,7 +12,6 @@ namespace LazyVocabulary.DAL.UnitOfWork
         private ApplicationContext _db;
 
         private LanguageRepository _languageRepository;
-        private GuiLanguageRepository _guiLanguageRepository;
         private UserProfileRepository _userProfileRepository;
         private DictionaryRepository _dictionaryRepository;
 
@@ -31,19 +30,6 @@ namespace LazyVocabulary.DAL.UnitOfWork
                 }
 
                 return _languageRepository;
-            }
-        }
-
-        public IRepository<GuiLanguage> GuiLanguages
-        {
-            get
-            {
-                if (_guiLanguageRepository == null)
-                {
-                    _guiLanguageRepository = new GuiLanguageRepository(_db);
-                }
-
-                return _guiLanguageRepository;
             }
         }
 

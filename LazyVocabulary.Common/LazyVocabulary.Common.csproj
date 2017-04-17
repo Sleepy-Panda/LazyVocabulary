@@ -61,21 +61,19 @@
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Dictionary.cs" />
-    <Compile Include="Entities\GuiLanguage.cs" />
     <Compile Include="Entities\Language.cs" />
     <Compile Include="Entities\SourcePhrase.cs" />
     <Compile Include="Entities\Subscription.cs" />
     <Compile Include="Entities\TranslatedPhrase.cs" />
     <Compile Include="Entities\UserProfile.cs" />
+    <Compile Include="Enums\LocaleLanguage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Enums\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

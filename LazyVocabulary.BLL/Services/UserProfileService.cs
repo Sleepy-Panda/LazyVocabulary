@@ -1,5 +1,6 @@
 ﻿using LazyVocabulary.BLL.OperationDetails;
 using LazyVocabulary.Common.Entities;
+using LazyVocabulary.Common.Enums;
 using LazyVocabulary.DAL.Interfaces;
 using System;
 using System.Threading.Tasks;
@@ -27,6 +28,7 @@ namespace LazyVocabulary.BLL.Services
                     UpdatedAt = DateTime.Now,
                     PasswordUpdatedAt = DateTime.Now,
                     AvatarImagePath = "default_avatar.png",
+                    Locale = LocaleLanguage.Ru,
                 };
 
                 _database.UserProfiles.Create(profile);

@@ -7,7 +7,6 @@ namespace LazyVocabulary.DAL.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         IRepository<Language> Languages { get; }
-        IRepository<GuiLanguage> GuiLanguages { get; }
         IRepository<UserProfile> UserProfiles { get; }
         IRepository<Dictionary> Dictionaries { get; }
 
