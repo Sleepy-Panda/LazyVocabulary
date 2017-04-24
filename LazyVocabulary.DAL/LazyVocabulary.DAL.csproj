@@ -80,6 +80,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DictionaryRepository.cs" />
+    <Compile Include="Repositories\SourcePhraseRepository.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
     <Compile Include="Repositories\LanguageRepository.cs" />
     <Compile Include="Repositories\UserProfileRepository.cs" />

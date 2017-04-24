@@ -38,13 +38,16 @@ namespace LazyVocabulary.BLL.Services
             return resultWithData;
         }
 
-        public ResultWithData<Dictionary> GetById(int id)
+        public ResultWithData<Dictionary> GetById(int id, string userId)
         {
             var resultWithData = new ResultWithData<Dictionary>();
 
             try
             {
-                resultWithData.ResultData = _database.Dictionaries.Get(id);
+                var dictionary = _database.Dictionaries.Get(id);
+                resultWithData.ResultData = dictionary.ApplicationUserId == userId 
+                    ? dictionary 
+                    : null;
                 resultWithData.Success = true;
             }
             catch (Exception ex)
@@ -116,11 +119,10 @@ namespace LazyVocabulary.BLL.Services
             return result;
         }
 
-        // TODO: для пользователя
-        public bool IsDictionaryNameAvailable(string dictionaryName)
+        public bool IsDictionaryNameAvailable(string dictionaryName, string userId)
         {
             bool result = _database.Dictionaries
-                .Find(d => d.Name.Equals(dictionaryName))
+                .Find(d => d.Name.Equals(dictionaryName) && d.ApplicationUserId.Equals(userId))
                 .SingleOrDefault() == null;
 
             return result;

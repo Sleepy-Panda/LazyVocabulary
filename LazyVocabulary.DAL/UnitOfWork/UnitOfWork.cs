@@ -14,6 +14,7 @@ namespace LazyVocabulary.DAL.UnitOfWork
         private LanguageRepository _languageRepository;
         private UserProfileRepository _userProfileRepository;
         private DictionaryRepository _dictionaryRepository;
+        private SourcePhraseRepository _sourcePhraseRepository;
 
         public UnitOfWork(string connectionString)
         {
@@ -56,6 +57,19 @@ namespace LazyVocabulary.DAL.UnitOfWork
                 }
 
                 return _dictionaryRepository;
+            }
+        }
+
+        public IRepository<SourcePhrase> SourcePhrases
+        {
+            get
+            {
+                if (_sourcePhraseRepository == null)
+                {
+                    _sourcePhraseRepository = new SourcePhraseRepository(_db);
+                }
+
+                return _sourcePhraseRepository;
             }
         }
 

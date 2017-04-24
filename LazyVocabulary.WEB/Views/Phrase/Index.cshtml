@@ -1,0 +1,83 @@
+﻿@using System.Text;
+@using LazyVocabulary.WEB.Models;
+@model IEnumerable<IndexSourcePhrasesViewModel>
+
+@{
+    ViewBag.Title = "Мои переводы";
+}
+
+@Styles.Render("~/Content/menu.css")
+
+<div class="breadcrump-container">
+    <i class="fa fa-home"></i>
+    <a href="#">Главная</a>
+    <span class="separator"></span>
+    <a href="/Dictionary/Index">Мои словари</a>
+    <span class="separator"></span>
+    Мои переводы
+</div>
+
+<div class="top-buttons-container">
+    <div class="row">
+        <a href="/Dictionary/Create" class="btn btn-info pull-right">
+            <i class="fa fa-plus"></i> Добавить словарь
+        </a>
+    </div>
+</div>
+
+<div class="container">
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-bordered table-hover table-striped">
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Value
+                        </td>
+                        <td>
+                            @{
+                                StringBuilder all = new StringBuilder();
+
+                                foreach (var translation in item.Translations)
+                                {
+                                    all.Append(translation.Value);
+                                    all.Append('\n');
+                                }
+                            }
+
+                            @all.ToString()
+                        </td>
+                        <td style="width: 50px; text-align: center;">
+                            <a href='javascript:;' class='toggle'><i class='fa fa-ellipsis-v'></i></a>
+                            <ul class="menu" data-menu data-menu-toggle=".toggle">
+                                <li>
+                                    <a href="@item.Id">Список переводов</a>
+                                </li>
+                                <li>
+                                    <a href="@item.Id">Подробнее о словаре</a>
+                                </li>
+                                <li class="menu-separator"></li>
+                                <li>
+                                    <a href="#">Редактировать словарь</a>
+                                </li>
+                                <li>
+                                    <a href="#">Удалить словарь</a>
+                                </li>
+                                <li class="menu-separator"></li>
+                                <li>
+                                    <a href="#">Экспортировать словарь в pdf</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p class="text-muted">Вы не добавили ни одного перевода.</p>
+    }
+</div>

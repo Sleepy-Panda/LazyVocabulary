@@ -90,7 +90,8 @@ namespace LazyVocabulary.WEB.Controllers
         [HttpGet]
         public JsonResult IsDictionaryNameAvailable(string name)
         {
-            bool result = _dictionaryService.IsDictionaryNameAvailable(name);
+            string userId = User.Identity.GetUserId();
+            bool result = _dictionaryService.IsDictionaryNameAvailable(name, userId);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -104,7 +105,9 @@ namespace LazyVocabulary.WEB.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var resultWithData = _dictionaryService.GetById(id.Value);
+            string userId = User.Identity.GetUserId();
+
+            var resultWithData = _dictionaryService.GetById(id.Value, userId);
 
             if (!resultWithData.Success)
             {
@@ -139,6 +142,8 @@ namespace LazyVocabulary.WEB.Controllers
                 return PartialView("_Edit", model);
             }
 
+            // TODO: доступно ли название 
+
             dynamic dictionary = new ExpandoObject();
             dictionary.Id = model.Id;
             dictionary.Name = model.Name;
@@ -158,6 +163,45 @@ namespace LazyVocabulary.WEB.Controllers
 
             ViewBag.Result = "Success";
             return PartialView("_Edit");
+        }
+
+        // GET: Dictionary/Details/1
+        [HttpGet]
+        public ActionResult Details(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            string userId = User.Identity.GetUserId();
+
+            var resultWithData = _dictionaryService.GetById(id.Value, userId);
+
+            if (!resultWithData.Success)
+            {
+                // TODO
+            }
+
+            var dictionary = resultWithData.ResultData;
+
+            if (dictionary == null)
+            {
+                return HttpNotFound();
+            }
+
+            var model = new DetailsDictionaryViewModel
+            {
+                Id = dictionary.Id,
+                Name = dictionary.Name,
+                Description = dictionary.Description,
+                SourceLanguageImagePath = dictionary.SourceLanguage.FlagImagePath,
+                TargetLanguageImagePath = dictionary.TargetLanguage.FlagImagePath,
+                SourcePhrases = dictionary.SourcePhrases,
+                CreatedAt = dictionary.CreatedAt,
+            };
+
+            return View(model);
         }
     }
 }
