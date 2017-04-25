@@ -3,6 +3,7 @@ using LazyVocabulary.DAL.EF;
 using LazyVocabulary.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,17 +21,17 @@ namespace LazyVocabulary.DAL.Repositories
 
         public IEnumerable<SourcePhrase> GetAll()
         {
-            return _db.Dictionaries;
+            return _db.SourcePhrases;
         }
 
         public SourcePhrase Get(int id)
         {
-            return _db.Dictionaries.Find(id);
+            return _db.SourcePhrases.Find(id);
         }
 
         public void Create(SourcePhrase item)
         {
-            _db.Dictionaries.Add(item);
+            _db.SourcePhrases.Add(item);
         }
 
         public void Update(SourcePhrase item)
@@ -40,16 +41,16 @@ namespace LazyVocabulary.DAL.Repositories
 
         public void Delete(int id)
         {
-            SourcePhrase item = _db.Dictionaries.Find(id);
+            SourcePhrase item = _db.SourcePhrases.Find(id);
             if (item != null)
             {
-                _db.Dictionaries.Remove(item);
+                _db.SourcePhrases.Remove(item);
             }
         }
 
         public IEnumerable<SourcePhrase> Find(Func<SourcePhrase, bool> predicate)
         {
-            return _db.Dictionaries
+            return _db.SourcePhrases
                 .Where(predicate);
         }
     }
