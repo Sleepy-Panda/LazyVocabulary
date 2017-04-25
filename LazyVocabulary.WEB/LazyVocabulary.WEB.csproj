@@ -173,16 +173,17 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DictionaryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PhraseController.cs" />
+    <Compile Include="Controllers\TranslationController.cs" />
     <Compile Include="Filters\RedirectOnExceptionAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CreateDictionaryViewModel.cs" />
+    <Compile Include="Models\CreateTranslationViewModel.cs" />
     <Compile Include="Models\DetailsDictionaryViewModel.cs" />
     <Compile Include="Models\EditDictionaryViewModel.cs" />
     <Compile Include="Models\IndexDictionaryViewModel.cs" />
-    <Compile Include="Models\IndexSourcePhrasesViewModel.cs" />
+    <Compile Include="Models\IndexTranslationViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -253,7 +254,9 @@
     <Content Include="Views\Dictionary\Edit.cshtml" />
     <Content Include="Views\Dictionary\_Edit.cshtml" />
     <Content Include="Views\Dictionary\Details.cshtml" />
-    <Content Include="Views\Phrase\Index.cshtml" />
+    <Content Include="Views\Translation\Index.cshtml" />
+    <Content Include="Views\Translation\Create.cshtml" />
+    <Content Include="Views\Translation\_Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

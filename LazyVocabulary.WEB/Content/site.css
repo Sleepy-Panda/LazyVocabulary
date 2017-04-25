@@ -8,11 +8,6 @@ body {
 	font-weight: 300;
 }
 
-h1, h2, h3, h4, h5, h6, p,
-button,
-input {
-}
-
 .body-content {
 	margin: 0 0 0 80px;
     padding: 0;
@@ -39,6 +34,10 @@ input {
     .container {
         max-width: 100%;
     }
+}
+
+div.col-md-6 {
+    padding: 0;
 }
 
 .nav-tabs {
@@ -301,7 +300,8 @@ input[type="text"],
 input[type="password"],
 textarea,
 textarea.form-control,
-.alert {
+.alert,
+select {
     max-width: 350px;
     font-weight: 400;
 }

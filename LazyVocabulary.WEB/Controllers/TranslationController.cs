@@ -7,19 +7,22 @@ using System.Web.Mvc;
 
 namespace LazyVocabulary.WEB.Controllers
 {
-    public class PhraseController : Controller
+    [Authorize]
+    public class TranslationController : Controller
     {
         private SourcePhraseService _sourcePhraseService;
+        private DictionaryService _dictionaryService;
 
-        public PhraseController(SourcePhraseService service)
+        public TranslationController(SourcePhraseService spService, DictionaryService dService)
         {
-            _sourcePhraseService = service;
+            _sourcePhraseService = spService;
+            _dictionaryService = dService;
         }
 
         // http://stackoverflow.com/questions/21616052/binding-arrays-in-asp-net-mvc-without-index
         // http://jsfiddle.net/716d58kw/
 
-        // GET: Phrase
+        // GET: Phrase/1
         [HttpGet]
         public ActionResult Index(int? id)
         {
@@ -39,7 +42,7 @@ namespace LazyVocabulary.WEB.Controllers
             var phrases = resultWithData.ResultData;
 
             var model = phrases
-                .Select(p => new IndexSourcePhrasesViewModel
+                .Select(p => new IndexTranslationViewModel
                 {
                     Id = p.Id,
                     Value = p.Value,
@@ -47,7 +50,35 @@ namespace LazyVocabulary.WEB.Controllers
                     DictionaryId = p.DictionaryId,
                 });
 
-            return View(model);
+            ViewBag.DictionaryId = id;
+
+            return View("Index", model);
+        }
+
+        // GET: Phrase/Create
+        [HttpGet]
+        public ActionResult Create(int? id)
+        {
+            string userId = User.Identity.GetUserId();
+            var resultWithData = _dictionaryService.GetByUserId(userId);
+
+            if (!resultWithData.Success)
+            {
+                // TODO
+            }
+
+            var dictionaries = resultWithData.ResultData;
+
+            if (id.HasValue)
+            {
+                ViewBag.DictionaryId = new SelectList(dictionaries, "Id", "Name", id.Value);
+            }
+            else
+            {
+                ViewBag.DictionaryId = new SelectList(dictionaries, "Id", "Name");
+            }
+
+            return View("Create");
         }
     }
 }

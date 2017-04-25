@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewBag.Title = "Новый перевод";
+}
+
+<div class="breadcrump-container">
+    <i class="fa fa-home"></i>
+    <a href="/Home/Index">Главная</a>
+    <span class="separator"></span>
+    <a href="/Dictionary/Index">Мои словари</a>
+    <span class="separator"></span>
+    Новый перевод
+</div>
+
+<div class="top-buttons-container">
+    <div class="row">
+        <button id="btn-clear-form" type="button" class="btn btn-default pull-right">
+            <i class="fa fa-remove"></i> Очистить форму
+        </button>
+    </div>
+</div>
+
+@using (Ajax.BeginForm("Create", "Translation", new AjaxOptions
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    OnBegin = "onBegin",
+    OnComplete = "onComplete",
+    UpdateTargetId = "target",
+    LoadingElementId = "loader",
+}))
+{
+    <div id="target" class="container">
+        @Html.Partial("_Create")
+    </div>
+}
+
+@section Scripts {
+    <script>
+        "use strict";
+
+        function onBegin() {
+            $("#btn-submit-form").attr("disabled", "disabled");
+        };
+
+        function onComplete() {
+            $('#btn-submit-form').attr('disabled', false);
+            $('#result').attr('style', 'display:normal');
+        };
+
+        $("#btn-clear-form").click(function () {
+            $(':input', '#form')
+                .not(':button, :submit, :reset, :hidden')
+                .val('')
+                .removeAttr('checked')
+                .removeAttr('selected');
+            $("#btn-clear-form").blur();
+        });
+
+        $("#btn-add-field").click(function () {
+            var $newInput = $('<div class="form-group"><input type="text" class="form-control" name="translations" placeholder="* Введите вариант перевода..." /></div>');
+            $("#translation-inputs").append($newInput);
+            $("#btn-add-field").blur();
+        });
+
+        $("#Value").focusout(function () {
+            $("#div-auto").empty();
+            var targetText = $("#Value").val();
+
+            if (targetText == "") {
+                $("#div-auto").append('<p class="text-muted">Не удалось совершить перевод.</p>');
+            }
+            
+            var translations = [];
+
+            var link = 'https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20170213T181444Z.08ee015e9d8d82f7.eda86d019b0feff6a7265faf46dc6d9aee180f55&lang=en-ru&text=' + targetText;
+            $.ajax({
+                type: 'GET',
+                url: link,
+                success: function (response) {
+                    console.log(response.def);
+                    response.def.forEach(
+                        function (item) {
+                            item.tr.forEach(
+                                function (item) {
+                                    translations.push(item.text);
+                                }
+                            );
+                        }
+                    );
+
+                    if (translations.length > 0) {
+                        translations.forEach(function (item) {
+                            $("#div-auto").append("<p>" + item + "</p");
+                        });
+                    }
+                    else {
+                        $("#div-auto").empty();
+                        $("#div-auto").append('<p class="text-muted">Не удалось совершить перевод.</p>');
+                    }
+                },
+                error: function () {
+                    $("#div-auto").empty();
+                    $("#div-auto").append('<p class="text-muted">Не удалось совершить перевод.</p>');
+                }
+            });
+        });
+
+
+        /*function onlyUnique(value, index, self) { 
+        return self.indexOf(value) === index;
+        }
+
+        // usage example:
+        var a = ['a', 1, 'a', 2, '1'];
+        var unique = a.filter( onlyUnique ); // returns ['a', 1, 2, '1']/*
+
+    </script>
+}

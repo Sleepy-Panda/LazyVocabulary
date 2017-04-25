@@ -1,6 +1,5 @@
-﻿@using System.Text;
-@using LazyVocabulary.WEB.Models;
-@model IEnumerable<IndexSourcePhrasesViewModel>
+﻿@using LazyVocabulary.WEB.Models;
+@model IEnumerable<IndexTranslationViewModel>
 
 @{
     ViewBag.Title = "Мои переводы";
@@ -19,8 +18,8 @@
 
 <div class="top-buttons-container">
     <div class="row">
-        <a href="/Dictionary/Create" class="btn btn-info pull-right">
-            <i class="fa fa-plus"></i> Добавить словарь
+        <a href="/Translation/Create/@ViewBag.DictionaryId" class="btn btn-info pull-right">
+            <i class="fa fa-plus"></i> Добавить перевод
         </a>
     </div>
 </div>

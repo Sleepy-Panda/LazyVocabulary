@@ -46,7 +46,7 @@ namespace LazyVocabulary.WEB.Controllers
                     CreatedAt = d.CreatedAt,
                 });
 
-            return View(model);
+            return View("Index", model);
         }
 
         // GET: Dictionary/Create

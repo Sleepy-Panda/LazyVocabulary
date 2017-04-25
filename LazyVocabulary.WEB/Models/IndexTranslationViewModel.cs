@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LazyVocabulary.WEB.Models
 {
-    public class IndexSourcePhrasesViewModel
+    public class IndexTranslationViewModel
     {
         [Required]
         public int Id { get; set; }
@@ -18,7 +18,7 @@ namespace LazyVocabulary.WEB.Models
         [Required]
         public ICollection<TranslatedPhrase> Translations { get; set; }
 
-        public IndexSourcePhrasesViewModel()
+        public IndexTranslationViewModel()
         {
             Translations = new List<TranslatedPhrase>();
         }

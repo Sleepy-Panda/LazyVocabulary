@@ -1,0 +1,79 @@
+﻿@using LazyVocabulary.WEB.Models;
+@model CreateTranslationViewModel 
+        
+<div id="form" class="form-horizontal">
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <h3>Основные настройки</h3>
+
+    <div class="form-group">
+        @Html.DropDownList("DictionaryId", null, htmlAttributes: new { @class = "form-control", placeholder = "* Выберите словарь..." })
+        @Html.ValidationMessageFor(m => m.DictionaryId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.Value, new { @class = "form-control", placeholder = "* Слово или выражение..." })
+        @Html.ValidationMessageFor(m => m.Value, "", new { @class = "text-danger" })
+    </div>
+
+    <h3>Варианты перевода</h3>
+
+    <div class="col-md-6">
+        <p>
+            <label class="radio-inline">
+                <input type="radio" id="radio-manual" checked /> Добавьте варианты перевода вручную...
+            </label>
+        </p>
+        <div id="div-manual">
+            <div id="translation-inputs">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="translations" placeholder="* Введите вариант перевода..." />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button id="btn-add-field" type="button" value="Добавить поле" class="btn btn-info">
+                    <span class="glyphicon glyphicon-plus"></span> Добавить поле
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <p>
+            <label class="radio-inline">
+                <input type="radio" id="radio-auto" /> Или воспользуйтесь автопереводом.
+            </label>
+        </p>
+        <div id="div-auto">
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        @{
+            if (ViewBag.Result == "Success")
+            {
+                <div id="result" class="alert alert-success alert-dismissible fade in" role="alert" style="display:none;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <span>Запись успешно добавлена.</span>
+                </div>
+            }
+            if (ViewBag.Result == "Error")
+            {
+                <div id="result" class="alert alert-danger alert-dismissible fade in" role="alert" style="display:none;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <span>Произошла ошибка, запись не была добавлена.</span>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+</div>
