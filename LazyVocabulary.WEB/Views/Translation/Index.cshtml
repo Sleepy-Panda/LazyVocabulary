@@ -50,8 +50,10 @@
                             }
                         </td>
                         <td style="width: 50px; text-align: center;">
-                            <a href='javascript:;' class='toggle'><i class='fa fa-ellipsis-v'></i></a>
-                            <ul class="menu" data-menu data-menu-toggle=".toggle">
+                            <a href='javascript:;' class='toggle' id="toggle-@item.Id">
+                                <i class='fa fa-ellipsis-v'></i>
+                            </a>
+                            <ul class="menu" data-menu data-menu-toggle="#toggle-@item.Id">
                                 <li>
                                     <a href="@item.Id">Список переводов</a>
                                 </li>
@@ -83,7 +85,7 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/scripts/menu.min.js")
+    @Scripts.Render("~/Scripts/menu.min.js")
 
     <script>
         $('[data-menu]').menu();

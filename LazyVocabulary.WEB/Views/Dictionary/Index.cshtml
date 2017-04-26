@@ -42,23 +42,28 @@
                         {
                             <tr>
                                 <td>
-                                    <b>@item.Name</b> <span class="text-muted">@item.PhrasesCount записей</span>
+                                    <a href="/Translation/Index/@item.Id">@item.Name</a>
+                                    <br />
+                                    <span class="text-muted">Количество записей: @item.PhrasesCount</span>
                                     <br />
                                     @item.Description
                                 </td>
                                 <td>
-                                    <img class="image-flag" src="@Url.Content("~/Content/Images/flags/" + item.SourceLanguageImagePath)" />
-                                    &rarr;
-                                    <img class="image-flag" src="@Url.Content("~/Content/Images/flags/" + item.TargetLanguageImagePath)" />
-                                </td>
-                                <td>
                                     <span class="text-muted">Создан:</span> @item.CreatedAt.ToString("dd.mm.yyyy HH:mm")
                                 </td>
+                                <td style="width: 90px; text-align: center;">
+                                    <img class="image-flag" src="@Url.Content("~/Content/Images/flags/" + item.SourceLanguageImagePath)" />
+                                </td>
+                                <td style="width: 90px; text-align: center;">
+                                    <img class="image-flag" src="@Url.Content("~/Content/Images/flags/" + item.TargetLanguageImagePath)" />
+                                </td>
                                 <td style="width: 50px; text-align: center;">
-                                    <a href='javascript:;' class='toggle'><i class='fa fa-ellipsis-v'></i></a>
-                                    <ul class="menu" data-menu data-menu-toggle=".toggle">
+                                    <a href='javascript:;' class='toggle' id="toggle-@item.Id">
+                                        <i class='fa fa-ellipsis-v'></i>
+                                    </a>
+                                    <ul class="menu" data-menu data-menu-toggle="#toggle-@item.Id">
                                         <li>
-                                            <a href="@item.Id">Список переводов</a>
+                                            <a href="/Translation/Index/@item.Id">Список переводов</a>
                                         </li>
                                         <li>
                                             <a href="@item.Id">Подробнее о словаре</a>
@@ -86,6 +91,7 @@
                 <p class="text-muted">Вы не создали ни одного словаря.</p>
             }
         </div>
+
         <div class="tab-pane" id="available" role="tabpanel">
 
         </div>
@@ -93,7 +99,7 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/scripts/menu.min.js")
+    @Scripts.Render("~/Scripts/menu.min.js")
 
     <script>
         $('[data-menu]').menu();

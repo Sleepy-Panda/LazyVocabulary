@@ -321,8 +321,19 @@ textarea.form-control::-webkit-input-placeholder {
     color: #888; 
 }
 
-.image-flag {
-    max-width: 40px;
+img {
+    -webkit-user-drag: none;
+            user-drag: none; 
+
+    -webkit-user-select: none; 
+       -moz-user-select: none;    
+        -ms-user-select: none;
+            user-select: none;
+}
+
+img.image-flag {
+    width: 50px;
+    max-width: 50px;
 }
 
 a.toggle {

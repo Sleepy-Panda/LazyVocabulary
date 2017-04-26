@@ -4,26 +4,28 @@ using LazyVocabulary.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace LazyVocabulary.BLL.Services
 {
-    public class SourcePhraseService
+    public class LanguageService
     {
         private IUnitOfWork _database { get; set; }
 
-        public SourcePhraseService(IUnitOfWork database)
+        public LanguageService(IUnitOfWork database)
         {
             _database = database;
         }
 
-        public ResultWithData<List<SourcePhrase>> GetByDictionaryId(int dictionaryId)
+        public ResultWithData<List<Language>> GetAll()
         {
-            var resultWithData = new ResultWithData<List<SourcePhrase>>();
+            var resultWithData = new ResultWithData<List<Language>>();
 
             try
             {
-                resultWithData.ResultData = _database.SourcePhrases
-                    .Find(s => s.DictionaryId == dictionaryId)
+                resultWithData.ResultData = _database.Languages
+                    .GetAll()
                     .ToList();
                 resultWithData.Success = true;
             }

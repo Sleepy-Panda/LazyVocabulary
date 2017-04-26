@@ -1,15 +1,11 @@
-﻿using LazyVocabulary.BLL.OperationDetails;
-using LazyVocabulary.Common.Entities;
-using LazyVocabulary.Common.Enums;
-using LazyVocabulary.DAL.Interfaces;
+﻿using LazyVocabulary.DAL.Interfaces;
 using System;
-using System.Threading.Tasks;
 
 namespace LazyVocabulary.BLL.Services
 {
     public class UserProfileService
     {
-        public IUnitOfWork _database { get; set; }
+        private IUnitOfWork _database { get; set; }
 
         public UserProfileService(IUnitOfWork database)
         {

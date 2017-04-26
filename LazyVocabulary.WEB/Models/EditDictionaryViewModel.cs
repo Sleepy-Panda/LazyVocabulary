@@ -20,8 +20,10 @@ namespace LazyVocabulary.WEB.Models
         [MaxLength(256)]
         public string Description { get; set; }
 
-        //public int SourceLanguageId { get; set; }
+        [Required]
+        public int SourceLanguageId { get; set; }
 
-        //public int TargetLanguageId { get; set; }
+        [Required]
+        public int TargetLanguageId { get; set; }
     }
 }

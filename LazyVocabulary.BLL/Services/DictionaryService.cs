@@ -10,7 +10,7 @@ namespace LazyVocabulary.BLL.Services
 {
     public class DictionaryService
     {
-        public IUnitOfWork _database { get; set; }
+        private IUnitOfWork _database { get; set; }
 
         public DictionaryService(IUnitOfWork database)
         {

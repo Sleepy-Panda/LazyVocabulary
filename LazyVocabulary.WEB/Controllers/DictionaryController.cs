@@ -13,10 +13,12 @@ namespace LazyVocabulary.WEB.Controllers
     public class DictionaryController : Controller
     {
         private DictionaryService _dictionaryService;
+        private LanguageService _languageService;
 
-        public DictionaryController(DictionaryService service)
+        public DictionaryController(DictionaryService dService, LanguageService lService)
         {
-            _dictionaryService = service;
+            _dictionaryService = dService;
+            _languageService = lService;
         }
 
         // GET: Dictionary
@@ -53,6 +55,16 @@ namespace LazyVocabulary.WEB.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            var resultWithData = _languageService.GetAll();
+
+            if (!resultWithData.Success)
+            {
+                // TODO
+            }
+
+            var languages = resultWithData.ResultData;
+            ViewBag.SourceLanguageId = ViewBag.TargetLanguageId = new SelectList(languages, "Id", "Name");
+
             return View("Create");
         }
 
@@ -61,6 +73,16 @@ namespace LazyVocabulary.WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(CreateDictionaryViewModel model)
         {
+            var resultWithData = _languageService.GetAll();
+
+            if (!resultWithData.Success)
+            {
+                // TODO
+            }
+
+            var languages = resultWithData.ResultData;
+            ViewBag.SourceLanguageId = ViewBag.TargetLanguageId = new SelectList(languages, "Id", "Name");
+
             if (!ModelState.IsValid)
             {
                 ViewBag.Result = "Error";
@@ -71,10 +93,9 @@ namespace LazyVocabulary.WEB.Controllers
             dictionary.Name = model.Name;
             dictionary.Description = model.Description;
             dictionary.ApplicationUserId = User.Identity.GetUserId();
-            dictionary.SourceLanguageId = 1;
-            dictionary.TargetLanguageId = 2;
+            dictionary.SourceLanguageId = model.SourceLanguageId;
+            dictionary.TargetLanguageId = model.TargetLanguageId;
 
-            // TODO: 1 и 2
             var result = await _dictionaryService.Create(dictionary);
 
             if (!result.Success)
@@ -128,6 +149,17 @@ namespace LazyVocabulary.WEB.Controllers
                 Description = dictionary.Description,
             };
 
+            var resultWithDataLanguages = _languageService.GetAll();
+
+            if (!resultWithDataLanguages.Success)
+            {
+                // TODO
+            }
+
+            var languages = resultWithDataLanguages.ResultData;
+            ViewBag.SourceLanguageId = new SelectList(languages, "Id", "Name", dictionary.SourceLanguageId);
+            ViewBag.TargetLanguageId = new SelectList(languages, "Id", "Name", dictionary.TargetLanguageId);
+
             return View("Edit", model);
         }
 
@@ -142,6 +174,17 @@ namespace LazyVocabulary.WEB.Controllers
                 return PartialView("_Edit", model);
             }
 
+            var resultWithDataLanguages = _languageService.GetAll();
+
+            if (!resultWithDataLanguages.Success)
+            {
+                // TODO
+            }
+
+            var languages = resultWithDataLanguages.ResultData;
+            ViewBag.SourceLanguageId = new SelectList(languages, "Id", "Name", model.SourceLanguageId);
+            ViewBag.TargetLanguageId = new SelectList(languages, "Id", "Name", model.TargetLanguageId);
+
             // TODO: доступно ли название 
 
             dynamic dictionary = new ExpandoObject();
@@ -149,10 +192,9 @@ namespace LazyVocabulary.WEB.Controllers
             dictionary.Name = model.Name;
             dictionary.Description = model.Description;
             dictionary.ApplicationUserId = User.Identity.GetUserId();
-            dictionary.SourceLanguageId = 1;
-            dictionary.TargetLanguageId = 2;
+            dictionary.SourceLanguageId = model.SourceLanguageId;
+            dictionary.TargetLanguageId = model.TargetLanguageId;
 
-            // TODO - 1, 2
             var result = await _dictionaryService.Update(dictionary);
 
             if (!result.Success)
