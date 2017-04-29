@@ -73,10 +73,32 @@
 
         $('#btn-add-field').click(function () {
             var div = $('#translation-inputs');
-            var last = $('.form-group', div).last();
-            last.clone().appendTo(div);
-            last.val('');
+            if ($('.form-group', div).length) {
+                var lastFormGroup = $('.form-group', div).last();
+
+                if ($('input:last', lastFormGroup).val().trim() != '') {
+                    lastFormGroup.clone().appendTo(div).find('input.inline').val('');
+                }
+            }
+            else {
+                var html = '';
+                html += '<div class="form-group">';
+                html += '<label>Введите вариант перевода</label>';
+                html += '<div>';
+                html += '<input type="text" class="form-control inline" name="translations" />';
+                html += '<span class="fa fa-trash remove-input"></span>';
+                html += '</div>';
+                html += '</div>';
+                div.append(html);
+            }
+
             $('#btn-add-field').blur();
+        });
+
+        // Signature for event binding on dynamically created elements.
+        $(document).on('click', 'span.remove-input', function (event) {
+            var formGroup = $(event.target).closest('.form-group');
+            formGroup.remove();
         });
 
         $('#Value').change(function () {

@@ -48,12 +48,15 @@
             <div id="translation-inputs">
                 <div class="form-group">
                     <label>Введите вариант перевода</label>
-                    <input type="text" class="form-control" name="translations" placeholder="" />
+                    <div>
+                        <input type="text" class="form-control inline" name="translations" placeholder="" />
+                        <span class="fa fa-trash remove-input"></span>
+                    </div>
                 </div>
             </div>
 
             <div class="form-group">
-                <button id="btn-add-field" type="button" value="Добавить поле" class="btn btn-info">
+                <button id="btn-add-field" type="button" value="Добавить поле" class="btn btn-default">
                     <span class="glyphicon glyphicon-plus"></span> Добавить поле
                 </button>
             </div>

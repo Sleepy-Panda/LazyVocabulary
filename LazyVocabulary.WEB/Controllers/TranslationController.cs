@@ -75,6 +75,7 @@ namespace LazyVocabulary.WEB.Controllers
                     Id = d.Id,
                     Name = $"{ d.Name } ({ d.SourceLanguage.Code }-{ d.TargetLanguage.Code })"
                 })
+                .OrderBy(d => d.Name)
                 .ToList();
 
             if (id.HasValue)
@@ -107,6 +108,7 @@ namespace LazyVocabulary.WEB.Controllers
                     Id = d.Id,
                     Name = $"{ d.Name } ({ d.SourceLanguage.Code }-{ d.TargetLanguage.Code })"
                 })
+                .OrderBy(d => d.Name)
                 .ToList();
 
             ViewBag.DictionaryId = new SelectList(dictionaries, "Id", "Name", model.DictionaryId);

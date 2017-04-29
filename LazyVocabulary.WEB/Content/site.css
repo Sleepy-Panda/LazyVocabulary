@@ -14,7 +14,7 @@ body {
 }
 
 .container {
-    margin: 0 50px 0 50px;
+    margin: 0 50px 50px 50px;
     padding: 0;
 }
 
@@ -55,6 +55,15 @@ div.col-md-6 {
 
 .top {
     margin-top: 40px;
+}
+
+.inline {
+    display: inline;
+}
+
+span.remove-input {
+    cursor: pointer;
+    padding: 10px;
 }
 
 h3 {
@@ -313,7 +322,6 @@ h3 {
 	padding: 15px 50px 15px 50px;
     background-color: #FAFAFA;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.25);
-    --margin-bottom: 15px;
 }
 
 .top-buttons-container .row button {
@@ -335,8 +343,7 @@ textarea,
 textarea.form-control,
 .alert,
 select {
-    max-width: 400px;
-    font-weight: 400;
+    max-width: 380px;
 }
 
 textarea.form-control {
