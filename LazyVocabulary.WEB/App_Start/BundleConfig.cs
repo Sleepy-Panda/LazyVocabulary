@@ -19,10 +19,12 @@ namespace LazyVocabulary.WEB
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.min.js",
+                      "~/Scripts/bootstrap-select.min.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
+                      "~/Content/bootstrap-select.min.css",
                       "~/Content/site.css",
                       "~/Content/font-awesome.min.css"));
 

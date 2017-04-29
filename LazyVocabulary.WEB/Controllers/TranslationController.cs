@@ -1,7 +1,10 @@
 ﻿using LazyVocabulary.BLL.Services;
+using LazyVocabulary.Common.Entities;
 using LazyVocabulary.WEB.Models;
 using Microsoft.AspNet.Identity;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Net;
@@ -63,24 +66,17 @@ namespace LazyVocabulary.WEB.Controllers
         public ActionResult Create(int? id)
         {
             string userId = User.Identity.GetUserId();
-            var resultWithData = _dictionaryService.GetByUserId(userId);
-
-            if (!resultWithData.Success)
-            {
-                // TODO
-            }
-
-            var dictionaries = resultWithData.ResultData
+            var dictionaries = GetDictionaries(userId)
                 .Select(d => new {
                     Id = d.Id,
-                    Name = $"{ d.Name } ({ d.SourceLanguage.Code }-{ d.TargetLanguage.Code })"
+                    Name = $"{ d.Name } ({ d.SourceLanguage.Code }-{ d.TargetLanguage.Code })",
+                    Group = "Мои словари",
                 })
-                .OrderBy(d => d.Name)
                 .ToList();
 
             if (id.HasValue)
             {
-                ViewBag.DictionaryId = new SelectList(dictionaries, "Id", "Name", id.Value);
+                ViewBag.DictionaryId = new SelectList(dictionaries, "Id", "Name", "Group", id.Value);
             }
             else
             {
@@ -96,22 +92,14 @@ namespace LazyVocabulary.WEB.Controllers
         public async Task<ActionResult> Create(CreateTranslationViewModel model, string[] translations)
         {
             string userId = User.Identity.GetUserId();
-            var resultWithData = _dictionaryService.GetByUserId(userId);
-
-            if (!resultWithData.Success)
-            {
-                // TODO
-            }
-
-            var dictionaries = resultWithData.ResultData
+            var dictionaries = GetDictionaries(userId)
                 .Select(d => new {
                     Id = d.Id,
-                    Name = $"{ d.Name } ({ d.SourceLanguage.Code }-{ d.TargetLanguage.Code })"
+                    Name = $"{ d.Name } ({ d.SourceLanguage.Code }-{ d.TargetLanguage.Code })",
+                    Group = "Мои словари",
                 })
-                .OrderBy(d => d.Name)
                 .ToList();
-
-            ViewBag.DictionaryId = new SelectList(dictionaries, "Id", "Name", model.DictionaryId);
+            ViewBag.DictionaryId = new SelectList(dictionaries, "Id", "Name", "Group", model.DictionaryId);
 
             if (!ModelState.IsValid)
             {
@@ -138,6 +126,18 @@ namespace LazyVocabulary.WEB.Controllers
 
             ViewBag.Result = "Success";
             return PartialView("_Create");
+        }
+
+        private IEnumerable<Dictionary> GetDictionaries(string userId)
+        {
+            var resultWithData = _dictionaryService.GetByUserId(userId);
+
+            if (!resultWithData.Success)
+            {
+                return new List<Dictionary>();
+            }
+
+            return resultWithData.ResultData.OrderBy(d => d.Name);
         }
     }
 }

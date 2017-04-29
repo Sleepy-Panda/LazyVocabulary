@@ -8,6 +8,10 @@ body {
 	font-weight: 300;
 }
 
+* {
+    outline: none !important;
+}
+
 .body-content {
 	margin: 0 0 0 80px;
     padding: 0;
@@ -417,3 +421,46 @@ td.toggle-menu-icon {
     text-align: center;
 }
 
+/* Overloads for bootstrap-select. */
+.bootstrap-select {
+    width: 380px !important;
+    max-width: 380px !important;
+}
+
+.bootstrap-select .btn:focus {
+    outline: none !important;
+}
+
+.bootstrap-select:hover .dropdown-toggle {
+    border-color: #CCC !important;
+}
+
+.bootstrap-select:active .dropdown-toggle,
+.bootstrap-select:focus .dropdown-toggle,
+.bootstrap-select.open .dropdown-toggle {
+    border-color: #66afe9 !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6) !important;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6) !important;
+}
+
+.bootstrap-select:hover .dropdown-toggle,
+.bootstrap-select:active .dropdown-toggle,
+.bootstrap-select:focus .dropdown-toggle,
+.bootstrap-select.open .dropdown-toggle {
+    background-color: #FFF;
+}
+
+.dropdown-menu {
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.25);
+}
+
+.dropdown-menu li a {
+    min-height: 28px !important;
+    margin: 7px 0;
+}
+
+.dropdown-menu > li > a:hover, 
+.dropdown-menu > li > a:focus {
+    background: #EEE !important;
+    color: #333;
+}

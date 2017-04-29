@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Новый перевод";
 }
 
@@ -45,6 +44,7 @@
 
         $(function () {
             $('#DictionaryId').change();
+            $('.selectpicker').selectpicker();
         });
 
         function onBegin() {
@@ -54,6 +54,7 @@
         function onComplete() {
             $('#btn-submit-form').attr('disabled', false);
             $('#result').attr('style', 'display:normal');
+            $('#DictionaryId').selectpicker('refresh');
         };
 
         $('#btn-submit-form').click(function () {
