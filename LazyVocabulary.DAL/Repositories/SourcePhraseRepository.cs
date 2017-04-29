@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LazyVocabulary.DAL.Repositories
 {
@@ -42,6 +40,7 @@ namespace LazyVocabulary.DAL.Repositories
         public void Delete(int id)
         {
             SourcePhrase item = _db.SourcePhrases.Find(id);
+
             if (item != null)
             {
                 _db.SourcePhrases.Remove(item);
@@ -50,8 +49,7 @@ namespace LazyVocabulary.DAL.Repositories
 
         public IEnumerable<SourcePhrase> Find(Func<SourcePhrase, bool> predicate)
         {
-            return _db.SourcePhrases
-                .Where(predicate);
+            return _db.SourcePhrases.Where(predicate);
         }
     }
 }

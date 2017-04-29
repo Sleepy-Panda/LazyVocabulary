@@ -40,8 +40,41 @@ div.col-md-6 {
     padding: 0;
 }
 
+.form-group label {
+    font-size: 12px;
+    margin-bottom: 2px;
+}
+
+.form-group label.required:before {
+    content: '* ';
+}
+
 .nav-tabs {
     margin-bottom: 20px;
+}
+
+.top {
+    margin-top: 40px;
+}
+
+h3 {
+    margin-top: 40px;
+}
+
+.alert-success {
+    background-color: #f1f9f7;
+    border-color: #e0f1e9;
+    color: #1d9d74;
+}
+
+.alert-danger {
+    background-color: #fbeeed;
+    border-color: #f7d8dd;
+    color: #d9534f;
+}
+
+.alert {
+    border-left: 4px solid;
 }
 
 .left-menu-container {
@@ -261,15 +294,11 @@ div.col-md-6 {
 }
 
 .breadcrump-container {
-	padding: 10px 50px 10px 50px;
+	padding: 8px 50px 5px 50px;
 	background-color: #fff;
-	border-bottom: 1px solid #EEE;
-	font-size: 14px;
+	border-bottom: 2px solid #EEE;
+	font-size: 12px;
 	color: #999;
-}
-
-.breadcrump-container i {
-	padding-right: 5px;
 }
 
 .breadcrump-container .separator:after {
@@ -281,10 +310,14 @@ div.col-md-6 {
 }
 
 .top-buttons-container {
-	padding: 20px 50px 20px 50px;
+	padding: 15px 50px 15px 50px;
     background-color: #FAFAFA;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.25);
-    margin-bottom: 20px;
+    --margin-bottom: 15px;
+}
+
+.top-buttons-container .row button {
+	margin-left: 15px;
 }
 
 .row {
@@ -302,7 +335,7 @@ textarea,
 textarea.form-control,
 .alert,
 select {
-    max-width: 350px;
+    max-width: 400px;
     font-weight: 400;
 }
 
@@ -325,6 +358,13 @@ textarea.form-control::-webkit-input-placeholder {
     color: #888; 
 }
 
+.form-control:-webkit-autofill,
+.form-control:-webkit-autofill:focus,
+.form-control:-webkit-autofill:active {
+    -webkit-box-shadow: inset 0 0 0 100px white;
+    -webkit-text-fill-color: #333;
+}
+
 img {
     -webkit-user-drag: none;
             user-drag: none; 
@@ -341,9 +381,14 @@ a.toggle {
     padding: 0 10px;
 }
 
+table.borderless tr, table.borderless td {
+    border-top: none !important;
+    border-bottom: 1px solid #ddd;
+}
+
 td {
     padding: 10px !important;
-    line-height: 25px !important;
+    line-height: 22px !important;
 }
 
 img.flag-image {
@@ -353,11 +398,6 @@ img.flag-image {
 
 td.details {
     width: 200px;
-}
-
-td.flag {
-    width: 90px;
-    text-align: center;
 }
 
 td.flag {

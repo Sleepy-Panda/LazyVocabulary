@@ -15,6 +15,7 @@ namespace LazyVocabulary.DAL.UnitOfWork
         private UserProfileRepository _userProfileRepository;
         private DictionaryRepository _dictionaryRepository;
         private SourcePhraseRepository _sourcePhraseRepository;
+        private TranslatedPhraseRepository _translatedPhraseRepository;
 
         public UnitOfWork(string connectionString)
         {
@@ -73,6 +74,19 @@ namespace LazyVocabulary.DAL.UnitOfWork
             }
         }
 
+        public IRepository<TranslatedPhrase> TranslatedPhrases
+        {
+            get
+            {
+                if (_translatedPhraseRepository == null)
+                {
+                    _translatedPhraseRepository = new TranslatedPhraseRepository(_db);
+                }
+
+                return _translatedPhraseRepository;
+            }
+        }
+
         public void Save()
         {
             _db.SaveChanges();
@@ -83,6 +97,7 @@ namespace LazyVocabulary.DAL.UnitOfWork
             await _db.SaveChangesAsync();
         }
 
+        #region Dispose
         private bool disposed = false;
 
         public virtual void Dispose(bool disposing)
@@ -93,6 +108,7 @@ namespace LazyVocabulary.DAL.UnitOfWork
                 {
                     _db.Dispose();
                 }
+
                 this.disposed = true;
             }
         }
@@ -102,5 +118,6 @@ namespace LazyVocabulary.DAL.UnitOfWork
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+        #endregion
     }
 }

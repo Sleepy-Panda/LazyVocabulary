@@ -4,14 +4,15 @@ using LazyVocabulary.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LazyVocabulary.BLL.Services
 {
-    public class SourcePhraseService
+    public class TranslationService
     {
         private IUnitOfWork _database { get; set; }
 
-        public SourcePhraseService(IUnitOfWork database)
+        public TranslationService(IUnitOfWork database)
         {
             _database = database;
         }
@@ -35,6 +36,44 @@ namespace LazyVocabulary.BLL.Services
             }
 
             return resultWithData;
+        }
+
+        public async Task<Result> Create(dynamic translationFromView)
+        {
+            var result = new Result();
+
+            try
+            {
+                var sourcePhrase = new SourcePhrase
+                {
+                    DictionaryId = translationFromView.DictionaryId,
+                    Value = translationFromView.Value,
+                };
+                _database.SourcePhrases.Create(sourcePhrase);
+                await _database.SaveAsync();
+
+                foreach (var value in translationFromView.Translations)
+                {
+                    var translation = new TranslatedPhrase
+                    {
+                        SourcePhraseId = sourcePhrase.Id,
+                        Value = value,
+                    };
+                    _database.TranslatedPhrases.Create(translation);
+                }
+
+                await _database.SaveAsync();
+
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+                result.StackTrace = ex.StackTrace;
+            }
+
+            return result;
         }
     }
 }

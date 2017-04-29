@@ -4,7 +4,6 @@
 }
 
 <div class="breadcrump-container">
-    <i class="fa fa-home"></i>
     <a href="/Home/Index">Главная</a>
     <span class="separator"></span>
     <a href="/Dictionary/Index">Мои словари</a>
@@ -14,6 +13,9 @@
 
 <div class="top-buttons-container">
     <div class="row">
+        <button id="btn-submit-form" type="button" class="btn btn-info pull-right">
+            <i class="glyphicon glyphicon-ok"></i> Сохранить
+        </button>
         <button id="btn-clear-form" type="button" class="btn btn-default pull-right">
             <i class="fa fa-remove"></i> Очистить форму
         </button>
@@ -37,10 +39,16 @@
 
 @section Scripts {
     <script>
-        "use strict";
+        'use strict';
+
+        var languagePair;
+
+        $(function () {
+            $('#DictionaryId').change();
+        });
 
         function onBegin() {
-            $("#btn-submit-form").attr("disabled", "disabled");
+            $('#btn-submit-form').attr('disabled', 'disabled');
         };
 
         function onComplete() {
@@ -48,72 +56,118 @@
             $('#result').attr('style', 'display:normal');
         };
 
-        $("#btn-clear-form").click(function () {
+        $('#btn-submit-form').click(function () {
+            $('form').submit();
+        });
+
+        $('#btn-clear-form').click(function () {
             $(':input', '#form')
                 .not(':button, :submit, :reset, :hidden')
                 .val('')
                 .removeAttr('checked')
                 .removeAttr('selected');
-            $("#btn-clear-form").blur();
+            $('select').prop('selectedIndex', 0);
+            $('#div-auto').empty();
+            $('#btn-clear-form').blur();
         });
 
-        $("#btn-add-field").click(function () {
-            var $newInput = $('<div class="form-group"><input type="text" class="form-control" name="translations" placeholder="* Введите вариант перевода..." /></div>');
-            $("#translation-inputs").append($newInput);
-            $("#btn-add-field").blur();
+        $('#btn-add-field').click(function () {
+            var div = $('#translation-inputs');
+            var last = $('.form-group', div).last();
+            last.clone().appendTo(div);
+            last.val('');
+            $('#btn-add-field').blur();
         });
 
-        $("#Value").focusout(function () {
-            $("#div-auto").empty();
-            var targetText = $("#Value").val();
+        $('#Value').change(function () {
+            $('#div-auto').empty();
+            var targetText = $('#Value').val().trim();
 
             if (targetText == "") {
-                $("#div-auto").append('<p class="text-muted">Не удалось совершить перевод.</p>');
+                $('#div-auto').append('<p class="text-muted">Не удалось совершить перевод.</p>');
+                return;
             }
-            
+
             var translations = [];
 
-            var link = 'https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20170213T181444Z.08ee015e9d8d82f7.eda86d019b0feff6a7265faf46dc6d9aee180f55&lang=en-ru&text=' + targetText;
+            var trLink = 'https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20170213T172041Z.188b671735d113e7.b44d78d5c904d7a51611c185121e7df8671cd00c&text=' + targetText + '&lang=' + languagePair;
+            var dLink = 'https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20170213T181444Z.08ee015e9d8d82f7.eda86d019b0feff6a7265faf46dc6d9aee180f55&text=' + targetText + '&lang=' + languagePair;
+
             $.ajax({
                 type: 'GET',
-                url: link,
+                url: trLink,
                 success: function (response) {
-                    console.log(response.def);
-                    response.def.forEach(
+                    response.text.forEach(
                         function (item) {
-                            item.tr.forEach(
-                                function (item) {
-                                    translations.push(item.text);
-                                }
-                            );
+                            translations.push(item.toLowerCase());
                         }
                     );
 
-                    if (translations.length > 0) {
-                        translations.forEach(function (item) {
-                            $("#div-auto").append("<p>" + item + "</p");
-                        });
-                    }
-                    else {
-                        $("#div-auto").empty();
-                        $("#div-auto").append('<p class="text-muted">Не удалось совершить перевод.</p>');
-                    }
+                    $.ajax({
+                        type: 'GET',
+                        url: dLink,
+                        success: function (response) {
+                            response.def.forEach(
+                                function (item) {
+                                    item.tr.forEach(
+                                        function (item) {
+                                            translations.push(item.text.toLowerCase());
+                                        }
+                                    );
+                                }
+                            );
+
+                            if (translations.length > 0) {
+                                translations = translations.filter(onlyUniqueItems);
+
+                                translations.forEach(function (item) {
+                                    $('#div-auto').append('<div class="checkbox"><label><input type="checkbox" name="translations" value="' + item + '"/>' + item + '</label></div>');
+                                });
+                            }
+                            else {
+                                printError();
+                            }
+                        },
+                        error: function () {
+                            printError();
+                        },
+                        complete: function () {
+                            // TODO
+                        }
+                    });
                 },
                 error: function () {
-                    $("#div-auto").empty();
-                    $("#div-auto").append('<p class="text-muted">Не удалось совершить перевод.</p>');
+                    printError();
+                }
+            });          
+        });
+
+        function printError() {
+            $('#div-auto').empty();
+            $('#div-auto').append('<p class="text-muted"><i>Не удалось совершить перевод.</i></p>');
+        }
+
+        function onlyUniqueItems(value, index, self) {
+            return self.indexOf(value) === index;
+        }
+
+        $('#DictionaryId').change(function () {
+            var dictionaryId = $('#DictionaryId').val();
+            
+            $.ajax({
+                type: 'GET',
+                url: '/Dictionary/GetLanguagePair',
+                data: { dictionaryId: dictionaryId },
+                contentType: 'application/json;charset=utf-8',
+                dataType: 'json',
+                success: function (result) {
+                    languagePair = result.languagePair;
+                    console.log(result.languagePair);
+                },
+                error: function (response) {
+                    console.log('error');
                 }
             });
         });
-
-
-        /*function onlyUnique(value, index, self) { 
-        return self.indexOf(value) === index;
-        }
-
-        // usage example:
-        var a = ['a', 1, 'a', 2, '1'];
-        var unique = a.filter( onlyUnique ); // returns ['a', 1, 2, '1']/*
-
     </script>
 }

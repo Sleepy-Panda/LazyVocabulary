@@ -1,6 +1,7 @@
 ﻿using LazyVocabulary.BLL.Services;
 using LazyVocabulary.WEB.Models;
 using Microsoft.AspNet.Identity;
+using System;
 using System.Dynamic;
 using System.Linq;
 using System.Net;
@@ -244,6 +245,20 @@ namespace LazyVocabulary.WEB.Controllers
             };
 
             return View(model);
+        }
+
+        [HttpGet]
+        public JsonResult GetLanguagePair(int dictionaryId)
+        {
+            string languagePair = String.Empty;
+            var resultWithData = _dictionaryService.GetLanguagePairById(dictionaryId);
+
+            if (resultWithData.Success)
+            {
+                languagePair = resultWithData.ResultData;
+            }
+
+            return Json(new { languagePair = languagePair }, JsonRequestBehavior.AllowGet);
         }
     }
 }

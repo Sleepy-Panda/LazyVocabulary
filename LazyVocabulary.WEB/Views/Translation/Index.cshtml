@@ -8,8 +8,7 @@
 @Styles.Render("~/Content/menu.css")
 
 <div class="breadcrump-container">
-    <i class="fa fa-home"></i>
-    <a href="#">Главная</a>
+    <a href="/Home/Index">Главная</a>
     <span class="separator"></span>
     <a href="/Dictionary/Index">Мои словари</a>
     <span class="separator"></span>
@@ -27,7 +26,7 @@
 <div class="container">
     @if (Model.Count() > 0)
     {
-        <table class="table table-bordered table-hover table-striped">
+        <table class="table table-bordered table-hover table-striped top">
             <tbody>
                 @foreach (var item in Model)
                 {
@@ -80,7 +79,7 @@
     }
     else
     {
-        <p class="text-muted">Вы не добавили ни одного перевода.</p>
+        <p class="text-muted top"><i>Вы не добавили ни одного перевода.</i></p>
     }
 </div>
 

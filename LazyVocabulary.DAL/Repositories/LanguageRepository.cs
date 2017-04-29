@@ -40,6 +40,7 @@ namespace LazyVocabulary.DAL.Repositories
         public void Delete(int id)
         {
             Language item = _db.Languages.Find(id);
+
             if (item != null)
             {
                 _db.Languages.Remove(item);
@@ -48,8 +49,7 @@ namespace LazyVocabulary.DAL.Repositories
 
         public IEnumerable<Language> Find(Func<Language, bool> predicate)
         {
-            return _db.Languages
-                .Where(predicate);
+            return _db.Languages.Where(predicate);
         }
     }
 }

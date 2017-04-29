@@ -6,7 +6,6 @@
 }
 
 <div class="breadcrump-container">
-    <i class="fa fa-home"></i>
     <a href="/Home/Index">Главная</a>
     <span class="separator"></span>
     <a href="/Dictionary/Index">Мои словари</a>
@@ -16,6 +15,9 @@
 
 <div class="top-buttons-container">
     <div class="row">
+        <button id="btn-submit-form" type="submit" value="Сохранить" class="btn btn-info pull-right">
+            <i class="fa fa-check"></i> Сохранить
+        </button>
         <button id="btn-clear-form" type="button" class="btn btn-default pull-right">
             <i class="fa fa-remove"></i> Очистить форму
         </button>
@@ -40,7 +42,7 @@
 @section Scripts {
     <script>
         function onBegin() {
-            $("#btn-submit-form").attr("disabled", "disabled");
+            $('#btn-submit-form').attr('disabled', 'disabled');
         };
 
         function onComplete() {
@@ -48,13 +50,18 @@
             $('#result').attr('style', 'display:normal');
         };
 
-        $("#btn-clear-form").click(function () {
+        $('#btn-submit-form').click(function () {
+            $('form').submit();
+        });
+
+        $('#btn-clear-form').click(function () {
             $(':input', '#form')
                 .not(':button, :submit, :reset, :hidden')
                 .val('')
                 .removeAttr('checked')
                 .removeAttr('selected');
-            $("#btn-clear-form").blur();
+            $('select').prop('selectedIndex', 0);
+            $('#btn-clear-form').blur();
         });
     </script>
 }

@@ -38,13 +38,35 @@ namespace LazyVocabulary.BLL.Services
             return resultWithData;
         }
 
-        public ResultWithData<Dictionary> GetById(int id, string userId)
+        public ResultWithData<string> GetLanguagePairById(int dictionaryId)
+        {
+            var resultWithData = new ResultWithData<string>();
+
+            try
+            {
+                var dictionary = _database.Dictionaries.Get(dictionaryId);
+                var languagePair = $"{ dictionary.SourceLanguage.Code }-{ dictionary.TargetLanguage.Code }";
+
+                resultWithData.ResultData = languagePair.ToLower();
+                resultWithData.Success = true;
+            }
+            catch (Exception ex)
+            {
+                resultWithData.Success = false;
+                resultWithData.Message = ex.Message;
+                resultWithData.StackTrace = ex.StackTrace;
+            }
+
+            return resultWithData;
+        }
+
+        public ResultWithData<Dictionary> GetById(int dictionaryId, string userId)
         {
             var resultWithData = new ResultWithData<Dictionary>();
 
             try
             {
-                var dictionary = _database.Dictionaries.Get(id);
+                var dictionary = _database.Dictionaries.Get(dictionaryId);
                 resultWithData.ResultData = dictionary.ApplicationUserId == userId 
                     ? dictionary 
                     : null;

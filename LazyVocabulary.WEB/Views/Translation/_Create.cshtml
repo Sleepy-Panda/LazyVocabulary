@@ -2,34 +2,53 @@
 @model CreateTranslationViewModel 
         
 <div id="form" class="form-horizontal">
-    @Html.AntiForgeryToken()
+    @{
+        if (ViewBag.Result == "Success")
+        {
+            <div id="result" class="alert alert-success alert-dismissible fade in top" role="alert" style="display:none;">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <span>Запись успешно добавлена.</span>
+            </div>
+        }
+        else if (ViewBag.Result == "Error")
+        {
+            <div id="result" class="alert alert-danger alert-dismissible fade in top" role="alert" style="display:none;">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <span>Произошла ошибка, запись не была добавлена.</span>
+            </div>
+        }
+    }
 
+    @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <h3>Основные настройки</h3>
 
     <div class="form-group">
-        @Html.DropDownList("DictionaryId", null, htmlAttributes: new { @class = "form-control", placeholder = "* Выберите словарь..." })
+        <label class="required" for="DictionaryId">Выберите словарь</label>
+        @Html.DropDownList("DictionaryId", null, htmlAttributes: new { @class = "form-control", placeholder = "" })
         @Html.ValidationMessageFor(m => m.DictionaryId, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
-        @Html.TextBoxFor(m => m.Value, new { @class = "form-control", placeholder = "* Слово или выражение..." })
+        <label class="required" for="Value">Введите слово или выражение</label>
+        @Html.TextBoxFor(m => m.Value, new { @class = "form-control", placeholder = "" })
         @Html.ValidationMessageFor(m => m.Value, "", new { @class = "text-danger" })
     </div>
 
     <h3>Варианты перевода</h3>
 
     <div class="col-md-6">
-        <p>
-            <label class="radio-inline">
-                <input type="radio" id="radio-manual" checked /> Добавьте варианты перевода вручную...
-            </label>
-        </p>
+        <p>Добавьте варианты перевода вручную...</p>
         <div id="div-manual">
             <div id="translation-inputs">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="translations" placeholder="* Введите вариант перевода..." />
+                    <label>Введите вариант перевода</label>
+                    <input type="text" class="form-control" name="translations" placeholder="" />
                 </div>
             </div>
 
@@ -42,38 +61,9 @@
     </div>
 
     <div class="col-md-6">
-        <p>
-            <label class="radio-inline">
-                <input type="radio" id="radio-auto" /> Или воспользуйтесь автопереводом.
-            </label>
-        </p>
+        <p>Или выделите варианты, предложенные автопереводом.</p>
         <div id="div-auto">
-
+            <p class="text-muted"><i>Не удалось совершить перевод.</i></p>
         </div>
     </div>
-
-    <div class="form-group">
-        @{
-            if (ViewBag.Result == "Success")
-            {
-                <div id="result" class="alert alert-success alert-dismissible fade in" role="alert" style="display:none;">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <span>Запись успешно добавлена.</span>
-                </div>
-            }
-            if (ViewBag.Result == "Error")
-            {
-                <div id="result" class="alert alert-danger alert-dismissible fade in" role="alert" style="display:none;">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <span>Произошла ошибка, запись не была добавлена.</span>
-                </div>
-            }
-        }
-    </div>
-</div>
-
 </div>

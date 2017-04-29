@@ -40,6 +40,7 @@ namespace LazyVocabulary.DAL.Repositories
         public void Delete(int id)
         {
             UserProfile item = _db.UserProfiles.Find(id);
+
             if (item != null)
             {
                 _db.UserProfiles.Remove(item);
@@ -48,8 +49,7 @@ namespace LazyVocabulary.DAL.Repositories
 
         public IEnumerable<UserProfile> Find(Func<UserProfile, bool> predicate)
         {
-            return _db.UserProfiles
-                .Where(predicate);
+            return _db.UserProfiles.Where(predicate);
         }
     }
 }

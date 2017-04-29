@@ -1,8 +1,11 @@
 ﻿using LazyVocabulary.BLL.Services;
 using LazyVocabulary.WEB.Models;
 using Microsoft.AspNet.Identity;
+using System;
+using System.Dynamic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace LazyVocabulary.WEB.Controllers
@@ -10,19 +13,19 @@ namespace LazyVocabulary.WEB.Controllers
     [Authorize]
     public class TranslationController : Controller
     {
-        private SourcePhraseService _sourcePhraseService;
+        private TranslationService _translationService;
         private DictionaryService _dictionaryService;
 
-        public TranslationController(SourcePhraseService spService, DictionaryService dService)
+        public TranslationController(TranslationService tService, DictionaryService dService)
         {
-            _sourcePhraseService = spService;
+            _translationService = tService;
             _dictionaryService = dService;
         }
 
         // http://stackoverflow.com/questions/21616052/binding-arrays-in-asp-net-mvc-without-index
         // http://jsfiddle.net/716d58kw/
 
-        // GET: Phrase/1
+        // GET: Translation/1
         [HttpGet]
         public ActionResult Index(int? id)
         {
@@ -32,7 +35,7 @@ namespace LazyVocabulary.WEB.Controllers
             }
 
             string userId = User.Identity.GetUserId();
-            var resultWithData = _sourcePhraseService.GetByDictionaryId(id.Value);
+            var resultWithData = _translationService.GetByDictionaryId(id.Value);
 
             if (!resultWithData.Success)
             {
@@ -55,7 +58,7 @@ namespace LazyVocabulary.WEB.Controllers
             return View("Index", model);
         }
 
-        // GET: Phrase/Create
+        // GET: Translation/Create
         [HttpGet]
         public ActionResult Create(int? id)
         {
@@ -67,7 +70,12 @@ namespace LazyVocabulary.WEB.Controllers
                 // TODO
             }
 
-            var dictionaries = resultWithData.ResultData;
+            var dictionaries = resultWithData.ResultData
+                .Select(d => new {
+                    Id = d.Id,
+                    Name = $"{ d.Name } ({ d.SourceLanguage.Code }-{ d.TargetLanguage.Code })"
+                })
+                .ToList();
 
             if (id.HasValue)
             {
@@ -79,6 +87,55 @@ namespace LazyVocabulary.WEB.Controllers
             }
 
             return View("Create");
+        }
+
+        // POST: Translation/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create(CreateTranslationViewModel model, string[] translations)
+        {
+            string userId = User.Identity.GetUserId();
+            var resultWithData = _dictionaryService.GetByUserId(userId);
+
+            if (!resultWithData.Success)
+            {
+                // TODO
+            }
+
+            var dictionaries = resultWithData.ResultData
+                .Select(d => new {
+                    Id = d.Id,
+                    Name = $"{ d.Name } ({ d.SourceLanguage.Code }-{ d.TargetLanguage.Code })"
+                })
+                .ToList();
+
+            ViewBag.DictionaryId = new SelectList(dictionaries, "Id", "Name", model.DictionaryId);
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Result = "Error";
+                return PartialView("_Create", model);
+            }
+
+            var validTranslations = translations
+                .Where(t => !String.IsNullOrEmpty(t))
+                .ToList();
+
+            dynamic translation = new ExpandoObject();
+            translation.DictionaryId = model.DictionaryId;
+            translation.Value = model.Value;
+            translation.Translations = validTranslations;
+
+            var result = await _translationService.Create(translation);
+
+            if (!result.Success)
+            {
+                ViewBag.Result = "Error";
+                return PartialView("_Create", model);
+            }
+
+            ViewBag.Result = "Success";
+            return PartialView("_Create");
         }
     }
 }

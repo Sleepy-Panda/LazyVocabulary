@@ -10,6 +10,7 @@ namespace LazyVocabulary.DAL.Interfaces
         IRepository<UserProfile> UserProfiles { get; }
         IRepository<Dictionary> Dictionaries { get; }
         IRepository<SourcePhrase> SourcePhrases { get; }
+        IRepository<TranslatedPhrase> TranslatedPhrases { get; }
 
         void Save();
         Task SaveAsync();
