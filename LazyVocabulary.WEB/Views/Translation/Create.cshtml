@@ -185,12 +185,54 @@
                 dataType: 'json',
                 success: function (result) {
                     languagePair = result.languagePair;
-                    console.log(result.languagePair);
+                    console.log('Language pair is ' + result.languagePair);
+                    $('#Value').keyup();
                 },
                 error: function (response) {
                     console.error('Cant get language pair for selected dictionary.');
                 }
             });
         });
+
+        $('#Value').keyup(function () {
+            var link = getGoogleLink();
+            $('a#google-link').attr('href', link);
+        });
+
+        function getGoogleLink() {
+            var link = 'https://translate.google.com?';
+            var q = $('#Value').val().trim();
+            var sl = languagePair.substring(0, 2);
+            var tl = languagePair.substring(3);
+
+            if (q != '') {
+                link += 'q=' + q;
+            }
+            link += '&sl=' + sl;
+            link += '&tl=' + tl;
+
+            return link;
+        }
+
+        //$('a#google-link').click(function (event) {
+        //    event.preventDefault();
+        //    var link = 'https://translate.google.com';
+        //    var q = $('#Value').val().trim();
+        //    var sl = languagePair.substring(0, 2);
+        //    var tl = languagePair.substring(3);
+        //    link += '?q=' + q;
+        //    link += '&sl=' + sl;
+        //    link += '&tl=' + tl;
+        //    console.log(link);
+
+        //    var win = window.open(link, '_blank');
+        //    if (win) {
+        //        // Browser has allowed it to be opened.
+        //        win.focus();
+        //    } else {
+        //        // Browser has blocked it.
+        //        console.error('Popups are blocked for this website.');
+        //    }
+        //});
     </script>
 }

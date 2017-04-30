@@ -90,6 +90,11 @@ h3 {
     border-left: 4px solid;
 }
 
+.modal-header,
+.modal-footer {
+    border: none;
+}
+
 .left-menu-container {
 	display: flex;
 	flex-direction: column;
@@ -400,6 +405,11 @@ table.borderless tr, table.borderless td {
 tr.disabled {
     opacity: 0.3;
     cursor: not-allowed;
+}
+
+.borderless tr > th {
+    border-top: none !important;
+    border-bottom: 2px solid #ddd;
 }
 
 td {
