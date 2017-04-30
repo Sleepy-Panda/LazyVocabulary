@@ -397,6 +397,11 @@ table.borderless tr, table.borderless td {
     border-bottom: 1px solid #ddd;
 }
 
+tr.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
 td {
     padding: 10px !important;
     line-height: 22px !important;

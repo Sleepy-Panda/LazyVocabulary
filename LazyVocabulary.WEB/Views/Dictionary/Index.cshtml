@@ -72,7 +72,7 @@
                                             <a href="/Dictionary/Edit/@item.Id">Редактировать словарь</a>
                                         </li>
                                         <li>
-                                            <a href="#">Удалить словарь</a>
+                                            <a href="#" class="delete-dictionary" id="delete-@item.Id">Удалить словарь</a>
                                         </li>
                                         <li class="menu-separator"></li>
                                         <li>
@@ -102,5 +102,30 @@
 
     <script>
         $('[data-menu]').menu();
+
+        $('a.delete-dictionary').click(function (event) {
+            event.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: '/Dictionary/Delete/' + event.target.id.match('[^delete-]*$'),
+                contentType: 'application/json;charset=utf-8',
+                dataType: 'json',
+                success: function (result) {
+                    if (result.success == true) {
+                        var tr = $(event.target).closest('tr');
+                        var menu = $('ul.menu', tr);
+                        menu.remove();
+                        tr.addClass('disabled');
+                    }
+                    else {
+                        console.error('Cant delete selected dictionary');
+                    }
+                },
+                error: function (response) {
+                    console.error('Cant delete selected dictionary');
+                }
+            });
+        });
     </script>
 }

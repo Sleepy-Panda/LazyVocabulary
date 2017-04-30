@@ -247,6 +247,25 @@ namespace LazyVocabulary.WEB.Controllers
             return View(model);
         }
 
+        // POST: Dictionary/Delete/1
+        [HttpPost]
+        public async Task<JsonResult> Delete(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+            }
+
+            var result = await _dictionaryService.Delete(id.Value);
+
+            if (!result.Success)
+            {
+                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpGet]
         public JsonResult GetLanguagePair(int dictionaryId)
         {

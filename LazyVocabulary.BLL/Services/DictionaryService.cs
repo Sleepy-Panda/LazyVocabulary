@@ -141,6 +141,27 @@ namespace LazyVocabulary.BLL.Services
             return result;
         }
 
+        public async Task<Result> Delete(int dictionaryId)
+        {
+            var result = new Result();
+
+            try
+            {
+                _database.Dictionaries.Delete(dictionaryId);
+                await _database.SaveAsync();
+
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+                result.StackTrace = ex.StackTrace;
+            }
+
+            return result;
+        }
+
         public bool IsDictionaryNameAvailable(string dictionaryName, string userId)
         {
             bool result = _database.Dictionaries
