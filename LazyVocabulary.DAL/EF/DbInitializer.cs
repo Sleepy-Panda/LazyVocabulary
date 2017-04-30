@@ -3,13 +3,11 @@ using System.Data.Entity;
 
 namespace LazyVocabulary.DAL.EF
 {
-    internal class DbInitializer : DropCreateDatabaseIfModelChanges<ApplicationContext>
+    internal class DbInitializer : DropCreateDatabaseAlways<ApplicationContext>
     {
         protected override void Seed(ApplicationContext db)
         {
             InitializeLanguages(db);
-
-            base.Seed(db);
         }
 
         private void InitializeLanguages(ApplicationContext db)
@@ -26,6 +24,36 @@ namespace LazyVocabulary.DAL.EF
                 Code = "en",
                 FlagImagePath = "en.png",
             });
+
+            db.Languages.Add(new Language
+            {
+                Name = "Deutsch",
+                Code = "de",
+                FlagImagePath = "de.png",
+            });
+
+            db.Languages.Add(new Language
+            {
+                Name = "French",
+                Code = "fr",
+                FlagImagePath = "fr.png",
+            });
+
+            db.Languages.Add(new Language
+            {
+                Name = "Español",
+                Code = "es",
+                FlagImagePath = "es.png",
+            });
+
+            db.Languages.Add(new Language
+            {
+                Name = "Italian",
+                Code = "it",
+                FlagImagePath = "it.png",
+            });
+
+            db.SaveChanges();            
         }
     }
 }

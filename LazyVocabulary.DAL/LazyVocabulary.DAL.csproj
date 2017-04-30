@@ -77,6 +77,14 @@
     <Compile Include="Migrations\201704171704458_UserLocale.Designer.cs">
       <DependentUpon>201704171704458_UserLocale.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704301911422_UpdatedAtForDictionaryEtc.cs" />
+    <Compile Include="Migrations\201704301911422_UpdatedAtForDictionaryEtc.Designer.cs">
+      <DependentUpon>201704301911422_UpdatedAtForDictionaryEtc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704301932386_IncreaseLengthForTranslationValue.cs" />
+    <Compile Include="Migrations\201704301932386_IncreaseLengthForTranslationValue.Designer.cs">
+      <DependentUpon>201704301932386_IncreaseLengthForTranslationValue.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DictionaryRepository.cs" />
@@ -102,6 +110,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704171704458_UserLocale.resx">
       <DependentUpon>201704171704458_UserLocale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704301911422_UpdatedAtForDictionaryEtc.resx">
+      <DependentUpon>201704301911422_UpdatedAtForDictionaryEtc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704301932386_IncreaseLengthForTranslationValue.resx">
+      <DependentUpon>201704301932386_IncreaseLengthForTranslationValue.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -16,12 +16,13 @@ namespace LazyVocabulary.DAL.EF
 
         static ApplicationContext()
         {
-            Database.SetInitializer<ApplicationContext>(new DbInitializer());
+
         }
 
         public ApplicationContext()
         {
-
+            Database.SetInitializer<ApplicationContext>(new DbInitializer());
+            Database.Initialize(true);
         }
 
         public ApplicationContext(string conectionString) 
@@ -38,6 +39,8 @@ namespace LazyVocabulary.DAL.EF
             modelBuilder.Configurations.Add(new UserProfileMapping());
             modelBuilder.Configurations.Add(new DictionaryMapping());
             modelBuilder.Configurations.Add(new ApplicationUserMapping());
+            modelBuilder.Configurations.Add(new SourcePhraseMapping());
+            modelBuilder.Configurations.Add(new TranslatedPhraseMapping());
         }
     }
 }

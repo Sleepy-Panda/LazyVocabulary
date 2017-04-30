@@ -125,6 +125,7 @@ namespace LazyVocabulary.BLL.Services
                     ApplicationUserId = dictionaryFromView.ApplicationUserId,
                     SourceLanguageId = dictionaryFromView.SourceLanguageId,
                     TargetLanguageId = dictionaryFromView.TargetLanguageId,
+                    UpdatedAt = DateTime.Now,
                 };
                 _database.Dictionaries.Update(dictionary);
                 await _database.SaveAsync();

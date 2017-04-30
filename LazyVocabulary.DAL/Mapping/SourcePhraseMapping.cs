@@ -16,7 +16,7 @@ namespace LazyVocabulary.DAL.Mapping
 
             Property(s => s.Value)
                 .IsRequired()
-                .HasMaxLength(64);
+                .HasMaxLength(256);
         }
     }
 }

@@ -24,6 +24,9 @@ namespace LazyVocabulary.WEB.Models
         public int PhrasesCount { get; set; }
 
         [Required]
-        public DateTime CreatedAt { get; set; }
+        public string CreatedAt { get; set; }
+
+        [Required]
+        public string UpdatedAt { get; set; }
     }
 }

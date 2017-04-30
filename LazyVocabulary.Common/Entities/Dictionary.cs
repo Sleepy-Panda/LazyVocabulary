@@ -13,6 +13,8 @@ namespace LazyVocabulary.Common.Entities
 
         public DateTime CreatedAt { get; set; }
 
+        public DateTime UpdatedAt { get; set; }
+
         public int ViewsCount { get; set; }
 
         public string ApplicationUserId { get; set; }
@@ -28,7 +30,7 @@ namespace LazyVocabulary.Common.Entities
 
         public Dictionary()
         {
-            CreatedAt = DateTime.Now;
+            CreatedAt = UpdatedAt = DateTime.Now;
             SourcePhrases = new List<SourcePhrase>();
         }
     }

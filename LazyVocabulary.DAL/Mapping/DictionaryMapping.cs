@@ -47,6 +47,9 @@ namespace LazyVocabulary.DAL.Mapping
 
             Property(d => d.CreatedAt)
                 .IsRequired();
+
+            Property(d => d.UpdatedAt)
+                .IsRequired();
         }
     }
 }

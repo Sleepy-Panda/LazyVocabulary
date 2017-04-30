@@ -64,6 +64,11 @@ namespace LazyVocabulary.BLL.Services
 
                 await _database.SaveAsync();
 
+                var dictionary = _database.Dictionaries.Get(translationFromView.DictionaryId);
+                dictionary.UpdatedAt = DateTime.Now;
+                _database.Dictionaries.Update(dictionary);
+                await _database.SaveAsync();
+            
                 result.Success = true;
             }
             catch (Exception ex)

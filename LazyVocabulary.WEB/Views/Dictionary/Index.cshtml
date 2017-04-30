@@ -48,7 +48,9 @@
                                     @item.Description
                                 </td>
                                 <td class="details hidden-sm hidden-xs">
-                                    <span class="text-muted">Создан:</span> @item.CreatedAt.ToString("dd.mm.yyyy HH:mm")
+                                    <span class="text-muted">Создан:</span> @item.CreatedAt
+                                    <br />
+                                    <span class="text-muted">Обновлён:</span> @item.UpdatedAt
                                 </td>
                                 <td class="flag">
                                     <img class="flag-image" src="@Url.Content("~/Content/Images/flags/" + item.SourceLanguageImagePath)" />

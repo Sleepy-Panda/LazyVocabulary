@@ -101,7 +101,7 @@
     <Compile Include="OperationDetails\ResultWithData.cs" />
     <Compile Include="Services\DictionaryService.cs" />
     <Compile Include="Services\LanguageService.cs" />
-    <Compile Include="Services\SourcePhraseService.cs" />
+    <Compile Include="Services\TranslationService.cs" />
     <Compile Include="Services\UserProfileService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>

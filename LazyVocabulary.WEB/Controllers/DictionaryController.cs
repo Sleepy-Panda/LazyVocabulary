@@ -38,6 +38,7 @@ namespace LazyVocabulary.WEB.Controllers
             var dictionaries = resultWithData.ResultData;
 
             var model = dictionaries
+                .OrderByDescending(d => d.UpdatedAt)
                 .Select(d => new IndexDictionaryViewModel
                 {
                     Id = d.Id,
@@ -46,7 +47,8 @@ namespace LazyVocabulary.WEB.Controllers
                     SourceLanguageImagePath = d.SourceLanguage.FlagImagePath,
                     TargetLanguageImagePath = d.TargetLanguage.FlagImagePath,
                     PhrasesCount = d.SourcePhrases.Count,
-                    CreatedAt = d.CreatedAt,
+                    CreatedAt = d.CreatedAt.ToString("dd.mm.yyyy HH:mm"),
+                    UpdatedAt = d.UpdatedAt.ToString("dd.mm.yyyy HH:mm"),
                 });
 
             return View("Index", model);
