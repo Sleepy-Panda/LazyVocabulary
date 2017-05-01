@@ -8,8 +8,7 @@ body {
 a {
     font-size: 16px;
     font-weight: 400;
-    color: #428bca;
-    opacity: 0.8;
+    color: #CCC;
     -webkit-transition: all .3s ease-in-out;
        -moz-transition: all .3s ease-in-out;
         -ms-transition: all .3s ease-in-out; 
@@ -20,9 +19,8 @@ a {
 a:hover,
 a:focus,
 a:active {
-    opacity: 1;
     text-decoration: none;
-    color: #428bca;
+    color: #FFF;
     -webkit-transition: all .3s ease-in-out;
        -moz-transition: all .3s ease-in-out;
         -ms-transition: all .3s ease-in-out; 
@@ -105,6 +103,8 @@ p {
 .form-box {
 	margin-top: 3rem;
     margin-bottom: 3rem;
+    padding-right: 0;
+    padding-left: 0;    
 }
 
 .form-top {
@@ -129,8 +129,7 @@ p {
 }
 
 .form-top-left p { 
-    opacity: 0.8; 
-    color: #fff; 
+    color: #CCC; 
 }
 
 .form-top-right {
@@ -148,6 +147,7 @@ p {
 	padding: 25px;
 	background: rgba(0, 0, 0, 0.5);
 	text-align: left;
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
     -webkit-border-radius: 0 0 4px 4px;
        -moz-border-radius: 0 0 4px 4px;
             border-radius: 0 0 4px 4px;
@@ -159,6 +159,7 @@ p {
 
 .form-bottom button.btn {
 	width: 100%;
+    text-transform: uppercase;
 }
 
 .form-bottom btn-left {
@@ -173,6 +174,7 @@ p {
 }
 
 .text-danger.field-validation-error {
+    font-size: 15px;
     font-weight: 300;
     color: #de615e;
 }
@@ -257,21 +259,19 @@ button.btn {
     margin: 0;
     padding: 0 20px;
     vertical-align: middle;
-    background: #5BC0DE;
+    background: #55ACEE;
     border: 0;
-    opacity: 0.8;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 16px;
     color: #fff;
     text-shadow: none;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+
     -webkit-border-radius: 4px; 
        -moz-border-radius: 4px; 
             border-radius: 4px;
-    -webkit-box-shadow: none; 
-       -moz-box-shadow: none; 
-            box-shadow: none;
     -webkit-transition: all .3s ease-in-out;
        -moz-transition: all .3s ease-in-out;
         -ms-transition: all .3s ease-in-out; 
@@ -280,8 +280,10 @@ button.btn {
 }
 
 button.btn:hover {
-    opacity: 1;
-    color: #fff; 
+    background-color: #6cb7f0;
+    color: #FFF;
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
+
     -webkit-transition: all .3s ease-in-out;
        -moz-transition: all .3s ease-in-out;
         -ms-transition: all .3s ease-in-out; 
@@ -292,7 +294,8 @@ button.btn:hover {
 button.btn:active { 
     outline: 0; 
     opacity: 1; 
-    color: #fff; 
+    color: #fff;
+    background-color: #6cb7f0;
     -webkit-box-shadow: none; 
        -moz-box-shadow: none; 
             box-shadow: none; 
@@ -302,13 +305,14 @@ button.btn:focus {
     outline: 0; 
     opacity: 1; 
     color: #fff; 
+    background-color: #6cb7f0;
 }
 
 button.btn:active:focus, 
 button.btn.active:focus { 
     outline: 0; 
     opacity: 1; 
-    background: #5BC0DE; 
+    background-color: #6cb7f0;
     color: #fff; 
 }
 
@@ -342,4 +346,8 @@ button.btn.active:focus {
 .form-control:-webkit-autofill:active {
     -webkit-box-shadow: inset 0 0 0 100px white;
     -webkit-text-fill-color: black;
+}
+
+.no-left-right-padding {
+
 }

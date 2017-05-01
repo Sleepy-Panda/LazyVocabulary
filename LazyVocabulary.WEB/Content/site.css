@@ -333,7 +333,8 @@ h3 {
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.25);
 }
 
-.top-buttons-container .row button {
+.top-buttons-container .row button,
+.top-buttons-container .row a {
 	margin-left: 15px;
 }
 
@@ -415,6 +416,10 @@ tr.disabled {
 td {
     padding: 10px !important;
     line-height: 22px !important;
+}
+
+td.td-checkbox {
+    width: 33px;
 }
 
 img.flag-image {

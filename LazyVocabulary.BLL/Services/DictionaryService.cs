@@ -3,6 +3,8 @@ using LazyVocabulary.Common.Entities;
 using LazyVocabulary.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -153,8 +155,14 @@ namespace LazyVocabulary.BLL.Services
 
                 result.Success = true;
             }
+            // TODO: Test
+            catch (DbUpdateConcurrencyException)
+            {
+                result.Success = true;
+            }
             catch (Exception ex)
             {
+                string exc = ex.GetType().ToString();
                 result.Success = false;
                 result.Message = ex.Message;
                 result.StackTrace = ex.StackTrace;

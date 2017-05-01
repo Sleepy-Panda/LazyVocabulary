@@ -30,7 +30,7 @@
                 Ведите электронный словарь, пополняйте словарный запас и делитесь им с друзьями в любое время и в любом месте.
                 Присоединяйтесь!
             </p>
-            <a href="/Account/Register" class="btn btn-info">
+            <a href="/Account/Register" class="btn">
                 <i class="fa fa-user-plus"></i> Присоединиться
             </a>
             <div class="arrow-down hidden-xs">
@@ -43,6 +43,47 @@
 <div>
     <div class="container">
         <h1>Что такое BeLazy</h1>
+        <p>Понятия не имею, потом придумаю</p>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="footer-social-section">
+        <div class="container">
+            <ul>
+                <li>
+                    <a class="btn-rounded btn-fb">
+                        <i class="fa fa-facebook"> </i>
+                    </a>
+                </li>
+                <li>
+                    <a class="btn-rounded btn-twitter">
+                        <i class="fa fa-twitter"> </i>
+                    </a>
+                </li>
+                <li>
+                    <a class="btn-rounded btn-gplus">
+                        <i class="fa fa-google-plus"> </i>
+                    </a>
+                </li>
+                <li>
+                    <a class="btn-rounded btn-vk">
+                        <i class="fa fa-vk"> </i>
+                    </a>
+                </li>
+                <li>
+                    <a class="btn-rounded btn-instagram">
+                        <i class="fa fa-instagram"> </i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-copyright">
+        <div class="container">
+            © 2017 Copyright</a>
+        </div>
     </div>
 </div>
 
@@ -60,7 +101,7 @@
             if (browserLanguage == 'ru' || browserLanguage == 'be' || browserLanguage == 'uk') {
                 browserLanguage = 'ru';
             }
-            // Transform other languages to English.
+                // Transform other languages to English.
             else {
                 browserLanguage = 'en';
             }
@@ -81,7 +122,7 @@
 
             // 7 days.
             var date = new Date;
-            date.setDate(date.getDate() + 7);           
+            date.setDate(date.getDate() + 7);
 
             updatedCookie += '; path=/;';
             updatedCookie += 'expires=' + date.toUTCString() + ';';

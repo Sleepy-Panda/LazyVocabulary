@@ -18,6 +18,9 @@
         <a href="/Dictionary/Create" class="btn btn-info pull-right">
             <i class="fa fa-plus"></i> Добавить словарь
         </a>
+        <button id="btn-delete-selected" type="button" class="btn btn-info pull-right" disabled>
+            <i class="fa fa-remove"></i> Удалить выбранные
+        </button>
     </div>
 </div>
 
@@ -40,6 +43,9 @@
                         @foreach (var item in Model)
                         {
                             <tr>
+                                <td class="td-checkbox">
+                                    <input type="checkbox" name="dictionaries" value="@item.Id">
+                                </td>
                                 <td>
                                     <a href="/Translation/Index/@item.Id">@item.Name</a>
                                     <br />
@@ -113,6 +119,27 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="modal-delete-selected" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">Подтвердите удаление</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Вы уверены, что хотите удалить выбранные словари со всеми переводами? Восстановить данные будет <b>невозможно.</b></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                <i class="fa fa-remove"></i> Закрыть
+                            </button>
+                            <button type="button" class="btn btn-info" id="btn-submit-delete-selected">
+                                <i class="glyphicon glyphicon-ok"></i> Удалить
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="tab-pane" id="tab-pane-available" role="tabpanel">
@@ -141,6 +168,7 @@
                         if (result.success == true) {
                             var tr = $(event.target).closest('tr');
                             tr.remove();
+                            editDeleteButtonState();
                         }
                         else {
                             console.error('Cant delete selected dictionary.');
@@ -161,5 +189,59 @@
                 });
             });
         });
+
+        $('#btn-delete-selected').click(function () {
+            $('#modal-delete-selected').modal('show');
+
+            $('#btn-submit-delete-selected').click(function () {
+                var ids = $('input[name="dictionaries"]:checked');
+                if (ids.length) {
+                    $.each(ids, function (i, value) {
+                        $.ajax({
+                            type: 'POST',
+                            url: '/Dictionary/Delete/' + $(value).val(),
+                            contentType: 'application/json;charset=utf-8',
+                            dataType: 'json',
+                            async: false,
+                            success: function (result) {
+                                if (result.success == true) {
+                                    var tr = value.closest('tr');
+                                    tr.remove();
+                                    editDeleteButtonState();
+                                }
+                                else {
+                                    console.error('Cant delete selected dictionary.');
+                                }
+
+                                var table = $('table#table-my-dictionaries');
+                                if (!$('tr', table).length) {
+                                    table.remove();
+                                    $('#tab-pane-my').append('<p class="text-muted"><i>Вы не создали ни одного словаря.</i></p>');
+                                }
+                            },
+                            error: function (response) {
+                                console.error('Cant delete selected dictionary.');
+                            },
+                            complete: function () {
+                                $('#modal-delete-selected').modal('hide');
+                            }
+                        });
+                    });
+                }
+            });
+        });
+
+        $('input[name="dictionaries"]').change(function () {
+            editDeleteButtonState();
+        });
+
+        function editDeleteButtonState() {
+            if (!$('input[name="dictionaries"]:checked').length) {
+                $('#btn-delete-selected').attr('disabled', true);
+            }
+            else {
+                $('#btn-delete-selected').attr('disabled', false);
+            }
+        }
     </script>
 }
