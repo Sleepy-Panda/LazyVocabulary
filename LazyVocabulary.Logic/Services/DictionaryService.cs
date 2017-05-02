@@ -1,9 +1,8 @@
-﻿using LazyVocabulary.Logic.OperationDetails;
-using LazyVocabulary.Common.Entities;
+﻿using LazyVocabulary.Common.Entities;
 using LazyVocabulary.DataAccess.Interfaces;
+using LazyVocabulary.Logic.OperationDetails;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
@@ -162,7 +161,7 @@ namespace LazyVocabulary.Logic.Services
             }
             catch (Exception ex)
             {
-                string exc = ex.GetType().ToString();
+                //string exc = ex.GetType().ToString();
                 result.Success = false;
                 result.Message = ex.Message;
                 result.StackTrace = ex.StackTrace;

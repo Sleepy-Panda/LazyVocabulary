@@ -20,17 +20,32 @@
         <a href="/Translation/Create/@ViewBag.DictionaryId" class="btn btn-info pull-right">
             <i class="fa fa-plus"></i> Добавить перевод
         </a>
+        <button id="btn-delete-selected" type="button" class="btn btn-info pull-right" disabled>
+            <i class="fa fa-remove"></i> Удалить выбранные
+        </button>
+        <button id="btn-move-selected" type="button" class="btn btn-info pull-right" disabled>
+            <i class="fa fa-arrow-right"></i> Переместить выбранные
+        </button>
+        <button id="btn-select-all" type="button" class="btn btn-default pull-right">
+            <i class="fa fa-check-square-o"></i> Выделить все
+        </button>
+        <button id="btn-deselect-all" type="button" class="btn btn-default pull-right">
+            <i class="fa fa-square-o"></i> Снять выделение
+        </button>
     </div>
 </div>
 
 <div class="container">
     @if (Model.Count() > 0)
     {
-        <table class="table table-bordered table-hover table-striped top">
+        <table class="table borderless top" id="table-translations">
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
+                        <td class="td-checkbox">
+                            <input type="checkbox" name="translations" value="@item.Id">
+                        </td>
                         <td>
                             @item.Value
                         </td>
@@ -45,7 +60,7 @@
                             }
                             else
                             {
-                                <p class="text-muted">Вы не добавили ни одного перевода.</p>
+                                <p class="text-muted"><i>Вы не добавили ни одного перевода.</i></p>
                             }
                         </td>
                         <td class="toggle-menu-icon">
@@ -54,21 +69,10 @@
                             </a>
                             <ul class="menu" data-menu data-menu-toggle="#toggle-@item.Id">
                                 <li>
-                                    <a href="@item.Id">Список переводов</a>
+                                    <a href="/Translation/Edit/@item.Id">Редактировать перевод</a>
                                 </li>
                                 <li>
-                                    <a href="@item.Id">Подробнее о словаре</a>
-                                </li>
-                                <li class="menu-separator"></li>
-                                <li>
-                                    <a href="#">Редактировать словарь</a>
-                                </li>
-                                <li>
-                                    <a href="#">Удалить словарь</a>
-                                </li>
-                                <li class="menu-separator"></li>
-                                <li>
-                                    <a href="#">Экспортировать словарь в pdf</a>
+                                    <a href="#" class="delete-translation" id="delete-@item.Id">Удалить перевод</a>
                                 </li>
                             </ul>
                         </td>
@@ -81,6 +85,28 @@
     {
         <p class="text-muted top"><i>Вы не добавили ни одного перевода.</i></p>
     }
+
+    <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Подтвердите удаление</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Вы уверены, что хотите удалить выбранный перевод? Восстановить данные будет <b>невозможно.</b></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fa fa-remove"></i> Закрыть
+                    </button>
+                    <button type="button" class="btn btn-info" id="btn-submit-delete">
+                        <i class="glyphicon glyphicon-ok"></i> Удалить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
@@ -88,5 +114,110 @@
 
     <script>
         $('[data-menu]').menu();
+
+        $('a.delete-translation').click(function (event) {
+            event.preventDefault();
+            $('#modal-delete').modal('show');
+
+            $('#btn-submit-delete').click(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '/Translation/Delete/' + event.target.id.match('[^delete-]*$'),
+                    contentType: 'application/json;charset=utf-8',
+                    dataType: 'json',
+                    // To avoid DbUpdateConcurrencyException in TranslationService.
+                    async: false,
+                    success: function (result) {
+                        if (result.success == true) {
+                            var tr = $(event.target).closest('tr');
+                            tr.remove();
+                            editDeleteButtonState();
+                        }
+                        else {
+                            console.error('Cant delete selected translation.');
+                        }
+
+                        var table = $('table#table-translations');
+                        if (!$('tr', table).length) {
+                            table.remove();
+                            $('.container').append('<p class="text-muted top"><i>Вы не добавили ни одного перевода.</i></p>');
+                        }
+                    },
+                    error: function (response) {
+                        console.error('Cant delete selected translation.');
+                    },
+                    complete: function () {
+                        $('#modal-delete').modal('hide');
+                    }
+                });
+            });
+        });
+
+        $('#btn-delete-selected').click(function () {
+            $('#modal-delete').modal('show');
+
+            $('#btn-submit-delete').click(function () {
+                var ids = $('input[name="translations"]:checked');
+                if (ids.length) {
+                    $.each(ids, function (i, value) {
+                        $.ajax({
+                            type: 'POST',
+                            url: '/Translation/Delete/' + $(value).val(),
+                            contentType: 'application/json;charset=utf-8',
+                            dataType: 'json',
+                            // To avoid DbUpdateConcurrencyException in DictionaryService.
+                            async: false,
+                            success: function (result) {
+                                if (result.success == true) {
+                                    var tr = value.closest('tr');
+                                    tr.remove();
+                                    editDeleteButtonState();
+                                }
+                                else {
+                                    console.error('Cant delete selected translation.');
+                                }
+
+                                var table = $('table#table-translations');
+                                if (!$('tr', table).length) {
+                                    table.remove();
+                                    $('.container').append('<p class="text-muted top"><i>Вы не добавили ни одного перевода.</i></p>');
+                                }
+                            },
+                            error: function (response) {
+                                console.error('Cant delete selected translation.');
+                            },
+                            complete: function () {
+                                $('#modal-delete').modal('hide');
+                            }
+                        });
+                    });
+                }
+            });
+        });
+
+        $('#btn-select-all').click(function () {
+            $('input[name="translations"]').prop('checked', true);
+            $(event.target).blur();
+            editDeleteButtonState();
+        });
+
+        $('#btn-deselect-all').click(function () {
+            $('input[name="translations"]').prop('checked', false);
+            $(event.target).blur();
+            editDeleteButtonState();
+        });
+
+        $('input[name="translations"]').change(function () {
+            editDeleteButtonState();
+        });
+
+        function editDeleteButtonState() {
+            if (!$('input[name="translations"]:checked').length) {
+                $('#btn-delete-selected').attr('disabled', true);
+            }
+            else {
+                $('#btn-delete-selected').attr('disabled', false);
+            }
+        }
     </script>
 }

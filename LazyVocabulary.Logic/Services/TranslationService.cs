@@ -80,5 +80,34 @@ namespace LazyVocabulary.Logic.Services
 
             return result;
         }
+
+        public async Task<Result> Delete(int sourcePhraseId)
+        {
+            var result = new Result();
+
+            try
+            {
+                _database.SourcePhrases.Delete(sourcePhraseId);
+                await _database.SaveAsync();
+
+                var translations = _database.TranslatedPhrases.Find(t => t.SourcePhraseId == sourcePhraseId);
+
+                foreach (var translation in translations) {
+                    _database.TranslatedPhrases.Delete(translation.Id);
+                }
+
+                await _database.SaveAsync();
+
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+                result.StackTrace = ex.StackTrace;
+            }
+
+            return result;
+        }
     }
 }

@@ -128,6 +128,25 @@ namespace LazyVocabulary.Web.Controllers
             return PartialView("_Create");
         }
 
+        // POST: Translation/Delete/1
+        [HttpPost]
+        public async Task<JsonResult> Delete(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+            }
+
+            var result = await _translationService.Delete(id.Value);
+
+            if (!result.Success)
+            {
+                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
         private IEnumerable<Dictionary> GetDictionaries(string userId)
         {
             var resultWithData = _dictionaryService.GetByUserId(userId);

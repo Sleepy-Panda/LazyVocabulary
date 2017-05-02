@@ -21,6 +21,12 @@
         <button id="btn-delete-selected" type="button" class="btn btn-info pull-right" disabled>
             <i class="fa fa-remove"></i> Удалить выбранные
         </button>
+        <button id="btn-select-all" type="button" class="btn btn-default pull-right">
+            <i class="fa fa-check-square-o"></i> Выделить все
+        </button>
+        <button id="btn-deselect-all" type="button" class="btn btn-default pull-right">
+            <i class="fa fa-square-o"></i> Снять выделение
+        </button>
     </div>
 </div>
 
@@ -164,6 +170,8 @@
                     url: '/Dictionary/Delete/' + event.target.id.match('[^delete-]*$'),
                     contentType: 'application/json;charset=utf-8',
                     dataType: 'json',
+                    // To avoid DbUpdateConcurrencyException in DictionaryService.
+                    async: false,
                     success: function (result) {
                         if (result.success == true) {
                             var tr = $(event.target).closest('tr');
@@ -230,6 +238,18 @@
                     });
                 }
             });
+        });
+
+        $('#btn-select-all').click(function () {
+            $('input[name="dictionaries"]').prop('checked', true);
+            $(event.target).blur();
+            editDeleteButtonState();
+        });
+
+        $('#btn-deselect-all').click(function () {
+            $('input[name="dictionaries"]').prop('checked', false);
+            $(event.target).blur();
+            editDeleteButtonState();
         });
 
         $('input[name="dictionaries"]').change(function () {
