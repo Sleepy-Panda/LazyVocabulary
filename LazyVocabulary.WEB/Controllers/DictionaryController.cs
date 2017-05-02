@@ -1,5 +1,5 @@
-﻿using LazyVocabulary.BLL.Services;
-using LazyVocabulary.WEB.Models;
+﻿using LazyVocabulary.Logic.Services;
+using LazyVocabulary.Web.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Dynamic;
@@ -8,7 +8,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace LazyVocabulary.WEB.Controllers
+namespace LazyVocabulary.Web.Controllers
 {
     [Authorize]
     public class DictionaryController : Controller

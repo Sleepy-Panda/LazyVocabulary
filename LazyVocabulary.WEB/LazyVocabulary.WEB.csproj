@@ -13,8 +13,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LazyVocabulary.WEB</RootNamespace>
-    <AssemblyName>LazyVocabulary.WEB</AssemblyName>
+    <RootNamespace>LazyVocabulary.Web</RootNamespace>
+    <AssemblyName>LazyVocabulary.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -283,9 +283,9 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LazyVocabulary.BLL\LazyVocabulary.BLL.csproj">
+    <ProjectReference Include="..\LazyVocabulary.Logic\LazyVocabulary.Logic.csproj">
       <Project>{25c0bb32-88b3-40fb-be15-a2439d4b256c}</Project>
-      <Name>LazyVocabulary.BLL</Name>
+      <Name>LazyVocabulary.Logic</Name>
     </ProjectReference>
     <ProjectReference Include="..\LazyVocabulary.Common\LazyVocabulary.Common.csproj">
       <Project>{27776f56-5c24-406f-9cff-8342f5965f12}</Project>

@@ -1,7 +1,7 @@
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(LazyVocabulary.WEB.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(LazyVocabulary.WEB.App_Start.NinjectWebCommon), "Stop")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(LazyVocabulary.Web.App_Start.NinjectWebCommon), "Start")]
+[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(LazyVocabulary.Web.App_Start.NinjectWebCommon), "Stop")]
 
-namespace LazyVocabulary.WEB.App_Start
+namespace LazyVocabulary.Web.App_Start
 {
     using System;
     using System.Web;
@@ -11,7 +11,7 @@ namespace LazyVocabulary.WEB.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using Ninject.Modules;
-    using BLL.Ninject;
+    using Logic.Ninject;
     using Util;
 
     public static class NinjectWebCommon 

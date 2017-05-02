@@ -1,12 +1,12 @@
-﻿using LazyVocabulary.BLL.Identity;
-using LazyVocabulary.BLL.Services;
+﻿using LazyVocabulary.Logic.Identity;
+using LazyVocabulary.Logic.Services;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 using System;
 
-namespace LazyVocabulary.WEB
+namespace LazyVocabulary.Web
 {
     public partial class Startup
     {

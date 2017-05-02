@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 using Remote = System.Web.Mvc.RemoteAttribute;
 
-namespace LazyVocabulary.WEB.Models
+namespace LazyVocabulary.Web.Models
 {
     public class RegisterViewModel
     {

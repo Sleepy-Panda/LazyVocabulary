@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace LazyVocabulary.WEB.Models
+namespace LazyVocabulary.Web.Models
 {
     public class IndexTranslationViewModel
     {

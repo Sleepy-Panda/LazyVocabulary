@@ -1,6 +1,6 @@
-﻿using LazyVocabulary.BLL.Services;
+﻿using LazyVocabulary.Logic.Services;
 using LazyVocabulary.Common.Entities;
-using LazyVocabulary.WEB.Models;
+using LazyVocabulary.Web.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections;
@@ -11,7 +11,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace LazyVocabulary.WEB.Controllers
+namespace LazyVocabulary.Web.Controllers
 {
     [Authorize]
     public class TranslationController : Controller

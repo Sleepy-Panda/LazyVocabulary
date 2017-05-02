@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LazyVocabulary.WEB", "LazyVocabulary.WEB\LazyVocabulary.WEB.csproj", "{2551382E-AC42-4FBB-8C8F-38F8E1B2AA4F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LazyVocabulary.Web", "LazyVocabulary.Web\LazyVocabulary.Web.csproj", "{2551382E-AC42-4FBB-8C8F-38F8E1B2AA4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LazyVocabulary.DAL", "LazyVocabulary.DAL\LazyVocabulary.DAL.csproj", "{797CC3AA-C35B-4FF2-9D25-B3EEBE365E7B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LazyVocabulary.DataAccess", "LazyVocabulary.DataAccess\LazyVocabulary.DataAccess.csproj", "{797CC3AA-C35B-4FF2-9D25-B3EEBE365E7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LazyVocabulary.BLL", "LazyVocabulary.BLL\LazyVocabulary.BLL.csproj", "{25C0BB32-88B3-40FB-BE15-A2439D4B256C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LazyVocabulary.Logic", "LazyVocabulary.Logic\LazyVocabulary.Logic.csproj", "{25C0BB32-88B3-40FB-BE15-A2439D4B256C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LazyVocabulary.Common", "LazyVocabulary.Common\LazyVocabulary.Common.csproj", "{27776F56-5C24-406F-9CFF-8342F5965F12}"
 EndProject

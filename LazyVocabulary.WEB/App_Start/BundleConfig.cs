@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace LazyVocabulary.WEB
+namespace LazyVocabulary.Web
 {
     public class BundleConfig
     {

@@ -1,8 +1,8 @@
-﻿using LazyVocabulary.WEB.Filters;
+﻿using LazyVocabulary.Web.Filters;
 using System.Web;
 using System.Web.Mvc;
 
-namespace LazyVocabulary.WEB
+namespace LazyVocabulary.Web
 {
     public class FilterConfig
     {

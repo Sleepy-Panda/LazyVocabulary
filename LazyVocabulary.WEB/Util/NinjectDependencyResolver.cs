@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace LazyVocabulary.WEB.Util
+namespace LazyVocabulary.Web.Util
 {
     public class NinjectDependencyResolver : IDependencyResolver
     {

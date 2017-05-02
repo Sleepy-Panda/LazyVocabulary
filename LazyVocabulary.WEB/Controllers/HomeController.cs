@@ -1,7 +1,7 @@
-﻿using LazyVocabulary.WEB.Filters;
+﻿using LazyVocabulary.Web.Filters;
 using System.Web.Mvc;
 
-namespace LazyVocabulary.WEB.Controllers
+namespace LazyVocabulary.Web.Controllers
 {
     [RedirectOnException]
     public class HomeController : Controller

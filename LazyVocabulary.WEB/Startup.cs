@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(LazyVocabulary.WEB.Startup))]
-namespace LazyVocabulary.WEB
+[assembly: OwinStartupAttribute(typeof(LazyVocabulary.Web.Startup))]
+namespace LazyVocabulary.Web
 {
     public partial class Startup
     {

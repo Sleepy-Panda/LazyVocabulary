@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
-namespace LazyVocabulary.WEB.Filters
+namespace LazyVocabulary.Web.Filters
 {
     public class RedirectOnExceptionAttribute : FilterAttribute, IExceptionFilter
     {

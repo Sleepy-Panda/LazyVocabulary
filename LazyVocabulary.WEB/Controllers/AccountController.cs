@@ -1,6 +1,6 @@
-﻿using LazyVocabulary.BLL.Helpers;
-using LazyVocabulary.BLL.Services;
-using LazyVocabulary.WEB.Models;
+﻿using LazyVocabulary.Logic.Helpers;
+using LazyVocabulary.Logic.Services;
+using LazyVocabulary.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace LazyVocabulary.WEB.Controllers
+namespace LazyVocabulary.Web.Controllers
 {
     public class AccountController : Controller
     {

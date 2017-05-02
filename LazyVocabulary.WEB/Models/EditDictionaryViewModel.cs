@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
-namespace LazyVocabulary.WEB.Models
+namespace LazyVocabulary.Web.Models
 {
     public class EditDictionaryViewModel
     {
