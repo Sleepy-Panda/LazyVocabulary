@@ -202,6 +202,7 @@
                             url: '/Dictionary/Delete/' + $(value).val(),
                             contentType: 'application/json;charset=utf-8',
                             dataType: 'json',
+                            // To avoid DbUpdateConcurrencyException in DictionaryService.
                             async: false,
                             success: function (result) {
                                 if (result.success == true) {

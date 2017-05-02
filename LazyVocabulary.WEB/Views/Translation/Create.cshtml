@@ -54,6 +54,7 @@
         function onComplete() {
             $('#btn-submit-form').attr('disabled', false);
             $('#result').attr('style', 'display:normal');
+            $('#Value').val('');
             $('#DictionaryId').selectpicker('refresh');
         };
 
@@ -72,7 +73,8 @@
             $('#btn-clear-form').blur();
         });
 
-        $('#btn-add-field').click(function () {
+        // Signature for event binding on dynamically created elements.
+        $(document).on('click', '#btn-add-field', function () {
             var div = $('#translation-inputs');
             if ($('.form-group', div).length) {
                 var lastFormGroup = $('.form-group', div).last();
@@ -102,17 +104,17 @@
             formGroup.remove();
         });
 
-        $('#Value').change(function () {
-            $('#div-auto').empty();
+        $(document).on('change', '#Value', function () {
             var targetText = $('#Value').val().trim();
 
-            if (targetText == "") {
-                $('#div-auto').append('<p class="text-muted">Не удалось совершить перевод.</p>');
+            if (targetText == '') {
+                printError();
                 return;
             }
 
-            var translations = [];
+            $('#div-auto').empty();
 
+            var translations = [];
             var trLink = 'https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20170213T172041Z.188b671735d113e7.b44d78d5c904d7a51611c185121e7df8671cd00c&text=' + targetText + '&lang=' + languagePair;
             var dLink = 'https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20170213T181444Z.08ee015e9d8d82f7.eda86d019b0feff6a7265faf46dc6d9aee180f55&text=' + targetText + '&lang=' + languagePair;
 
@@ -165,16 +167,8 @@
             });          
         });
 
-        function printError() {
-            $('#div-auto').empty();
-            $('#div-auto').append('<p class="text-muted"><i>Не удалось совершить перевод.</i></p>');
-        }
-
-        function onlyUniqueItems(value, index, self) {
-            return self.indexOf(value) === index;
-        }
-
-        $('#DictionaryId').change(function () {
+        // Signature for event binding on dynamically created elements.
+        $(document).on('change', '#DictionaryId', function () {
             var dictionaryId = $('#DictionaryId').val();
             
             $.ajax({
@@ -194,10 +188,20 @@
             });
         });
 
-        $('#Value').keyup(function () {
+        // Signature for event binding on dynamically created elements.
+        $(document).on('keyup', '#Value', function () {
             var link = getGoogleLink();
             $('a#google-link').attr('href', link);
         });
+
+        function printError() {
+            $('#div-auto').empty();
+            $('#div-auto').append('<p class="text-muted"><i>Не удалось совершить перевод.</i></p>');
+        }
+
+        function onlyUniqueItems(value, index, self) {
+            return self.indexOf(value) === index;
+        }
 
         function getGoogleLink() {
             var link = 'https://translate.google.com?';
@@ -213,26 +217,5 @@
 
             return link;
         }
-
-        //$('a#google-link').click(function (event) {
-        //    event.preventDefault();
-        //    var link = 'https://translate.google.com';
-        //    var q = $('#Value').val().trim();
-        //    var sl = languagePair.substring(0, 2);
-        //    var tl = languagePair.substring(3);
-        //    link += '?q=' + q;
-        //    link += '&sl=' + sl;
-        //    link += '&tl=' + tl;
-        //    console.log(link);
-
-        //    var win = window.open(link, '_blank');
-        //    if (win) {
-        //        // Browser has allowed it to be opened.
-        //        win.focus();
-        //    } else {
-        //        // Browser has blocked it.
-        //        console.error('Popups are blocked for this website.');
-        //    }
-        //});
     </script>
 }
