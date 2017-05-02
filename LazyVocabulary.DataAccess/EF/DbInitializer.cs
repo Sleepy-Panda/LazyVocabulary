@@ -1,5 +1,6 @@
 ﻿using LazyVocabulary.Common.Entities;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 
 namespace LazyVocabulary.DataAccess.EF
 {
@@ -12,41 +13,41 @@ namespace LazyVocabulary.DataAccess.EF
 
         private void InitializeLanguages(ApplicationContext db)
         {
-            db.Languages.Add(new Language {
+            db.Languages.AddOrUpdate(new Language {
                 Name = "Русский",
                 Code = "ru",
                 FlagImagePath = "ru.png",
             });
 
-            db.Languages.Add(new Language
+            db.Languages.AddOrUpdate(new Language
             {
                 Name = "English",
                 Code = "en",
                 FlagImagePath = "en.png",
             });
 
-            db.Languages.Add(new Language
+            db.Languages.AddOrUpdate(new Language
             {
                 Name = "Deutsch",
                 Code = "de",
                 FlagImagePath = "de.png",
             });
 
-            db.Languages.Add(new Language
+            db.Languages.AddOrUpdate(new Language
             {
                 Name = "French",
                 Code = "fr",
                 FlagImagePath = "fr.png",
             });
 
-            db.Languages.Add(new Language
+            db.Languages.AddOrUpdate(new Language
             {
                 Name = "Español",
                 Code = "es",
                 FlagImagePath = "es.png",
             });
 
-            db.Languages.Add(new Language
+            db.Languages.AddOrUpdate(new Language
             {
                 Name = "Italian",
                 Code = "it",
