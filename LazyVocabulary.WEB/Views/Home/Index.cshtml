@@ -5,7 +5,7 @@
 
 <div class="left-menu-container">
     <div class="left-menu-item-container">
-        <a href="#">
+        <a href="#" rel = "tooltip">
             <i class="fa fa-home"></i>
         </a>
     </div>
@@ -30,7 +30,7 @@
                 Ведите электронный словарь, пополняйте словарный запас и делитесь им с друзьями в любое время и в любом месте.
                 Присоединяйтесь!
             </p>
-            <a href="/Account/Register" class="btn">
+            <a href="/Account/Register" class="btn btn-blue">
                 <i class="fa fa-user-plus"></i> Присоединиться
             </a>
             <div class="arrow-down hidden-xs">
@@ -40,51 +40,115 @@
     </div>
 </div>
 
-<div>
+<div id="language">
     <div class="container">
-        <h1>Что такое BeLazy</h1>
-        <p>Понятия не имею, потом придумаю</p>
+        <p>Основываясь на Ваших предпочтениях, мы рекомендуем Вам русский язык интерфейса.</p>
+        <p>Вы можете изменить язык отображения сайта: </p>
+        <ul>
+            <li>
+                <img src="~/Content/Images/home/ru.png" id="img-ru" />
+            </li>
+            <li>
+                <img src="~/Content/Images/home/en.png" id="img-en" />
+            </li>
+        </ul>  
+    </div>
+</div>
+
+<div id="about">
+    <div class="container">
+        <h1>BeLazy - это...</h1>
+        <div class="row">
+            <div class="col-md-2 col-md-offset-1">
+                <img src="~/Content/Images/home/notebook.png" />
+            </div>
+            <div class="col-md-8">
+                <h2>Широкие возможности</h2>
+                <p>
+                    Эффективно управляйте электронными словарями и делитесь ими с другими пользователями.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2 col-md-offset-1">
+                <img src="~/Content/Images/home/notepad.png" />
+            </div>
+            <div class="col-md-8">
+                <h2>Ускоренное взаимодействие</h2>
+                <p>
+                    Добавьте интересующее Вас слово или выражение в словарь, и система сама подскажет Вам варианты перевода с учётом указанной пары языков.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2 col-md-offset-1">
+                <img src="~/Content/Images/home/browser.png" />
+            </div>
+            <div class="col-md-8">
+                <h2>Изучение языка на любых сайтах</h2>
+                <p>
+                    Воспользуйтесь нашим расширением для браузера Chrome, чтобы пополнять словарный запас, не отрываясь от чтения текста.
+                </p>
+            </div>
+        </div>        
     </div>
 </div>
 
 <div class="footer">
+    <div class="footer-call-to-action">
+        <div class="container">
+            <ul>
+                <li>
+                    <p>Зарегистрируйтесь, это бесплатно!</p>
+                </li>
+                <li>
+                    <a href="/Account/Register" class="btn btn-red">
+                        <i class="fa fa-user-plus"></i> Зарегистрироваться
+                    </a>
+                </li>
+            </ul>                               
+        </div>
+    </div>
+
     <div class="footer-social-section">
         <div class="container">
             <ul>
                 <li>
                     <a class="btn-rounded btn-fb">
-                        <i class="fa fa-facebook"> </i>
+                        <i class="fa fa-facebook"></i>
                     </a>
                 </li>
                 <li>
                     <a class="btn-rounded btn-twitter">
-                        <i class="fa fa-twitter"> </i>
+                        <i class="fa fa-twitter"></i>
                     </a>
                 </li>
                 <li>
                     <a class="btn-rounded btn-gplus">
-                        <i class="fa fa-google-plus"> </i>
+                        <i class="fa fa-google-plus"></i>
                     </a>
                 </li>
                 <li>
                     <a class="btn-rounded btn-vk">
-                        <i class="fa fa-vk"> </i>
+                        <i class="fa fa-vk"></i>
                     </a>
                 </li>
                 <li>
                     <a class="btn-rounded btn-instagram">
-                        <i class="fa fa-instagram"> </i>
+                        <i class="fa fa-instagram"></i>
                     </a>
                 </li>
             </ul>
         </div>
     </div>
 
-    <div class="footer-copyright">
+    @*<div class="footer-copyright">
         <div class="container">
             © 2017 Copyright</a>
         </div>
-    </div>
+    </div>*@
 </div>
 
 @section Scripts {

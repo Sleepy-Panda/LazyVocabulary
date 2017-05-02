@@ -201,7 +201,15 @@
     <Content Include="Content\auth.css" />
     <Content Include="Content\Images\flags\de.png" />
     <Content Include="Content\Images\flags\en.png" />
+    <Content Include="Content\Images\flags\fr.png" />
+    <Content Include="Content\Images\flags\it.png" />
     <Content Include="Content\Images\flags\ru.png" />
+    <Content Include="Content\Images\flags\sp.png" />
+    <Content Include="Content\Images\home\browser.png" />
+    <Content Include="Content\Images\home\en.png" />
+    <Content Include="Content\Images\home\notebook.png" />
+    <Content Include="Content\Images\home\notepad.png" />
+    <Content Include="Content\Images\home\ru.png" />
     <Content Include="Content\menu.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
