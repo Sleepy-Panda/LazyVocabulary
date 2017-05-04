@@ -42,6 +42,7 @@ a:active {
 	width: 80px;
 	z-index: 1000;
 	background-color: #262626;
+    box-shadow: 3px 0 6px 0 rgba(0, 0, 0, 0.25);
 }
 
 .left-menu-item-container {
@@ -279,41 +280,18 @@ button.btn {
             transition: all .3s ease-in-out;
 }
 
-button.btn:hover {
+button.btn:hover,
+button.btn:focus,
+button.btn:active {
     background-color: #6cb7f0;
     color: #FFF;
+    outline: 0; 
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
-
     -webkit-transition: all .3s ease-in-out;
        -moz-transition: all .3s ease-in-out;
         -ms-transition: all .3s ease-in-out; 
          -o-transition: all .3s ease-in-out;
             transition: all .3s ease-in-out;
-}
-
-button.btn:active { 
-    outline: 0; 
-    opacity: 1; 
-    color: #fff;
-    background-color: #6cb7f0;
-    -webkit-box-shadow: none; 
-       -moz-box-shadow: none; 
-            box-shadow: none; 
-}
-
-button.btn:focus { 
-    outline: 0; 
-    opacity: 1; 
-    color: #fff; 
-    background-color: #6cb7f0;
-}
-
-button.btn:active:focus, 
-button.btn.active:focus { 
-    outline: 0; 
-    opacity: 1; 
-    background-color: #6cb7f0;
-    color: #fff; 
 }
 
 .btn-transparent {
