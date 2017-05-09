@@ -8,6 +8,8 @@ namespace LazyVocabulary.Common.Entities
 {
     public class ApplicationUser : IdentityUser
     {
+        public string Token { get; set; }
+
         public virtual UserProfile UserProfile { get; set; }
 
         public virtual ICollection<Dictionary> Dictionaries { get; set; }

@@ -133,6 +133,10 @@ p {
     color: #CCC; 
 }
 
+.form-top-left p.text-danger { 
+    color: #de615e;
+}
+
 .form-top-right {
 	float: left;
 	width: 25%;

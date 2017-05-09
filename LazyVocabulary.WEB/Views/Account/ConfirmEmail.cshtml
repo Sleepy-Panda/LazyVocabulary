@@ -1,0 +1,52 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "ConfirmEmail";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+<div class="left-menu-container">
+    <div class="left-menu-item-container">
+        <a href="/Home/Index">
+            <i class="fa fa-home"></i>
+        </a>
+    </div>
+    <div class="left-menu-item-container">
+        <a href="/Account/Register">
+            <i class="fa fa-user-plus"></i>
+        </a>
+    </div>
+    <div class="left-menu-item-container">
+        <a href="/Account/Login">
+            <i class="fa fa-sign-in"></i>
+        </a>
+    </div>
+</div>
+
+<div id="cover">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3 form-box">
+                <div class="form-top">
+                    <div class="form-top-left">
+                        <h3>Подтверждение email</h3>
+                        <p>
+                            На указанный при регистрации электронный адрес <b>@Model </b>были высланы дальнейшие инструкции для завершения регистрации.
+                        </p>
+                        <p>
+                            Пожалуйста, перейдите по ссылке, указанной в письме, чтобы подтвердить Ваш аккаунт.
+                        </p>
+                    </div>
+                    <div class="form-top-right">
+                        <i class="fa fa-envelope-o"></i>
+                    </div>
+                </div>
+                @*<div class="form-bottom">
+                    <div class="form-group">
+                        <button type="submit" class="btn" data-ripple><i class="fa fa-sign-in"></i> Войти</button>
+                    </div>
+                </div>*@
+            </div>
+        </div>
+    </div>
+</div>

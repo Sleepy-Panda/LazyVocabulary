@@ -37,7 +37,6 @@ namespace LazyVocabulary.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            string userId = User.Identity.GetUserId();
             var resultWithData = _translationService.GetByDictionaryId(id.Value);
 
             if (!resultWithData.Success)
@@ -57,6 +56,19 @@ namespace LazyVocabulary.Web.Controllers
                 });
 
             ViewBag.DictionaryId = id;
+
+            string userId = User.Identity.GetUserId();
+            var dictionariesExcludingCurrent = GetDictionaries(userId)
+                .Where(d => d.Id != id.Value)
+                .Select(d => new {
+                    Id = d.Id,
+                    Name = $"{ d.Name } ({ d.SourceLanguage.Code }-{ d.TargetLanguage.Code })",
+                    Group = "Мои словари",
+                })
+                .ToList();
+
+            ViewBag.Dictionaries = new SelectList(dictionariesExcludingCurrent, "Id", "Name");
+            ViewBag.DictionariesCount = dictionariesExcludingCurrent.Count;
 
             return View("Index", model);
         }
@@ -92,7 +104,7 @@ namespace LazyVocabulary.Web.Controllers
         public async Task<ActionResult> Create(CreateTranslationViewModel model, string[] translations)
         {
             string userId = User.Identity.GetUserId();
-            var dictionaries = GetDictionaries(userId)
+            var dictionaries = GetDictionaries(userId)                
                 .Select(d => new {
                     Id = d.Id,
                     Name = $"{ d.Name } ({ d.SourceLanguage.Code }-{ d.TargetLanguage.Code })",

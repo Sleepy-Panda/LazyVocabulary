@@ -46,14 +46,14 @@
                             @Html.TextBoxFor(m => m.Login, new { @class = "form-control", @placeholder = "* Имя пользователя или Email..." })
                             @Html.ValidationMessageFor(m => m.Login, "", new { @class = "text-danger" })
                         </div>
-                            <div class="form-group">
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "* Пароль..." })
-                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn" data-ripple><i class="fa fa-sign-in"></i> Войти</button>
-                            </div>
-                            @Html.ActionLink("Восстановить пароль", "Login")
+                        <div class="form-group">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "* Пароль..." })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn" data-ripple><i class="fa fa-sign-in"></i> Войти</button>
+                        </div>
+                        @Html.ActionLink("Восстановить пароль", "Login")
                     }
                 </div>
             </div>

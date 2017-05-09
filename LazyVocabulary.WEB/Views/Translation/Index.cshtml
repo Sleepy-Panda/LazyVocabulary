@@ -1,4 +1,6 @@
 ﻿@using LazyVocabulary.Web.Models;
+@using System.Linq;
+
 @model IEnumerable<IndexTranslationViewModel>
 
 @{
@@ -23,7 +25,7 @@
         <button id="btn-delete-selected" type="button" class="btn btn-info pull-right" disabled>
             <i class="fa fa-remove"></i> Удалить выбранные
         </button>
-        <button id="btn-move-selected" type="button" class="btn btn-info pull-right" disabled>
+        <button id="btn-copy-selected" type="button" class="btn btn-info pull-right">
             <i class="fa fa-arrow-right"></i> Переместить выбранные
         </button>
         <button id="btn-select-all" type="button" class="btn btn-default pull-right">
@@ -103,6 +105,45 @@
                     <button type="button" class="btn btn-info" id="btn-submit-delete">
                         <i class="glyphicon glyphicon-ok"></i> Удалить
                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-copy" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Подтвердите копирование</h4>
+                </div>
+                <div class="modal-body">
+                    @if (ViewBag.DictionariesCount > 0)
+                    {
+                        <p>Выберите целевой словарь для копирования / перемещения переводов.</p>
+
+                        <div class="form-group">
+                            <label class="required" for="Dictionaries">Выберите словарь</label>
+                            <div>
+                                @Html.DropDownList("Dictionaries", null, htmlAttributes: new { @class = "selectpicker" })
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted"><i>Нет словарей для копирования / перемещения.</i></p>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fa fa-remove"></i> Закрыть
+                    </button>
+
+                    @if (ViewBag.DictionariesCount > 0)
+                    {
+                        <button type="button" class="btn btn-info" id="btn-submit-copy">
+                            <i class="glyphicon glyphicon-ok"></i> Скопировать
+                        </button>
+                    }                    
                 </div>
             </div>
         </div>
@@ -188,6 +229,42 @@
                             },
                             complete: function () {
                                 $('#modal-delete').modal('hide');
+                            }
+                        });
+                    });
+                }
+            });
+        });
+
+        $('#btn-copy-selected').click(function () {
+            $('#modal-copy').modal('show');
+
+            $('#btn-submit-copy').click(function () {
+                var ids = $('input[name="translations"]:checked');
+                if (ids.length) {
+                    $.each(ids, function (i, value) {
+                        $.ajax({
+                            type: 'POST',
+                            url: '/Translation/Copy/' + $(value).val(),
+                            contentType: 'application/json;charset=utf-8',
+                            dataType: 'json',
+                            // To avoid DbUpdateConcurrencyException in DictionaryService.
+                            async: false,
+                            success: function (result) {
+                                if (result.success == true) {
+                                    //var tr = value.closest('tr');
+                                    //tr.remove();
+                                    //editDeleteButtonState();
+                                }
+                                else {
+                                    console.error('Cant copy selected translation.');
+                                }
+                            },
+                            error: function (response) {
+                                console.error('Cant copy selected translation.');
+                            },
+                            complete: function () {
+                                $('#modal-copy').modal('hide');
                             }
                         });
                     });

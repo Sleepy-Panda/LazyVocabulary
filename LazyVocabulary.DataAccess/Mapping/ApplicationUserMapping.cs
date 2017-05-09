@@ -12,6 +12,10 @@ namespace LazyVocabulary.DataAccess.Mapping
             HasOptional(u => u.UserProfile)
                 .WithRequired(u => u.ApplicationUser)
                 .Map(u => u.MapKey("ApplicationUserId"));
+
+            Property(u => u.Token)
+                .IsRequired()
+                .HasMaxLength(24);
         }
     }
 }

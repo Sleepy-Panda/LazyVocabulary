@@ -156,31 +156,12 @@ namespace LazyVocabulary.Web.Controllers
                 return View(model);
             }
 
-            // Log in created user using claim.
-            var resultWithClaimData = await UserService.CreateIdentityAsync(user);
-
-            if (!resultWithClaimData.Success)
-            {
-                ModelState.AddModelError("", resultWithClaimData.Message);
-                return View(model);
-            }
-
-            var claim = resultWithClaimData.ResultData;
-
-            AuthenticationManager.SignOut();
-            AuthenticationManager.SignIn(
-                new AuthenticationProperties
-                {
-                    IsPersistent = true,
-                    ExpiresUtc = DateTimeOffset.UtcNow.AddDays(7),
-                }, 
-                claim
-            );
-
             // Send message to user's email.
-            var text = String.Format("Для подтверждения email перейдите по ссылке: " +
-                "<a href=\"{0}\" title=\"Подтвердить адрес электронной почты\">Подтвердить адрес электронной почты</a>",
-                Url.Action("VerifyToken", "Account", new { token = "asd", email = model.Email }, Request.Url.Scheme));
+            var href = Url.Action("VerifyToken", "Account", new { email = model.Email, token = resultWithStringData.ResultData }, Request.Url.Scheme);
+            var text = 
+                $"Для завершения регистрации на сайте перейдите по ссылке: " +
+                $"<a href=\"{ href }\" " + 
+                $"title=\"Подтвердить email\">Подтвердить email</a>";
 
             var result = await EmailHelper.SendEmail(model.Email, "Подтверждение email", text);
 
@@ -190,7 +171,35 @@ namespace LazyVocabulary.Web.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ConfirmEmail", new { email = user.Email });
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult ConfirmEmail(string email)
+        {
+            return View("ConfirmEmail", email);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult> VerifyToken(string email, string token)
+        {
+            var result = await UserService.VerifyToken(email, token);
+
+            if (!result.Success)
+            {
+                return RedirectToAction("VerifyTokenError", new { email = email });
+            }
+
+            return RedirectToAction("Login");
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult VerifyTokenError(string email)
+        {
+            return View("VerifyTokenError", email);
         }
 
         private ActionResult RedirectToLocal(string returnUrl)

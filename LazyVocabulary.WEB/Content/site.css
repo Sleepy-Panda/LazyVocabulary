@@ -311,6 +311,13 @@ h3 {
 	border-radius: 30px;
 }
 
+.fixed-top-container {
+    position: fixed;
+    left: 80px;
+    right: 0;
+    top: 0;
+}
+
 .breadcrump-container {
 	padding: 8px 50px 5px 50px;
 	background-color: #fff;
@@ -328,14 +335,14 @@ h3 {
 }
 
 .top-buttons-container {
-	padding: 15px 50px 15px 50px;
+	padding: 15px 50px 0 50px;
     background-color: #FAFAFA;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.25);
 }
 
 .top-buttons-container .row button,
 .top-buttons-container .row a {
-	margin-left: 15px;
+	margin: 0 0 15px 15px;
 }
 
 .row {

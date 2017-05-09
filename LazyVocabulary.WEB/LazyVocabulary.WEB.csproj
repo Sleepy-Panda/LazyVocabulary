@@ -270,6 +270,8 @@
     <Content Include="Views\Translation\Index.cshtml" />
     <Content Include="Views\Translation\Create.cshtml" />
     <Content Include="Views\Translation\_Create.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\VerifyTokenError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

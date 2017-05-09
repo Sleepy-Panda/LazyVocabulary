@@ -8,6 +8,7 @@ using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using LazyVocabulary.Logic.Helpers;
 
 namespace LazyVocabulary.Logic.Services
 {
@@ -65,6 +66,7 @@ namespace LazyVocabulary.Logic.Services
                     UserName = userFromView.UserName,
                     Email = userFromView.Email,
                     UserProfile = new UserProfile(userFromView.Locale.ToString()),
+                    Token = TokenGeneratorHelper.GetToken(),
                 };
 
                 var identityResult = await UserManager.CreateAsync(appUser, userFromView.Password);
@@ -81,7 +83,7 @@ namespace LazyVocabulary.Logic.Services
                     throw new Exception(errors);
                 }
 
-                resultWithData.ResultData = appUser.Id;
+                resultWithData.ResultData = appUser.Token;
                 resultWithData.Success = true;
             }
             catch (Exception ex)
@@ -92,6 +94,31 @@ namespace LazyVocabulary.Logic.Services
             }
 
             return resultWithData;
+        }
+
+        public async Task<Result> VerifyToken(string email, string token)
+        {
+            var result = new Result();
+
+            try
+            {
+                var user = _context.Users
+                    .Where(u => u.Email == email && u.Token == token)
+                    .Single();
+
+                user.EmailConfirmed = true;
+                await _context.SaveChangesAsync();
+
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+                result.StackTrace = ex.StackTrace;
+            }
+
+            return result;
         }
 
         public async Task<ResultWithData<ClaimsIdentity>> CreateIdentityAsync(dynamic userFromView)
