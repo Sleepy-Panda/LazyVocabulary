@@ -11,7 +11,7 @@ namespace LazyVocabulary.Web.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.Culture = HttpContext.Request.Cookies["locale"]?.Value;
-                return View("Index", "Dictionary");
+                return RedirectToAction("Index", "Dictionary");
             }
 
             return View();

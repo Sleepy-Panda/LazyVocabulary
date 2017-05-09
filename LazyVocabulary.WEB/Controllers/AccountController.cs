@@ -174,18 +174,20 @@ namespace LazyVocabulary.Web.Controllers
             return RedirectToAction("ConfirmEmail", new { email = user.Email });
         }
 
+        // GET: Account/ConfirmEmail
         [HttpGet]
         [AllowAnonymous]
         public ActionResult ConfirmEmail(string email)
         {
-            return View("ConfirmEmail", email);
+            return View("ConfirmEmail", (object)email);
         }
 
+        // GET: Account/VerifyToken
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult> VerifyToken(string email, string token)
         {
-            var result = await UserService.VerifyToken(email, token);
+            var result = await UserService.VerifyTokenAsync(email, token);
 
             if (!result.Success)
             {
@@ -195,11 +197,52 @@ namespace LazyVocabulary.Web.Controllers
             return RedirectToAction("Login");
         }
 
+        // GET: Account/VerifyTokenError
         [HttpGet]
         [AllowAnonymous]
         public ActionResult VerifyTokenError(string email)
         {
-            return View("VerifyTokenError", email);
+            return View("VerifyTokenError", (object)email);
+        }
+
+        // GET: Account/ResetPassword
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult ResetPassword()
+        {
+            return View("ResetPassword");
+        }
+
+        // POST: /Account/ResetPassword
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(model);
+            //}
+
+            //var newPassword = TokenGeneratorHelper.GetToken().Substring(0, 8);
+            //// Send message to user's email.
+            //var href = Url.Action("VerifyToken", "Account", new { email = model.Email, token = resultWithStringData.ResultData }, Request.Url.Scheme);
+            //var text =
+            //    $"Для завершения регистрации на сайте перейдите по ссылке: " +
+            //    $"<a href=\"{ href }\" " +
+            //    $"title=\"Подтвердить email\">Подтвердить email</a>";
+
+            //var result = await EmailHelper.SendEmail(model.Email, "Подтверждение email", text);
+
+            //if (!result.Success)
+            //{
+            //    ModelState.AddModelError("", result.Message);
+            //    return View(model);
+            //}
+
+            //return RedirectToAction("ConfirmEmail", new { email = user.Email });
+
+            return RedirectToAction("Login");
         }
 
         private ActionResult RedirectToLocal(string returnUrl)

@@ -96,7 +96,7 @@ namespace LazyVocabulary.Logic.Services
             return resultWithData;
         }
 
-        public async Task<Result> VerifyToken(string email, string token)
+        public async Task<Result> VerifyTokenAsync(string email, string token)
         {
             var result = new Result();
 
@@ -106,8 +106,11 @@ namespace LazyVocabulary.Logic.Services
                     .Where(u => u.Email == email && u.Token == token)
                     .Single();
 
-                user.EmailConfirmed = true;
-                await _context.SaveChangesAsync();
+                if (!user.EmailConfirmed)
+                {
+                    user.EmailConfirmed = true;
+                    await _context.SaveChangesAsync();
+                }
 
                 result.Success = true;
             }
@@ -142,6 +145,11 @@ namespace LazyVocabulary.Logic.Services
                 if (appUser == null)
                 {
                     throw new Exception("Invalid login or password.");
+                }
+
+                if (!appUser.EmailConfirmed)
+                {
+                    throw new Exception("Email is not confirmed.");
                 }
 
                 var claim = await UserManager.CreateIdentityAsync(
