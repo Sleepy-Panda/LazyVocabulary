@@ -22,14 +22,14 @@ namespace LazyVocabulary.Resources.Views {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class AccountLoginResource {
+    public class AccountConfirmEmailResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AccountLoginResource() {
+        internal AccountConfirmEmailResource() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace LazyVocabulary.Resources.Views {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LazyVocabulary.Resources.Views.AccountLoginResource", typeof(AccountLoginResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LazyVocabulary.Resources.Views.AccountConfirmEmailResource", typeof(AccountConfirmEmailResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,16 +61,34 @@ namespace LazyVocabulary.Resources.Views {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Для входа введите имя пользователя или адрес электронной почты и пароль, использованные при регистрации:.
+        ///   Looks up a localized string similar to На указанный при регистрации электронный адрес.
         /// </summary>
-        public static string FormInstructions {
+        public static string FormInstructions1 {
             get {
-                return ResourceManager.GetString("FormInstructions", resourceCulture);
+                return ResourceManager.GetString("FormInstructions1", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вход на сайт.
+        ///   Looks up a localized string similar to были высланы дальнейшие инструкции для завершения регистрации..
+        /// </summary>
+        public static string FormInstructions2 {
+            get {
+                return ResourceManager.GetString("FormInstructions2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пожалуйста, перейдите по ссылке, указанной в письме, чтобы подтвердить Ваш аккаунт..
+        /// </summary>
+        public static string FormInstructions3 {
+            get {
+                return ResourceManager.GetString("FormInstructions3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Подтверждение email.
         /// </summary>
         public static string FormName {
             get {
@@ -79,56 +97,11 @@ namespace LazyVocabulary.Resources.Views {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вход на сайт.
+        ///   Looks up a localized string similar to Подтверждение email.
         /// </summary>
         public static string PageName {
             get {
                 return ResourceManager.GetString("PageName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to * Пароль....
-        /// </summary>
-        public static string PasswordPlaceholder {
-            get {
-                return ResourceManager.GetString("PasswordPlaceholder", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Восстановить пароль.
-        /// </summary>
-        public static string RestorePassword {
-            get {
-                return ResourceManager.GetString("RestorePassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Войти.
-        /// </summary>
-        public static string SignIn {
-            get {
-                return ResourceManager.GetString("SignIn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ...или войдите с помощью:.
-        /// </summary>
-        public static string SignInWith {
-            get {
-                return ResourceManager.GetString("SignInWith", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to * Имя пользователя или Email....
-        /// </summary>
-        public static string UserNameOrEmailPlaceholder {
-            get {
-                return ResourceManager.GetString("UserNameOrEmailPlaceholder", resourceCulture);
             }
         }
     }

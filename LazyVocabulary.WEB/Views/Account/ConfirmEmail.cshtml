@@ -1,7 +1,9 @@
-﻿@model string
+﻿@using LazyVocabulary.Resources.Views;
+
+@model string
 
 @{
-    ViewBag.Title = "ConfirmEmail";
+    ViewBag.Title = AccountConfirmEmailResource.PageName;
     Layout = "~/Views/Shared/_AuthLayout.cshtml";
 }
 
@@ -29,13 +31,11 @@
             <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3 form-box">
                 <div class="form-top">
                     <div class="form-top-left">
-                        <h3>Подтверждение email</h3>
+                        <h3>@AccountConfirmEmailResource.FormName</h3>
                         <p>
-                            На указанный при регистрации электронный адрес <b>@Model </b>были высланы дальнейшие инструкции для завершения регистрации.
+                            @AccountConfirmEmailResource.FormInstructions1 <b>@Model </b>@AccountConfirmEmailResource.FormInstructions2
                         </p>
-                        <p>
-                            Пожалуйста, перейдите по ссылке, указанной в письме, чтобы подтвердить Ваш аккаунт.
-                        </p>
+                        <p>@AccountConfirmEmailResource.FormInstructions3</p>
                     </div>
                     <div class="form-top-right">
                         <i class="fa fa-envelope-o"></i>

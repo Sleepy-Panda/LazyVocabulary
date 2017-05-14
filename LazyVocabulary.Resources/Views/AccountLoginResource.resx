@@ -123,6 +123,9 @@
   <data name="FormName" xml:space="preserve">
     <value>Вход на сайт</value>
   </data>
+  <data name="PageName" xml:space="preserve">
+    <value>Вход на сайт</value>
+  </data>
   <data name="PasswordPlaceholder" xml:space="preserve">
     <value>* Пароль...</value>
   </data>

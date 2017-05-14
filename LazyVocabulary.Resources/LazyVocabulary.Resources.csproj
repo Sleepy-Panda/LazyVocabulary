@@ -71,6 +71,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RegisterViewModelResource.en.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\AccountConfirmEmailResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountConfirmEmailResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AccountConfirmEmailResource.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountConfirmEmailResource.en.resx</DependentUpon>
+    </Compile>
     <Compile Include="Views\AccountLoginResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -80,6 +90,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AccountLoginResource.en.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AccountRegisterResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountRegisterResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AccountRegisterResource.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountRegisterResource.en.resx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -107,6 +127,14 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RegisterViewModelResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\AccountConfirmEmailResource.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountConfirmEmailResource.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AccountConfirmEmailResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountConfirmEmailResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\AccountLoginResource.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AccountLoginResource.en.Designer.cs</LastGenOutput>
@@ -114,6 +142,14 @@
     <EmbeddedResource Include="Views\AccountLoginResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AccountLoginResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AccountRegisterResource.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountRegisterResource.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AccountRegisterResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountRegisterResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

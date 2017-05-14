@@ -117,28 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FormInstructions" xml:space="preserve">
-    <value>Use your username / email and password to sign in:</value>
+  <data name="FormInstructions1" xml:space="preserve">
+    <value>We sent instructions to your email address</value>
+  </data>
+  <data name="FormInstructions2" xml:space="preserve">
+    <value>to complete your registration.</value>
+  </data>
+  <data name="FormInstructions3" xml:space="preserve">
+    <value>Please follow the link in the letter to confirm your account.</value>
   </data>
   <data name="FormName" xml:space="preserve">
-    <value>Sign in</value>
+    <value>Confirm email</value>
   </data>
   <data name="PageName" xml:space="preserve">
-    <value>Sign in</value>
-  </data>
-  <data name="PasswordPlaceholder" xml:space="preserve">
-    <value>* Password...</value>
-  </data>
-  <data name="RestorePassword" xml:space="preserve">
-    <value>Restore password</value>
-  </data>
-  <data name="SignIn" xml:space="preserve">
-    <value>Sign in</value>
-  </data>
-  <data name="SignInWith" xml:space="preserve">
-    <value>...or sign in with:</value>
-  </data>
-  <data name="UserNameOrEmailPlaceholder" xml:space="preserve">
-    <value>* Username or email...</value>
+    <value>Confirm email</value>
   </data>
 </root>
