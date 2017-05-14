@@ -1,8 +1,9 @@
 ﻿@using LazyVocabulary.Web.Models;
+
 @model LoginViewModel
 
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "s";
     Layout = "~/Views/Shared/_AuthLayout.cshtml";
 }
 
@@ -76,3 +77,7 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/app-js/localization.js")
+}

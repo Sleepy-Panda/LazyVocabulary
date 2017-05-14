@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
+using LazyVocabulary.Resources.ViewModels;
 
 namespace LazyVocabulary.Web.Models
 {
     public class LoginViewModel
     {
-        [Required]
-        [Display(Name = "Login")]
+        [Required(ErrorMessageResourceName = "FieldIsRequired",
+            ErrorMessageResourceType = typeof(CommonValidationResource))]
         public string Login { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "FieldIsRequired",
+            ErrorMessageResourceType = typeof(CommonValidationResource))]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
         public string Password { get; set; }
     }
 }

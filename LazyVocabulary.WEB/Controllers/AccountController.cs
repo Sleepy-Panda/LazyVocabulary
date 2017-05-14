@@ -1,5 +1,6 @@
 ﻿using LazyVocabulary.Logic.Helpers;
 using LazyVocabulary.Logic.Services;
+using LazyVocabulary.Web.Filters;
 using LazyVocabulary.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -12,6 +13,7 @@ using System.Web.Mvc;
 
 namespace LazyVocabulary.Web.Controllers
 {
+    [SetCulture]
     public class AccountController : Controller
     {
         private UserService _userService;

@@ -1,30 +1,48 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using LazyVocabulary.Resources.ViewModels;
+using System.ComponentModel.DataAnnotations;
 using Remote = System.Web.Mvc.RemoteAttribute;
 
 namespace LazyVocabulary.Web.Models
 {
     public class RegisterViewModel
     {
-        [Required]
-        [Display(Name = "UserName")]
-        [Remote("IsUserNameAvailable", "Account")]
+        [Required(ErrorMessageResourceName = "FieldIsRequired",
+            ErrorMessageResourceType = typeof(CommonValidationResource))]
+
+        [Remote("IsUserNameAvailable", "Account", 
+            ErrorMessageResourceName = "UserNameIsUnavailable",
+            ErrorMessageResourceType = typeof(RegisterViewModelResource))]
+
         public string UserName { get; set; }
 
-        [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        [Remote("IsEmailAvailable", "Account")]
+        [Required(ErrorMessageResourceName = "FieldIsRequired",
+            ErrorMessageResourceType = typeof(CommonValidationResource))]
+
+        [EmailAddress(ErrorMessageResourceName = "EmailIsInvalid",
+            ErrorMessageResourceType = typeof(CommonValidationResource))]
+
+        [Remote("IsEmailAvailable", "Account",
+            ErrorMessageResourceName = "EmailIsUnavailable",
+            ErrorMessageResourceType = typeof(RegisterViewModelResource))]
+
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "FieldIsRequired",
+            ErrorMessageResourceType = typeof(CommonValidationResource))]
+
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+
         public string Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "FieldIsRequired",
+            ErrorMessageResourceType = typeof(CommonValidationResource))]
+
         [DataType(DataType.Password)]
-        [Display(Name = "ConfirmPassword")]
-        [Compare("Password")]
+
+        [Compare("Password",
+            ErrorMessageResourceName = "PasswordsShouldBeEqual",
+            ErrorMessageResourceType = typeof(RegisterViewModelResource))]
+
         public string ConfirmPassword { get; set; }
     }
 }

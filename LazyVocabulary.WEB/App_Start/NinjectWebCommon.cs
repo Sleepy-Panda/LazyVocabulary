@@ -13,6 +13,7 @@ namespace LazyVocabulary.Web.App_Start
     using Ninject.Modules;
     using Logic.Ninject;
     using Util;
+    using Logic.Services;
 
     public static class NinjectWebCommon 
     {
@@ -42,7 +43,10 @@ namespace LazyVocabulary.Web.App_Start
         /// <returns>The created kernel.</returns>
         private static IKernel CreateKernel()
         {
-            var modules = new INinjectModule[] { new ServiceModule("DefaultConnection") };
+            var modules = new INinjectModule[] {
+                new ServiceModule("DefaultConnection"),
+                new SetCultureAttributeModule(),
+            };
             var kernel = new StandardKernel(modules);
 
             try

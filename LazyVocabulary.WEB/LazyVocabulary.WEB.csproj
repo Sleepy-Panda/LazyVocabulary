@@ -175,6 +175,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TranslationController.cs" />
     <Compile Include="Filters\RedirectOnExceptionAttribute.cs" />
+    <Compile Include="Filters\SetCultureAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -189,6 +190,7 @@
     <Compile Include="Models\ResetPasswordViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Util\SetCultureAttributeModule.cs" />
     <Compile Include="Util\NinjectDependencyResolver.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -219,6 +221,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\site.css" />
     <Content Include="Scripts\app-js\dictionary.js" />
+    <Content Include="Scripts\app-js\localization.js" />
     <Content Include="Scripts\bootstrap-select.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -295,6 +298,10 @@
     <ProjectReference Include="..\LazyVocabulary.Common\LazyVocabulary.Common.csproj">
       <Project>{27776f56-5c24-406f-9cff-8342f5965f12}</Project>
       <Name>LazyVocabulary.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LazyVocabulary.Resources\LazyVocabulary.Resources.csproj">
+      <Project>{5c3c8693-b0a9-4b5c-902c-644f2102b4bf}</Project>
+      <Name>LazyVocabulary.Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -1,4 +1,5 @@
-﻿using Ninject;
+﻿using LazyVocabulary.Logic.Services;
+using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -27,7 +28,7 @@ namespace LazyVocabulary.Web.Util
 
         private void AddBindings()
         {
-
+            kernel.Bind<UserProfileService>().ToSelf();
         }
     }
 }
