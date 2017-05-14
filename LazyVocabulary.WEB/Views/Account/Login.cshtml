@@ -1,9 +1,10 @@
 ﻿@using LazyVocabulary.Web.Models;
+@using LazyVocabulary.Resources.Views;
 
 @model LoginViewModel
 
 @{
-    ViewBag.Title = "s";
+    ViewBag.Title = AccountLoginResource.FormName;
     Layout = "~/Views/Shared/_AuthLayout.cshtml";
 }
 
@@ -31,8 +32,8 @@
             <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3 form-box">
                 <div class="form-top">
                     <div class="form-top-left">
-                        <h3>Вход на сайт</h3>
-                        <p>Для входа введите имя пользователя или адрес электронной почты и пароль, использованные при регистрации:</p>
+                        <h3>@AccountLoginResource.FormName</h3>
+                        <p>@AccountLoginResource.FormInstructions</p>
                     </div>
                     <div class="form-top-right">
                         <i class="fa fa-key"></i>
@@ -44,24 +45,24 @@
                     {
                         @Html.AntiForgeryToken()
                         <div class="form-group">
-                            @Html.TextBoxFor(m => m.Login, new { @class = "form-control", @placeholder = "* Имя пользователя или Email..." })
+                            @Html.TextBoxFor(m => m.Login, new { @class = "form-control", @placeholder = AccountLoginResource.UserNameOrEmailPlaceholder })
                             @Html.ValidationMessageFor(m => m.Login, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group">
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "* Пароль..." })
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = AccountLoginResource.PasswordPlaceholder })
                             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn" data-ripple><i class="fa fa-sign-in"></i> Войти</button>
+                            <button type="submit" class="btn" data-ripple><i class="fa fa-sign-in"></i> @AccountLoginResource.SignIn</button>
                         </div>
-                        @Html.ActionLink("Восстановить пароль", "Login")
+                        @Html.ActionLink(@AccountLoginResource.RestorePassword, "Login")
                     }
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3 social-login-container">
-                <p>...или войдите с помощью:</p>
+                <p>@AccountLoginResource.SignInWith</p>
                 <div class="social-login-buttons">
                     <a class="btn btn-transparent social-login-button" href="#">
                         <i class="fa fa-facebook"></i> Facebook

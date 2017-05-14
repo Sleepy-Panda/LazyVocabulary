@@ -35,7 +35,6 @@ namespace LazyVocabulary.Web
         private UserService CreateUserService()
         {
             return new UserService("DefaultConnection");
-            //return serviceCreator.CreateUserService("DefaultConnection");
         }
     }
 }

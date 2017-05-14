@@ -117,13 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="EmailIsUnavailable" xml:space="preserve">
-    <value>Email is already in use.</value>
+  <data name="FormInstructions" xml:space="preserve">
+    <value>Для входа введите имя пользователя или адрес электронной почты и пароль, использованные при регистрации:</value>
   </data>
-  <data name="PasswordsShouldBeEqual" xml:space="preserve">
-    <value>Passwords should be equal.</value>
+  <data name="FormName" xml:space="preserve">
+    <value>Вход на сайт</value>
   </data>
-  <data name="UserNameIsUnavailable" xml:space="preserve">
-    <value>Username is already in use.</value>
+  <data name="PasswordPlaceholder" xml:space="preserve">
+    <value>* Пароль...</value>
+  </data>
+  <data name="RestorePassword" xml:space="preserve">
+    <value>Восстановить пароль</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Войти</value>
+  </data>
+  <data name="SignInWith" xml:space="preserve">
+    <value>...или войдите с помощью:</value>
+  </data>
+  <data name="UserNameOrEmailPlaceholder" xml:space="preserve">
+    <value>* Имя пользователя или Email...</value>
   </data>
 </root>

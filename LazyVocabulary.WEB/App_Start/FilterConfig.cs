@@ -9,6 +9,7 @@ namespace LazyVocabulary.Web
         {
             filters.Add(new HandleErrorAttribute());
             filters.Add(new RedirectOnExceptionAttribute());
+            //filters.Add(new SetCultureAttribute());
         }
     }
 }

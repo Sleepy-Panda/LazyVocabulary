@@ -123,4 +123,10 @@
   <data name="FieldIsRequired" xml:space="preserve">
     <value>Field can not be empty.</value>
   </data>
+  <data name="LengthFromTo" xml:space="preserve">
+    <value>Field should contain from {2} to {1} symbols.</value>
+  </data>
+  <data name="OnlyLettersAndDigits" xml:space="preserve">
+    <value>Field should contain letters or digits only.</value>
+  </data>
 </root>

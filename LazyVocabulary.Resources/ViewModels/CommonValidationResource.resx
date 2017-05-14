@@ -123,4 +123,10 @@
   <data name="FieldIsRequired" xml:space="preserve">
     <value>Поле не может быть пустым.</value>
   </data>
+  <data name="LengthFromTo" xml:space="preserve">
+    <value>Поле должно содержать от {2} до {1} символов.</value>
+  </data>
+  <data name="OnlyLettersAndDigits" xml:space="preserve">
+    <value>Поле должно содержать только латинские буквы и цифры.</value>
+  </data>
 </root>
