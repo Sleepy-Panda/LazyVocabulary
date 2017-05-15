@@ -119,7 +119,7 @@
                 <div class="modal-body">
                     @if (ViewBag.DictionariesCount > 0)
                     {
-                        <p>Выберите целевой словарь для копирования / перемещения переводов.</p>
+                        <p>Выберите целевой словарь для копирования выбранных переводов.</p>
 
                         <div class="form-group">
                             <label class="required" for="Dictionaries">Выберите словарь</label>
@@ -130,7 +130,7 @@
                     }
                     else
                     {
-                        <p class="text-muted"><i>Нет словарей для копирования / перемещения.</i></p>
+                        <p class="text-muted"><i>Нет словарей для копирования выбранных переводов.</i></p>
                     }
                 </div>
                 <div class="modal-footer">
@@ -206,7 +206,7 @@
                             url: '/Translation/Delete/' + $(value).val(),
                             contentType: 'application/json;charset=utf-8',
                             dataType: 'json',
-                            // To avoid DbUpdateConcurrencyException in DictionaryService.
+                            // To avoid DbUpdateConcurrencyException in TranslationService.
                             async: false,
                             success: function (result) {
                                 if (result.success == true) {
@@ -237,39 +237,35 @@
         });
 
         $('#btn-copy-selected').click(function () {
-            $('#modal-copy').modal('show');
+            $('#modal-copy').modal('show');           
+        });
 
-            $('#btn-submit-copy').click(function () {
-                var ids = $('input[name="translations"]:checked');
-                if (ids.length) {
-                    $.each(ids, function (i, value) {
-                        $.ajax({
-                            type: 'POST',
-                            url: '/Translation/Copy/' + $(value).val(),
-                            contentType: 'application/json;charset=utf-8',
-                            dataType: 'json',
-                            // To avoid DbUpdateConcurrencyException in DictionaryService.
-                            async: false,
-                            success: function (result) {
-                                if (result.success == true) {
-                                    //var tr = value.closest('tr');
-                                    //tr.remove();
-                                    //editDeleteButtonState();
-                                }
-                                else {
-                                    console.error('Cant copy selected translation.');
-                                }
-                            },
-                            error: function (response) {
-                                console.error('Cant copy selected translation.');
-                            },
-                            complete: function () {
-                                $('#modal-copy').modal('hide');
+        $('#btn-submit-copy').click(function () {
+            var ids = $('input[name="translations"]:checked');
+            if (ids.length) {
+                $.each(ids, function (i, value) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Translation/Copy?translationId=' + $(value).val() + '&dictionaryId=' + $('#Dictionaries').val(),
+                        contentType: 'application/json;charset=utf-8',
+                        dataType: 'json',
+                        // To avoid DbUpdateConcurrencyException in TranslationService.
+                        success: function (result) {
+                            if (result.success == true) {
                             }
-                        });
+                            else {
+                                console.error('Cant copy selected translation.');
+                            }
+                        },
+                        error: function (response) {
+                            console.error('Cant copy selected translation.');
+                        },
+                        complete: function () {
+                            $('#modal-copy').modal('hide');
+                        }
                     });
-                }
-            });
+                });
+            }
         });
 
         $('#btn-select-all').click(function () {

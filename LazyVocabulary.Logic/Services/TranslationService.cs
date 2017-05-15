@@ -109,5 +109,39 @@ namespace LazyVocabulary.Logic.Services
 
             return result;
         }
+
+        public async Task<Result> Copy(int sourcePhraseId, int dictionaryId)
+        {
+            var result = new Result();
+
+            try
+            {
+                var sourcePhrase = _database.SourcePhrases.Get(sourcePhraseId);
+                sourcePhrase.DictionaryId = dictionaryId;
+
+                _database.SourcePhrases.Create(sourcePhrase);
+                await _database.SaveAsync();
+
+                var translations = _database.TranslatedPhrases.Find(t => t.SourcePhraseId == sourcePhraseId);
+
+                foreach (var translation in translations)
+                {
+                    translation.SourcePhraseId = sourcePhrase.Id;
+                    _database.TranslatedPhrases.Create(translation);
+                }
+
+                await _database.SaveAsync();
+
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+                result.StackTrace = ex.StackTrace;
+            }
+
+            return result;
+        }
     }
 }

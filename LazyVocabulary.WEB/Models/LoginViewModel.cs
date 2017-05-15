@@ -12,10 +12,6 @@ namespace LazyVocabulary.Web.Models
             ErrorMessageResourceName = "LengthFromTo",
             ErrorMessageResourceType = typeof(CommonValidationResource))]
 
-        [RegularExpression(@"[a-zA-Z0-9]+",
-            ErrorMessageResourceName = "OnlyLettersAndDigits",
-            ErrorMessageResourceType = typeof(CommonValidationResource))]
-
         public string Login { get; set; }
 
         [Required(ErrorMessageResourceName = "FieldIsRequired",

@@ -1,9 +1,8 @@
-﻿using LazyVocabulary.Logic.Services;
-using LazyVocabulary.Common.Entities;
+﻿using LazyVocabulary.Common.Entities;
+using LazyVocabulary.Logic.Services;
 using LazyVocabulary.Web.Models;
 using Microsoft.AspNet.Identity;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
@@ -150,6 +149,25 @@ namespace LazyVocabulary.Web.Controllers
             }
 
             var result = await _translationService.Delete(id.Value);
+
+            if (!result.Success)
+            {
+                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        // POST: Translation/Copy?translationId=1&dictionaryId=1
+        [HttpPost]
+        public async Task<JsonResult> Copy(int? translationId, int? dictionaryId)
+        {
+            if (!translationId.HasValue && !dictionaryId.HasValue)
+            {
+                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+            }
+
+            var result = await _translationService.Copy(translationId.Value, dictionaryId.Value);
 
             if (!result.Success)
             {
