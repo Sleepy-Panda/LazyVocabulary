@@ -1,5 +1,4 @@
 ﻿@using LazyVocabulary.Web.Models;
-@using System.Linq;
 
 @model IEnumerable<IndexTranslationViewModel>
 
@@ -38,54 +37,35 @@
 </div>
 
 <div class="container">
-    @if (Model.Count() > 0)
+    @using (Ajax.BeginForm("Search", "Translation", new { id = ViewBag.DictionaryId }, new AjaxOptions
     {
-        <table class="table borderless top" id="table-translations">
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td class="td-checkbox">
-                            <input type="checkbox" name="translations" value="@item.Id">
-                        </td>
-                        <td>
-                            @item.Value
-                        </td>
-                        <td>
-                            @if (item.Translations.Count > 0)
-                            {
-                                foreach (var translation in item.Translations)
-                                {
-                                    @translation.Value
-                                    <br />
-                                }
-                            }
-                            else
-                            {
-                                <p class="text-muted"><i>Вы не добавили ни одного перевода.</i></p>
-                            }
-                        </td>
-                        <td class="toggle-menu-icon">
-                            <a href='javascript:;' class='toggle' id="toggle-@item.Id">
-                                <i class='fa fa-ellipsis-v'></i>
-                            </a>
-                            <ul class="menu" data-menu data-menu-toggle="#toggle-@item.Id">
-                                <li>
-                                    <a href="/Translation/Edit/@item.Id">Редактировать перевод</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="delete-translation" id="delete-@item.Id">Удалить перевод</a>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
-    else
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace,
+        OnBegin = "onBegin",
+        OnComplete = "onComplete",
+        UpdateTargetId = "target",
+        LoadingElementId = "loader",
+    }))
     {
-        <p class="text-muted top"><i>Вы не добавили ни одного перевода.</i></p>
+        <h3>Поиск переводов</h3>
+        <div class="form-group">
+            <label class="required" for="searchPattern">Введите строку поиска</label>
+            <div>
+                @Html.TextBox("searchPattern", "", new { @class = "form-control inline" })
+                <span class="fa fa-remove clear-input" title="Очистить поле"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button id="btn-submit-form" type="submit" class="btn btn-default">
+                <i class="fa fa-search"></i> Найти переводы
+            </button>
+        </div>
+
+        <h3>Результаты поиска</h3>
+        <div id="target">
+            @Html.Partial("_List")
+        </div>
     }
 
     <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-hidden="true">
@@ -109,6 +89,29 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modal-delete-selected" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Подтвердите удаление</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Вы уверены, что хотите удалить все выбранные переводы? Восстановить данные будет <b>невозможно.</b></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fa fa-remove"></i> Закрыть
+                    </button>
+                    <button type="button" class="btn btn-info" id="btn-submit-delete-selected">
+                        <i class="glyphicon glyphicon-ok"></i> Удалить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="modal-copy" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -156,11 +159,27 @@
     <script>
         $('[data-menu]').menu();
 
-        $('a.delete-translation').click(function (event) {
+        function onBegin() {
+            $('#btn-submit-form').attr('disabled', 'disabled');
+        };
+
+        function onComplete() {
+            $('#btn-submit-form').attr('disabled', false);
+            $('#result').attr('style', 'display:normal');
+            $('[data-menu]').menu();
+        };
+
+        $(document).on('click', 'span.clear-input', function (event) {
+            var input = $(event.target).prev('.form-control');
+            input.val('');
+        });
+
+        // Delete from context menu.
+        $(document).on('click', 'a.delete-translation', function (event) {
             event.preventDefault();
             $('#modal-delete').modal('show');
 
-            $('#btn-submit-delete').click(function () {
+            $(document).on('click', '#btn-submit-delete', function () {
                 $.ajax({
                     type: 'POST',
                     url: '/Translation/Delete/' + event.target.id.match('[^delete-]*$'),
@@ -194,53 +213,52 @@
             });
         });
 
-        $('#btn-delete-selected').click(function () {
-            $('#modal-delete').modal('show');
-
-            $('#btn-submit-delete').click(function () {
-                var ids = $('input[name="translations"]:checked');
-                if (ids.length) {
-                    $.each(ids, function (i, value) {
-                        $.ajax({
-                            type: 'POST',
-                            url: '/Translation/Delete/' + $(value).val(),
-                            contentType: 'application/json;charset=utf-8',
-                            dataType: 'json',
-                            // To avoid DbUpdateConcurrencyException in TranslationService.
-                            async: false,
-                            success: function (result) {
-                                if (result.success == true) {
-                                    var tr = value.closest('tr');
-                                    tr.remove();
-                                    editDeleteButtonState();
-                                }
-                                else {
-                                    console.error('Cant delete selected translation.');
-                                }
-
-                                var table = $('table#table-translations');
-                                if (!$('tr', table).length) {
-                                    table.remove();
-                                    $('.container').append('<p class="text-muted top"><i>Вы не добавили ни одного перевода.</i></p>');
-                                }
-                            },
-                            error: function (response) {
-                                console.error('Cant delete selected translation.');
-                            },
-                            complete: function () {
-                                $('#modal-delete').modal('hide');
-                            }
-                        });
-                    });
-                }
-            });
+        // Delete selected using delete button.
+        $(document).on('click', '#btn-delete-selected', function () {
+            $('#modal-delete-selected').modal('show');            
         });
 
-        $('#btn-copy-selected').click(function () {
+        $(document).on('click', '#btn-submit-delete-selected', function () {
+            var ids = $('input[name="translations"]:checked');
+            if (ids.length) {
+                $.each(ids, function (i, value) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Translation/Delete/' + $(value).val(),
+                        contentType: 'application/json;charset=utf-8',
+                        dataType: 'json',
+                        success: function (result) {
+                            if (result.success == true) {
+                                var tr = value.closest('tr');
+                                tr.remove();
+                                editDeleteButtonState();
+                            }
+                            else {
+                                console.error('Cant delete selected translation.');
+                            }
+
+                            var table = $('table#table-translations');
+                            if (!$('tr', table).length) {
+                                table.remove();
+                                $('.container').append('<p class="text-muted top"><i>Вы не добавили ни одного перевода.</i></p>');
+                            }
+                        },
+                        error: function (response) {
+                            console.error('Cant delete selected translation.');
+                        },
+                        complete: function () {
+                            $('#modal-delete-selected').modal('hide');
+                        }
+                    });
+                });
+            }
+        });
+
+        $(document).on('click', '#btn-copy-selected', function () {
             $('#modal-copy').modal('show');           
         });
 
-        $('#btn-submit-copy').click(function () {
+        $(document).on('click', '#btn-submit-copy', function () {
             var ids = $('input[name="translations"]:checked');
             if (ids.length) {
                 $.each(ids, function (i, value) {
@@ -268,19 +286,19 @@
             }
         });
 
-        $('#btn-select-all').click(function () {
+        $(document).on('click', '#btn-select-all', function () {
             $('input[name="translations"]').prop('checked', true);
             $(event.target).blur();
             editDeleteButtonState();
         });
 
-        $('#btn-deselect-all').click(function () {
+        $(document).on('click', '#btn-deselect-all', function () {
             $('input[name="translations"]').prop('checked', false);
             $(event.target).blur();
             editDeleteButtonState();
         });
 
-        $('input[name="translations"]').change(function () {
+        $(document).on('change', 'input[name="translations"]', function () {
             editDeleteButtonState();
         });
 

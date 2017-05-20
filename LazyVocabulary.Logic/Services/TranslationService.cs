@@ -38,6 +38,38 @@ namespace LazyVocabulary.Logic.Services
             return resultWithData;
         }
 
+        public ResultWithData<List<SourcePhrase>> GetByDictionaryIdAndSearchPattern(int dictionaryId, string searchPattern)
+        {
+            var resultWithData = new ResultWithData<List<SourcePhrase>>();
+
+            try
+            {
+                if (String.IsNullOrEmpty(searchPattern))
+                {
+                    resultWithData.ResultData = _database.SourcePhrases
+                        .Find(s => s.DictionaryId == dictionaryId)
+                        .ToList();
+                }
+                else
+                {
+                    resultWithData.ResultData = _database.SourcePhrases
+                        .Find(s => (s.DictionaryId == dictionaryId) && 
+                                   (s.Value.ToLower().Contains(searchPattern) || s.TranslatedPhrases.Any(tp => tp.Value.ToLower().Contains(searchPattern))))
+                        .ToList();
+                }
+
+                resultWithData.Success = true;
+            }
+            catch (Exception ex)
+            {
+                resultWithData.Success = false;
+                resultWithData.Message = ex.Message;
+                resultWithData.StackTrace = ex.StackTrace;
+            }
+
+            return resultWithData;
+        }
+
         public async Task<Result> Create(dynamic translationFromView)
         {
             var result = new Result();
@@ -130,6 +162,11 @@ namespace LazyVocabulary.Logic.Services
                     _database.TranslatedPhrases.Create(translation);
                 }
 
+                await _database.SaveAsync();
+
+                var dictionary = _database.Dictionaries.Get(dictionaryId);
+                dictionary.UpdatedAt = DateTime.Now;
+                _database.Dictionaries.Update(dictionary);
                 await _database.SaveAsync();
 
                 result.Success = true;
