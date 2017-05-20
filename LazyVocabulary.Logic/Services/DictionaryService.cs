@@ -39,7 +39,7 @@ namespace LazyVocabulary.Logic.Services
             return resultWithData;
         }
 
-        public ResultWithData<List<Dictionary>> GetByUserIdAndSearchPattern(string userId, string searchPattern)
+        public ResultWithData<List<Dictionary>> GetByUserIdAndSearchPattern(string userId, string searchPattern, bool searchDescriptions)
         {
             var resultWithData = new ResultWithData<List<Dictionary>>();
 
@@ -53,9 +53,23 @@ namespace LazyVocabulary.Logic.Services
                 }
                 else
                 {
-                    resultWithData.ResultData = _database.Dictionaries
-                    .Find(d => d.ApplicationUserId == userId && d.Name.ToLower().Contains(searchPattern.ToLower()))
-                    .ToList();
+                    List<Dictionary> dictionaries;
+
+                    if (searchDescriptions)
+                    {
+                        dictionaries = _database.Dictionaries
+                            .Find(d => (d.ApplicationUserId == userId) && 
+                                       (d.Name.ToLower().Contains(searchPattern.ToLower()) || (d.Description != null && d.Description.ToLower().Contains(searchPattern.ToLower()))))
+                            .ToList();
+                    }
+                    else
+                    {
+                        dictionaries = _database.Dictionaries
+                            .Find(d => d.ApplicationUserId == userId && d.Name.ToLower().Contains(searchPattern.ToLower()))
+                            .ToList();
+                    }
+
+                    resultWithData.ResultData = dictionaries;
                 }
                 
                 resultWithData.Success = true;
