@@ -57,14 +57,14 @@ namespace LazyVocabulary.Web.Controllers
 
         // GET: Dictionary/Search
         [HttpGet]
-        public ActionResult Search(string searchPattern = null)
+        public ActionResult Search(string searchPattern = null, bool searchDescriptions = false)
         {
             string userId = User.Identity.GetUserId();
             searchPattern = searchPattern == null 
                 ? String.Empty 
                 : searchPattern.Trim();
 
-            var resultWithData = _dictionaryService.GetByUserIdAndSearchPattern(userId, searchPattern);
+            var resultWithData = _dictionaryService.GetByUserIdAndSearchPattern(userId, searchPattern, searchDescriptions);
 
             if (!resultWithData.Success)
             {
