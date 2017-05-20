@@ -15,7 +15,7 @@ namespace LazyVocabulary.Web.Filters
     public class SetCultureAttribute : FilterAttribute, IActionFilter
     {
         [Inject]
-        public UserProfileService service { get; set; }
+        public UserProfileService Service { get; set; }
 
         public SetCultureAttribute()
         {
@@ -37,7 +37,7 @@ namespace LazyVocabulary.Web.Filters
                 else
                 {
                     // Get culture from database and set cookie.
-                    var resultWithData = service.GetCultureByUserId(filterContext.HttpContext.User.Identity.GetUserId());
+                    var resultWithData = Service.GetCultureByUserId(filterContext.HttpContext.User.Identity.GetUserId());
 
                     if (!resultWithData.Success)
                     {
@@ -45,8 +45,9 @@ namespace LazyVocabulary.Web.Filters
                     }
 
                     cultureInfo = resultWithData.ResultData;
-                    filterContext.HttpContext.Request.Cookies["locale"].Value = cultureInfo.Name.ToLower();
                 }
+
+                AddOrUpdateLocaleCookie(filterContext, cultureInfo.Name.ToLower());
             }
             else
             {
@@ -54,6 +55,7 @@ namespace LazyVocabulary.Web.Filters
                 if (!Enum.GetNames(typeof(LocaleLanguage)).Any(l => l.ToLower() == cultureFromCookie.Value.ToLower()))
                 {
                     cultureInfo = UserProfile.DefaultCulture;
+                    AddOrUpdateLocaleCookie(filterContext, cultureInfo.Name.ToLower());
                 }
                 else
                 {
@@ -69,7 +71,22 @@ namespace LazyVocabulary.Web.Filters
 
         public void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            // Without realization.
+            // Without implementation.
+        }
+
+        private void AddOrUpdateLocaleCookie(ActionExecutedContext filterContext, string locale)
+        {
+            HttpCookie cookie = filterContext.HttpContext.Request.Cookies["locale"];
+
+            if (cookie == null)
+            {
+                cookie = new HttpCookie("locale");
+            }
+
+            cookie.Values["locale"] = locale;
+            cookie.Expires = DateTime.Now.AddDays(30);
+
+            filterContext.HttpContext.Response.Cookies.Add(cookie);
         }
     }
 }

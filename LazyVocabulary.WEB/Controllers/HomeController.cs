@@ -4,6 +4,7 @@ using System.Web.Mvc;
 namespace LazyVocabulary.Web.Controllers
 {
     [RedirectOnException]
+    [SetCulture]
     public class HomeController : Controller
     {
         public ActionResult Index()

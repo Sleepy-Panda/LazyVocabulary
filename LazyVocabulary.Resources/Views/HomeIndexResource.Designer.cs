@@ -59,5 +59,203 @@ namespace LazyVocabulary.Resources.Views {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BeLazy – это интересный способ каждый день узнавать что-то новое. Ведите электронный словарь, пополняйте словарный запас и делитесь им с друзьями в любое время и в любом месте. Присоединяйтесь!.
+        /// </summary>
+        public static string AboutBeLazy {
+            get {
+                return ResourceManager.GetString("AboutBeLazy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BeLazy - это....
+        /// </summary>
+        public static string BeLazyIs {
+            get {
+                return ResourceManager.GetString("BeLazyIs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы можете изменить язык отображения сайта:.
+        /// </summary>
+        public static string ChangeLanguage {
+            get {
+                return ResourceManager.GetString("ChangeLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Эффективно управляйте электронными словарями и делитесь ими с другими пользователями..
+        /// </summary>
+        public static string Details1 {
+            get {
+                return ResourceManager.GetString("Details1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Добавьте интересующее Вас слово или выражение в словарь, и система сама подскажет Вам варианты перевода с учётом указанной пары языков..
+        /// </summary>
+        public static string Details2 {
+            get {
+                return ResourceManager.GetString("Details2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Воспользуйтесь нашим расширением для браузера Chrome, чтобы пополнять словарный запас, не отрываясь от чтения текста..
+        /// </summary>
+        public static string Details3 {
+            get {
+                return ResourceManager.GetString("Details3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English.
+        /// </summary>
+        public static string English {
+            get {
+                return ResourceManager.GetString("English", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Facebook.
+        /// </summary>
+        public static string Facebook {
+            get {
+                return ResourceManager.GetString("Facebook", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Google.
+        /// </summary>
+        public static string Google {
+            get {
+                return ResourceManager.GetString("Google", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Широкие возможности.
+        /// </summary>
+        public static string Header1 {
+            get {
+                return ResourceManager.GetString("Header1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ускоренное взаимодействие.
+        /// </summary>
+        public static string Header2 {
+            get {
+                return ResourceManager.GetString("Header2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Изучение языка на любых сайтах.
+        /// </summary>
+        public static string Header3 {
+            get {
+                return ResourceManager.GetString("Header3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instagram.
+        /// </summary>
+        public static string Instagram {
+            get {
+                return ResourceManager.GetString("Instagram", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Присоединиться.
+        /// </summary>
+        public static string Join {
+            get {
+                return ResourceManager.GetString("Join", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Добро пожаловать.
+        /// </summary>
+        public static string PageName {
+            get {
+                return ResourceManager.GetString("PageName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Основываясь на Ваших предпочтениях, мы рекомендуем Вам русский язык интерфейса..
+        /// </summary>
+        public static string RecommendedLanguage {
+            get {
+                return ResourceManager.GetString("RecommendedLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Зарегистрироваться.
+        /// </summary>
+        public static string Register {
+            get {
+                return ResourceManager.GetString("Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Зарегистрируйтесь, это бесплатно!.
+        /// </summary>
+        public static string RegisterForFree {
+            get {
+                return ResourceManager.GetString("RegisterForFree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Русский (выбранный).
+        /// </summary>
+        public static string Russian {
+            get {
+                return ResourceManager.GetString("Russian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twitter.
+        /// </summary>
+        public static string Twitter {
+            get {
+                return ResourceManager.GetString("Twitter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ВКонтакте.
+        /// </summary>
+        public static string Vk {
+            get {
+                return ResourceManager.GetString("Vk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Добро пожаловать в BeLazy.
+        /// </summary>
+        public static string WelcomeBeLazy {
+            get {
+                return ResourceManager.GetString("WelcomeBeLazy", resourceCulture);
+            }
+        }
     }
 }

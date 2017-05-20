@@ -1,11 +1,13 @@
-﻿@{
-    ViewBag.Title = "Welcome";
+﻿@using LazyVocabulary.Resources.Views;
+
+@{
+    ViewBag.Title = HomeIndexResource.PageName;
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
 
 <div class="left-menu-container">
     <div class="left-menu-item-container">
-        <a href="#" rel = "tooltip">
+        <a href="#" rel="tooltip">
             <i class="fa fa-home"></i>
         </a>
     </div>
@@ -24,14 +26,10 @@
 <div id="cover">
     <div id="cover-caption">
         <div class="container">
-            <h1>Добро пожаловать в BeLazy</h1>
-            <p>
-                BeLazy – это интересный способ каждый день узнавать что-то новое.
-                Ведите электронный словарь, пополняйте словарный запас и делитесь им с друзьями в любое время и в любом месте.
-                Присоединяйтесь!
-            </p>
+            <h1>@HomeIndexResource.WelcomeBeLazy</h1>
+            <p>@HomeIndexResource.AboutBeLazy</p>
             <a href="/Account/Register" class="btn btn-blue" data-ripple>
-                <i class="fa fa-user-plus"></i> Присоединиться
+                <i class="fa fa-user-plus"></i> @HomeIndexResource.Join
             </a>
             <div class="arrow-down hidden-xs">
                 <i class="fa fa-angle-down"></i>
@@ -42,14 +40,14 @@
 
 <div id="language">
     <div class="container">
-        <p>Основываясь на Ваших предпочтениях, мы рекомендуем Вам русский язык интерфейса.</p>
-        <p>Вы можете изменить язык отображения сайта: </p>
+        <p>@HomeIndexResource.RecommendedLanguage</p>
+        <p>@HomeIndexResource.ChangeLanguage</p>
         <ul>
             <li>
-                <img src="~/Content/Images/home/ru.png" class="flag" id="flag-ru" />
+                <img src="~/Content/Images/home/ru.png" class="flag" id="flag-ru" title="@HomeIndexResource.Russian" />
             </li>
             <li>
-                <img src="~/Content/Images/home/en.png" class="flag" id="flag-en" />
+                <img src="~/Content/Images/home/en.png" class="flag" id="flag-en" title="@HomeIndexResource.English" />
             </li>
         </ul>  
     </div>
@@ -57,16 +55,14 @@
 
 <div id="about">
     <div class="container">
-        <h1>BeLazy - это...</h1>
+        <h1>@HomeIndexResource.BeLazyIs</h1>
         <div class="row">
             <div class="col-md-2 col-md-offset-1">
                 <img src="~/Content/Images/home/notebook.png" />
             </div>
             <div class="col-md-8">
-                <h2>Широкие возможности</h2>
-                <p>
-                    Эффективно управляйте электронными словарями и делитесь ими с другими пользователями.
-                </p>
+                <h2>@HomeIndexResource.Header1</h2>
+                <p>@HomeIndexResource.Details1</p>
             </div>
         </div>
 
@@ -75,10 +71,8 @@
                 <img src="~/Content/Images/home/notepad.png" />
             </div>
             <div class="col-md-8">
-                <h2>Ускоренное взаимодействие</h2>
-                <p>
-                    Добавьте интересующее Вас слово или выражение в словарь, и система сама подскажет Вам варианты перевода с учётом указанной пары языков.
-                </p>
+                <h2>@HomeIndexResource.Header2</h2>
+                <p>@HomeIndexResource.Details2</p>
             </div>
         </div>
 
@@ -87,10 +81,8 @@
                 <img src="~/Content/Images/home/browser.png" />
             </div>
             <div class="col-md-8">
-                <h2>Изучение языка на любых сайтах</h2>
-                <p>
-                    Воспользуйтесь нашим расширением для браузера Chrome, чтобы пополнять словарный запас, не отрываясь от чтения текста.
-                </p>
+                <h2>@HomeIndexResource.Header3</h2>
+                <p>@HomeIndexResource.Details3</p>
             </div>
         </div>        
     </div>
@@ -101,11 +93,11 @@
         <div class="container">
             <ul>
                 <li>
-                    <p>Зарегистрируйтесь, это бесплатно!</p>
+                    <p>@HomeIndexResource.RegisterForFree</p>
                 </li>
                 <li>
                     <a href="/Account/Register" class="btn btn-red" data-ripple>
-                        <i class="fa fa-user-plus"></i> Зарегистрироваться
+                        <i class="fa fa-user-plus"></i> @HomeIndexResource.Register
                     </a>
                 </li>
             </ul>                               
@@ -116,27 +108,27 @@
         <div class="container">
             <ul>
                 <li>
-                    <a class="btn-rounded btn-fb" data-ripple>
+                    <a class="btn-rounded btn-fb" title="@HomeIndexResource.Facebook" data-ripple>
                         <i class="fa fa-facebook"></i>
                     </a>
                 </li>
                 <li>
-                    <a class="btn-rounded btn-twitter" data-ripple>
+                    <a class="btn-rounded btn-twitter" title="@HomeIndexResource.Twitter" data-ripple>
                         <i class="fa fa-twitter"></i>
                     </a>
                 </li>
                 <li>
-                    <a class="btn-rounded btn-gplus" data-ripple>
+                    <a class="btn-rounded btn-gplus" title="@HomeIndexResource.Google" data-ripple>
                         <i class="fa fa-google-plus"></i>
                     </a>
                 </li>
                 <li>
-                    <a class="btn-rounded btn-vk" data-ripple>
+                    <a class="btn-rounded btn-vk" title="@HomeIndexResource.Vk" data-ripple>
                         <i class="fa fa-vk"></i>
                     </a>
                 </li>
                 <li>
-                    <a class="btn-rounded btn-instagram" data-ripple>
+                    <a class="btn-rounded btn-instagram" title="@HomeIndexResource.Instagram" data-ripple>
                         <i class="fa fa-instagram"></i>
                     </a>
                 </li>
