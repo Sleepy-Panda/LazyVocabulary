@@ -156,6 +156,20 @@ namespace LazyVocabulary.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult IsDictionaryNameAvailableForEdit(string name, string oldName)
+        {
+            if (name == oldName)
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+
+            string userId = User.Identity.GetUserId();
+            bool result = _dictionaryService.IsDictionaryNameAvailable(name, userId);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Dictionary/Edit/1
         [HttpGet]
         public ActionResult Edit(int? id)
@@ -185,6 +199,7 @@ namespace LazyVocabulary.Web.Controllers
             {
                 Id = dictionary.Id,
                 Name = dictionary.Name,
+                OldName = dictionary.Name,
                 Description = dictionary.Description,
             };
 
@@ -223,8 +238,6 @@ namespace LazyVocabulary.Web.Controllers
             var languages = resultWithDataLanguages.ResultData;
             ViewBag.SourceLanguageId = new SelectList(languages, "Id", "Name", model.SourceLanguageId);
             ViewBag.TargetLanguageId = new SelectList(languages, "Id", "Name", model.TargetLanguageId);
-
-            // TODO: доступно ли название 
 
             dynamic dictionary = new ExpandoObject();
             dictionary.Id = model.Id;

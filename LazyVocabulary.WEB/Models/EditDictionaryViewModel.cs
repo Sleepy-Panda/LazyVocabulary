@@ -11,10 +11,13 @@ namespace LazyVocabulary.Web.Models
         [Required]
         [Display(Name = "Название")]
         [MaxLength(64)]
-        //[Remote("IsDictionaryNameAvailable", "Dictionary",
-        //    ErrorMessage = "Словарь с таким названием уже существует.",
-        //    AdditionalFields = "Id")]
+        [Remote("IsDictionaryNameAvailableForEdit", "Dictionary",
+            ErrorMessage = "Словарь с таким названием уже существует.",
+            AdditionalFields = "OldName")]
         public string Name { get; set; }
+
+        [Required]
+        public string OldName { get; set; }
 
         [Display(Name = "Описание")]
         [MaxLength(256)]

@@ -54,7 +54,7 @@
             {
                 <h3>Поиск словарей</h3>
                 <div class="form-group">
-                    <label class="required" for="searchPattern">Введите строку поиска</label>
+                    <label for="searchPattern">Введите строку поиска</label>
                     <div>
                         @Html.TextBox("searchPattern", "", new { @class = "form-control inline" })
                         <span class="fa fa-remove clear-input" title="Очистить поле"></span>
@@ -167,7 +167,7 @@
                         if (result.success == true) {
                             var tr = $(event.target).closest('tr');
                             tr.remove();
-                            editDeleteButtonState();
+                            updateButtonStates();
                         }
                         else {
                             console.error('Cant delete selected dictionary.');
@@ -176,7 +176,7 @@
                         var table = $('table#table-my-dictionaries');
                         if (!$('tr', table).length) {
                             table.remove();
-                            $('#tab-pane-my').append('<p class="text-muted"><i>Вы не создали ни одного словаря.</i></p>');
+                            $('#there-is-no-dictionaries').attr('style', 'display:normal');
                         }
                     },
                     error: function (response) {
@@ -207,7 +207,7 @@
                             if (result.success == true) {
                                 var tr = value.closest('tr');
                                 tr.remove();
-                                editDeleteButtonState();
+                                updateButtonStates();
                             }
                             else {
                                 console.error('Cant delete selected dictionary.');
@@ -216,7 +216,7 @@
                             var table = $('table#table-my-dictionaries');
                             if (!$('tr', table).length) {
                                 table.remove();
-                                $('#tab-pane-my').append('<p class="text-muted"><i>Вы не создали ни одного словаря.</i></p>');
+                                $('#there-is-no-dictionaries').attr('style', 'display:normal');
                             }
                         },
                         error: function (response) {
@@ -233,20 +233,20 @@
         $(document).on('click', '#btn-select-all', function () {
             $('input[name="dictionaries"]').prop('checked', true);
             $(event.target).blur();
-            editDeleteButtonState();
+            updateButtonStates();
         });
 
         $(document).on('click', '#btn-deselect-all', function () {
             $('input[name="dictionaries"]').prop('checked', false);
             $(event.target).blur();
-            editDeleteButtonState();
+            updateButtonStates();
         });
 
         $(document).on('change', 'input[name="dictionaries"]', function () {
-            editDeleteButtonState();
+            updateButtonStates();
         });
 
-        function editDeleteButtonState() {
+        function updateButtonStates() {
             if (!$('input[name="dictionaries"]:checked').length) {
                 $('#btn-delete-selected').attr('disabled', true);
             }

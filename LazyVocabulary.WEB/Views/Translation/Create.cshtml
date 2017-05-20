@@ -58,22 +58,21 @@
             $('#DictionaryId').selectpicker('refresh');
         };
 
-        $('#btn-submit-form').click(function () {
+        $(document).on('click', '#btn-submit-form', function () {
             $('form').submit();
         });
 
-        $('#btn-clear-form').click(function () {
+        $(document).on('click', '#btn-clear-form', function () {
             $(':input', '#form')
                 .not(':button, :submit, :reset, :hidden')
                 .val('')
                 .removeAttr('checked')
                 .removeAttr('selected');
             $('select').prop('selectedIndex', 0);
-            $('#div-auto').empty();
+            showCannotTranslate();
             $('#btn-clear-form').blur();
         });
 
-        // Signature for event binding on dynamically created elements.
         $(document).on('click', '#btn-add-field', function () {
             var div = $('#translation-inputs');
             if ($('.form-group', div).length) {
@@ -98,7 +97,6 @@
             $('#btn-add-field').blur();
         });
 
-        // Signature for event binding on dynamically created elements.
         $(document).on('click', 'span.remove-input', function (event) {
             var formGroup = $(event.target).closest('.form-group');
             formGroup.remove();
@@ -108,11 +106,11 @@
             var targetText = $('#Value').val().trim();
 
             if (targetText == '') {
-                printError();
+                showCannotTranslate();
                 return;
             }
 
-            $('#div-auto').empty();
+            hideCannotTranslate();
 
             var translations = [];
             var trLink = 'https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20170213T172041Z.188b671735d113e7.b44d78d5c904d7a51611c185121e7df8671cd00c&text=' + targetText + '&lang=' + languagePair;
@@ -150,24 +148,20 @@
                                 });
                             }
                             else {
-                                printError();
+                                showCannotTranslate();
                             }
                         },
                         error: function () {
-                            printError();
+                            showCannotTranslate();
                         },
-                        complete: function () {
-                            // TODO
-                        }
                     });
                 },
                 error: function () {
-                    printError();
+                    showCannotTranslate();
                 }
             });          
         });
 
-        // Signature for event binding on dynamically created elements.
         $(document).on('change', '#DictionaryId', function () {
             var dictionaryId = $('#DictionaryId').val();
             
@@ -188,15 +182,19 @@
             });
         });
 
-        // Signature for event binding on dynamically created elements.
         $(document).on('keyup', '#Value', function () {
             var link = getGoogleLink();
             $('a#google-link').attr('href', link);
         });
 
-        function printError() {
+        function showCannotTranslate() {
             $('#div-auto').empty();
-            $('#div-auto').append('<p class="text-muted"><i>Не удалось совершить перевод.</i></p>');
+            $('#cannot-translate').attr('style', 'display:normal;');
+        }
+
+        function hideCannotTranslate() {
+            $('#div-auto').empty();
+            $('#cannot-translate').attr('style', 'display:none;');
         }
 
         function onlyUniqueItems(value, index, self) {

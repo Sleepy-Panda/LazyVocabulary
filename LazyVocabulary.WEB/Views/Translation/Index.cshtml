@@ -24,7 +24,7 @@
         <button id="btn-delete-selected" type="button" class="btn btn-info pull-right" disabled>
             <i class="fa fa-remove"></i> Удалить выбранные
         </button>
-        <button id="btn-copy-selected" type="button" class="btn btn-info pull-right">
+        <button id="btn-copy-selected" type="button" class="btn btn-info pull-right" disabled>
             <i class="fa fa-arrow-right"></i> Копировать выбранные
         </button>
         <button id="btn-select-all" type="button" class="btn btn-default pull-right">
@@ -49,7 +49,7 @@
     {
         <h3>Поиск переводов</h3>
         <div class="form-group">
-            <label class="required" for="searchPattern">Введите строку поиска</label>
+            <label for="searchPattern">Введите строку поиска</label>
             <div>
                 @Html.TextBox("searchPattern", "", new { @class = "form-control inline" })
                 <span class="fa fa-remove clear-input" title="Очистить поле"></span>
@@ -191,7 +191,7 @@
                         if (result.success == true) {
                             var tr = $(event.target).closest('tr');
                             tr.remove();
-                            editDeleteButtonState();
+                            updateButtonStates();
                         }
                         else {
                             console.error('Cant delete selected translation.');
@@ -200,7 +200,7 @@
                         var table = $('table#table-translations');
                         if (!$('tr', table).length) {
                             table.remove();
-                            $('.container').append('<p class="text-muted top"><i>Вы не добавили ни одного перевода.</i></p>');
+                            $('#there-is-no-translations').attr('style', 'display:normal');
                         }
                     },
                     error: function (response) {
@@ -231,7 +231,7 @@
                             if (result.success == true) {
                                 var tr = value.closest('tr');
                                 tr.remove();
-                                editDeleteButtonState();
+                                updateButtonStates();
                             }
                             else {
                                 console.error('Cant delete selected translation.');
@@ -240,7 +240,7 @@
                             var table = $('table#table-translations');
                             if (!$('tr', table).length) {
                                 table.remove();
-                                $('.container').append('<p class="text-muted top"><i>Вы не добавили ни одного перевода.</i></p>');
+                                $('#there-is-no-translations').attr('style', 'display:normal');
                             }
                         },
                         error: function (response) {
@@ -267,7 +267,6 @@
                         url: '/Translation/Copy?translationId=' + $(value).val() + '&dictionaryId=' + $('#Dictionaries').val(),
                         contentType: 'application/json;charset=utf-8',
                         dataType: 'json',
-                        // To avoid DbUpdateConcurrencyException in TranslationService.
                         success: function (result) {
                             if (result.success == true) {
                             }
@@ -289,25 +288,27 @@
         $(document).on('click', '#btn-select-all', function () {
             $('input[name="translations"]').prop('checked', true);
             $(event.target).blur();
-            editDeleteButtonState();
+            updateButtonStates();
         });
 
         $(document).on('click', '#btn-deselect-all', function () {
             $('input[name="translations"]').prop('checked', false);
             $(event.target).blur();
-            editDeleteButtonState();
+            updateButtonStates();
         });
 
         $(document).on('change', 'input[name="translations"]', function () {
-            editDeleteButtonState();
+            updateButtonStates();
         });
 
-        function editDeleteButtonState() {
+        function updateButtonStates() {
             if (!$('input[name="translations"]:checked').length) {
                 $('#btn-delete-selected').attr('disabled', true);
+                $('#btn-copy-selected').attr('disabled', true);
             }
             else {
                 $('#btn-delete-selected').attr('disabled', false);
+                $('#btn-copy-selected').attr('disabled', false);
             }
         }
     </script>
