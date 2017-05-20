@@ -2,6 +2,7 @@
 using LazyVocabulary.Web.Models;
 using Microsoft.AspNet.Identity;
 using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Net;
@@ -47,11 +48,46 @@ namespace LazyVocabulary.Web.Controllers
                     SourceLanguageImagePath = d.SourceLanguage.FlagImagePath,
                     TargetLanguageImagePath = d.TargetLanguage.FlagImagePath,
                     PhrasesCount = d.SourcePhrases.Count,
-                    CreatedAt = d.CreatedAt.ToString("dd.mm.yyyy HH:mm"),
-                    UpdatedAt = d.UpdatedAt.ToString("dd.mm.yyyy HH:mm"),
+                    CreatedAt = d.CreatedAt.ToString("d MMMM, yyyy HH:mm"),
+                    UpdatedAt = d.UpdatedAt.ToString("d MMMM, yyyy HH:mm"),
                 });
 
             return View("Index", model);
+        }
+
+        // GET: Dictionary/Search
+        [HttpGet]
+        public ActionResult Search(string searchPattern = null)
+        {
+            string userId = User.Identity.GetUserId();
+            searchPattern = searchPattern == null 
+                ? String.Empty 
+                : searchPattern.Trim();
+
+            var resultWithData = _dictionaryService.GetByUserIdAndSearchPattern(userId, searchPattern);
+
+            if (!resultWithData.Success)
+            {
+                return PartialView("_List", new List<IndexDictionaryViewModel>());
+            }
+
+            var dictionaries = resultWithData.ResultData;
+
+            var model = dictionaries
+                .OrderByDescending(d => d.UpdatedAt)
+                .Select(d => new IndexDictionaryViewModel
+                {
+                    Id = d.Id,
+                    Name = d.Name,
+                    Description = d.Description,
+                    SourceLanguageImagePath = d.SourceLanguage.FlagImagePath,
+                    TargetLanguageImagePath = d.TargetLanguage.FlagImagePath,
+                    PhrasesCount = d.SourcePhrases.Count,
+                    CreatedAt = d.CreatedAt.ToString("d MMMM, yyyy HH:mm"),
+                    UpdatedAt = d.UpdatedAt.ToString("d MMMM, yyyy HH:mm"),
+                });
+
+            return PartialView("_List", model);
         }
 
         // GET: Dictionary/Create
