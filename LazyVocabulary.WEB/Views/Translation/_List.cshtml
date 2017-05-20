@@ -1,0 +1,54 @@
+﻿@using LazyVocabulary.Web.Models;
+@using System.Linq;
+
+@model IEnumerable<IndexTranslationViewModel>
+
+@if (Model.Count() > 0)
+{
+    <table class="table borderless top" id="table-translations">
+        <tbody>
+            @foreach (var item in Model)
+                {
+                <tr>
+                    <td class="td-checkbox">
+                        <input type="checkbox" name="translations" value="@item.Id">
+                    </td>
+                    <td>
+                        @item.Value
+                    </td>
+                    <td>
+                        @if (item.Translations.Count > 0)
+                        {
+                            foreach (var translation in item.Translations)
+                            {
+                                @translation.Value
+                                <br />
+                            }
+                        }
+                        else
+                        {
+                            <p class="text-muted"><i>Вы не добавили ни одного перевода.</i></p>
+                        }
+                    </td>
+                    <td class="toggle-menu-icon">
+                        <a href='javascript:;' class='toggle' id="toggle-@item.Id">
+                            <i class='fa fa-ellipsis-v'></i>
+                        </a>
+                        <ul class="menu" data-menu data-menu-toggle="#toggle-@item.Id">
+                            <li>
+                                <a href="/Translation/Edit/@item.Id">Редактировать перевод</a>
+                            </li>
+                            <li>
+                                <a href="#" class="delete-translation" id="delete-@item.Id">Удалить перевод</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="text-muted top"><i>Вы не добавили ни одного перевода.</i></p>
+}

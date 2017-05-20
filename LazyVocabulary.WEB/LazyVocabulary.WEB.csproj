@@ -278,6 +278,7 @@
     <Content Include="Views\Account\VerifyTokenError.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Dictionary\_List.cshtml" />
+    <Content Include="Views\Translation\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

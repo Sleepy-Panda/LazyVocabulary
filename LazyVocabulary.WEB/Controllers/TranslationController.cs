@@ -72,6 +72,42 @@ namespace LazyVocabulary.Web.Controllers
             return View("Index", model);
         }
 
+        // GET: Translation/Search
+        [HttpGet]
+        public ActionResult Search(int? id, string searchPattern = null)
+        {
+            if (!id.HasValue)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            searchPattern = searchPattern == null
+                ? String.Empty
+                : searchPattern.Trim();
+
+            var resultWithData = _translationService.GetByDictionaryIdAndSearchPattern(id.Value, searchPattern);
+
+            if (!resultWithData.Success)
+            {
+                return PartialView("_List", new List<IndexTranslationViewModel>());
+            }
+
+            var phrases = resultWithData.ResultData;
+
+            var model = phrases
+                .Select(p => new IndexTranslationViewModel
+                {
+                    Id = p.Id,
+                    Value = p.Value,
+                    Translations = p.TranslatedPhrases,
+                    DictionaryId = p.DictionaryId,
+                });
+
+            ViewBag.DictionaryId = id;
+
+            return PartialView("_List", model);
+        }
+
         // GET: Translation/Create
         [HttpGet]
         public ActionResult Create(int? id)
