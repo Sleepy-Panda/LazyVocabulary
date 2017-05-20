@@ -24,10 +24,12 @@
                         <span class="text-muted">Обновлён:</span> @item.UpdatedAt
                     </td>
                     <td class="flag">
-                        <img class="flag-image" src="@Url.Content("~/Content/Images/flags/" + item.SourceLanguageImagePath)" />
+                        <img class="flag-image" title="@item.SourceLanguageName"
+                             src="@Url.Content("~/Content/Images/flags/" + item.SourceLanguageImagePath)" />
                     </td>
                     <td class="flag">
-                        <img class="flag-image" src="@Url.Content("~/Content/Images/flags/" + item.TargetLanguageImagePath)" />
+                        <img class="flag-image" title="@item.TargetLanguageName"
+                             src="@Url.Content("~/Content/Images/flags/" + item.TargetLanguageImagePath)" />
                     </td>
                     <td class="toggle-menu-icon">
                         <a href='javascript:;' class='toggle' id="toggle-@item.Id">

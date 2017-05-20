@@ -46,6 +46,7 @@ namespace LazyVocabulary.Web.Controllers
             var phrases = resultWithData.ResultData;
 
             var model = phrases
+                .OrderByDescending(p => p.Id)
                 .Select(p => new IndexTranslationViewModel
                 {
                     Id = p.Id,

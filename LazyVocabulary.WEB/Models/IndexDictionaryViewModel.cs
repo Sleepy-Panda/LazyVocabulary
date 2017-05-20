@@ -21,6 +21,12 @@ namespace LazyVocabulary.Web.Models
         public string TargetLanguageImagePath { get; set; }
 
         [Required]
+        public string SourceLanguageName { get; set; }
+
+        [Required]
+        public string TargetLanguageName { get; set; }
+
+        [Required]
         public int PhrasesCount { get; set; }
 
         [Required]
