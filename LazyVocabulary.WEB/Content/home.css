@@ -276,7 +276,7 @@ a.btn {
     margin: 10px;
 }
 
-#language img {
+#language img.flag:not([disabled]) {
     cursor: pointer;
     -webkit-transition: all .3s ease-in-out;
        -moz-transition: all .3s ease-in-out;
@@ -285,7 +285,7 @@ a.btn {
             transition: all .3s ease-in-out;
 }
 
-#language img:hover {
+#language img.flag:not([disabled]):hover {
     opacity: 0.8;
     -webkit-transition: all .3s ease-in-out;
        -moz-transition: all .3s ease-in-out;
@@ -294,8 +294,11 @@ a.btn {
             transition: all .3s ease-in-out;
 }
 
+#language img.flag[disabled] {
+    opacity: 0.8;
+}
+
 #about {
-    --position: relative;
     padding-top: 3em;
     background-color: #fafafa;
     color: #333;
@@ -369,14 +372,13 @@ a.btn {
 
 .btn-rounded {
     display: inline-block;
-    height: 50px;
-    width: 50px;
-    line-height: 50px;
+    height: 47px;
+    width: 47px;
+    line-height: 47px;
     border-radius: 50%;
     cursor: pointer;
     color: #fff;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
-
     -webkit-transition: all .3s ease-in-out;
        -moz-transition: all .3s ease-in-out;
         -ms-transition: all .3s ease-in-out; 
@@ -387,7 +389,6 @@ a.btn {
 .btn-rounded:hover {
     color: #fff;
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
-
     -webkit-transition: all .3s ease-in-out;
        -moz-transition: all .3s ease-in-out;
         -ms-transition: all .3s ease-in-out; 

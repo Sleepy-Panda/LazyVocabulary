@@ -16,8 +16,18 @@ if (locale != 'ru' && locale != 'en') {
         browserLanguage = 'en';
     }
 
+    locale = browserLanguage;
     setCookie('locale', browserLanguage);
 }
+
+var iconName = '#flag-' + locale;
+$(iconName).attr('disabled', true);
+
+$('img[id^="flag-"]').click(function (event) {
+    var code = event.target.id.slice(-2);
+    setCookie('locale', code);
+    location.reload(true);
+});
 
 function getCookie(name) {
     var matches = document.cookie.match(new RegExp(
