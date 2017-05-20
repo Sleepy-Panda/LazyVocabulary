@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LazyVocabulary.Resources.Views {
+namespace LazyVocabulary.Resources.Views.Home {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace LazyVocabulary.Resources.Views {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LazyVocabulary.Resources.Views.HomeIndexResource", typeof(HomeIndexResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LazyVocabulary.Resources.Views.Home.HomeIndexResource", typeof(HomeIndexResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -71,45 +71,65 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RegisterViewModelResource.en.resx</DependentUpon>
     </Compile>
-    <Compile Include="Views\AccountConfirmEmailResource.Designer.cs">
+    <Compile Include="Views\Account\AccountConfirmEmailResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AccountConfirmEmailResource.resx</DependentUpon>
     </Compile>
-    <Compile Include="Views\AccountConfirmEmailResource.en.Designer.cs">
+    <Compile Include="Views\Account\AccountConfirmEmailResource.en.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AccountConfirmEmailResource.en.resx</DependentUpon>
     </Compile>
-    <Compile Include="Views\AccountLoginResource.Designer.cs">
+    <Compile Include="Views\Account\AccountLoginResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AccountLoginResource.resx</DependentUpon>
     </Compile>
-    <Compile Include="Views\AccountLoginResource.en.Designer.cs">
+    <Compile Include="Views\Account\AccountLoginResource.en.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AccountLoginResource.en.resx</DependentUpon>
     </Compile>
-    <Compile Include="Views\AccountRegisterResource.Designer.cs">
+    <Compile Include="Views\Account\AccountRegisterResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AccountRegisterResource.resx</DependentUpon>
     </Compile>
-    <Compile Include="Views\AccountRegisterResource.en.Designer.cs">
+    <Compile Include="Views\Account\AccountRegisterResource.en.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AccountRegisterResource.en.resx</DependentUpon>
     </Compile>
-    <Compile Include="Views\HomeIndexResource.Designer.cs">
+    <Compile Include="Views\Account\AccountVerifyTokenErrorResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountVerifyTokenErrorResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\AccountVerifyTokenErrorResource.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountVerifyTokenErrorResource.en.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\HomeIndexResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HomeIndexResource.resx</DependentUpon>
     </Compile>
-    <Compile Include="Views\HomeIndexResource.en.Designer.cs">
+    <Compile Include="Views\Home\HomeIndexResource.en.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HomeIndexResource.en.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu\MenuForUnauthorizedResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MenuForUnauthorizedResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu\MenuForUnauthorizedResource.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MenuForUnauthorizedResource.en.resx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -137,39 +157,56 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RegisterViewModelResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\AccountConfirmEmailResource.en.resx">
+    <EmbeddedResource Include="Views\Account\AccountConfirmEmailResource.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AccountConfirmEmailResource.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\AccountConfirmEmailResource.resx">
+    <EmbeddedResource Include="Views\Account\AccountConfirmEmailResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AccountConfirmEmailResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\AccountLoginResource.en.resx">
+    <EmbeddedResource Include="Views\Account\AccountLoginResource.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AccountLoginResource.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\AccountLoginResource.resx">
+    <EmbeddedResource Include="Views\Account\AccountLoginResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AccountLoginResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\AccountRegisterResource.en.resx">
+    <EmbeddedResource Include="Views\Account\AccountRegisterResource.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AccountRegisterResource.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\AccountRegisterResource.resx">
+    <EmbeddedResource Include="Views\Account\AccountRegisterResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AccountRegisterResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\HomeIndexResource.en.resx">
+    <EmbeddedResource Include="Views\Account\AccountVerifyTokenErrorResource.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountVerifyTokenErrorResource.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Account\AccountVerifyTokenErrorResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountVerifyTokenErrorResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Home\HomeIndexResource.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>HomeIndexResource.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\HomeIndexResource.resx">
+    <EmbeddedResource Include="Views\Home\HomeIndexResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>HomeIndexResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Menu\MenuForUnauthorizedResource.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MenuForUnauthorizedResource.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Menu\MenuForUnauthorizedResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MenuForUnauthorizedResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

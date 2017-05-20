@@ -1,23 +1,26 @@
-﻿@model string
+﻿@using LazyVocabulary.Resources.Views.Account;
+@using LazyVocabulary.Resources.Views.Menu;
+
+@model string
 
 @{
-    ViewBag.Title = "VerifyTokenError";
+    ViewBag.Title = AccountVerifyTokenErrorResource.PageName;
     Layout = "~/Views/Shared/_AuthLayout.cshtml";
 }
 
 <div class="left-menu-container">
     <div class="left-menu-item-container">
-        <a href="/Home/Index">
+        <a href="/Home/Index" title="@MenuForUnauthorizedResource.Home">
             <i class="fa fa-home"></i>
         </a>
     </div>
     <div class="left-menu-item-container">
-        <a href="/Account/Register">
+        <a href="/Account/Register" title="@MenuForUnauthorizedResource.Register">
             <i class="fa fa-user-plus"></i>
         </a>
     </div>
     <div class="left-menu-item-container">
-        <a href="/Account/Login">
+        <a href="/Account/Login" title="@MenuForUnauthorizedResource.Login">
             <i class="fa fa-sign-in"></i>
         </a>
     </div>
@@ -29,9 +32,9 @@
             <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3 form-box">
                 <div class="form-top">
                     <div class="form-top-left">
-                        <h3>Ошибка подтверждения email</h3>
+                        <h3>@AccountVerifyTokenErrorResource.FormName</h3>
                         <p class="text-danger">
-                            Указанный токен не соответствует ожидаемому. Электронный адрес <b>@Model </b>не был подтверждён.
+                            @AccountVerifyTokenErrorResource.ErrorTextBeforeEmail <b>@Model </b>@AccountVerifyTokenErrorResource.ErrorTextAfterEmail
                         </p>
                     </div>
                     <div class="form-top-right">
@@ -42,4 +45,3 @@
         </div>
     </div>
 </div>
-

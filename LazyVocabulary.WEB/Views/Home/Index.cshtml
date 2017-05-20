@@ -1,4 +1,5 @@
-﻿@using LazyVocabulary.Resources.Views;
+﻿@using LazyVocabulary.Resources.Views.Home;
+@using LazyVocabulary.Resources.Views.Menu;
 
 @{
     ViewBag.Title = HomeIndexResource.PageName;
@@ -7,17 +8,17 @@
 
 <div class="left-menu-container">
     <div class="left-menu-item-container">
-        <a href="#" rel="tooltip">
+        <a href="#" title="@MenuForUnauthorizedResource.Home">
             <i class="fa fa-home"></i>
         </a>
     </div>
     <div class="left-menu-item-container">
-        <a href="/Account/Register">
+        <a href="/Account/Register" title="@MenuForUnauthorizedResource.Register">
             <i class="fa fa-user-plus"></i>
         </a>
     </div>
     <div class="left-menu-item-container">
-        <a href="/Account/Login">
+        <a href="/Account/Login" title="@MenuForUnauthorizedResource.Login">
             <i class="fa fa-sign-in"></i>
         </a>
     </div>
@@ -146,4 +147,3 @@
 @section Scripts {
     @Scripts.Render("~/Scripts/app-js/localization.js")
 }
-
