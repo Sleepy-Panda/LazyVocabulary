@@ -65,7 +65,8 @@ div.col-md-6 {
     display: inline;
 }
 
-span.remove-input {
+span.remove-input,
+span.clear-input {
     cursor: pointer;
     padding: 10px;
 }

@@ -39,6 +39,37 @@ namespace LazyVocabulary.Logic.Services
             return resultWithData;
         }
 
+        public ResultWithData<List<Dictionary>> GetByUserIdAndSearchPattern(string userId, string searchPattern)
+        {
+            var resultWithData = new ResultWithData<List<Dictionary>>();
+
+            try
+            {
+                if (String.IsNullOrEmpty(searchPattern))
+                {
+                    resultWithData.ResultData = _database.Dictionaries
+                    .Find(d => d.ApplicationUserId == userId)
+                    .ToList();
+                }
+                else
+                {
+                    resultWithData.ResultData = _database.Dictionaries
+                    .Find(d => d.ApplicationUserId == userId && d.Name.ToLower().Contains(searchPattern.ToLower()))
+                    .ToList();
+                }
+                
+                resultWithData.Success = true;
+            }
+            catch (Exception ex)
+            {
+                resultWithData.Success = false;
+                resultWithData.Message = ex.Message;
+                resultWithData.StackTrace = ex.StackTrace;
+            }
+
+            return resultWithData;
+        }
+
         public ResultWithData<string> GetLanguagePairById(int dictionaryId)
         {
             var resultWithData = new ResultWithData<string>();
