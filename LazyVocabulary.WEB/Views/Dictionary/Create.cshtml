@@ -32,7 +32,7 @@
     OnComplete = "onComplete",
     UpdateTargetId = "target",
     LoadingElementId = "loader",
-}))
+}, new { id = "form" }))
 {
     <div id="target" class="container">
         @Html.Partial("_Create")
@@ -51,7 +51,7 @@
         };
 
         $('#btn-submit-form').click(function () {
-            $('form').submit();
+            $('#form').submit();
         });
 
         $('#btn-clear-form').click(function () {

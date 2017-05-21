@@ -2,8 +2,6 @@
     ViewBag.Title = "Мои словари";
 }
 
-@Styles.Render("~/Content/menu.css")
-
 <div class="breadcrump-container">
     <a href="/Home/Index">Главная</a>
     <span class="separator"></span>
@@ -127,11 +125,7 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/Scripts/menu.min.js")
-
     <script>
-        $('[data-menu]').menu();
-
         function onBegin() {
             $('#btn-submit-form').attr('disabled', 'disabled');
         };
@@ -139,7 +133,6 @@
         function onComplete() {            
             $('#btn-submit-form').attr('disabled', false);
             $('#result').attr('style', 'display:normal');
-            $('[data-menu]').menu();
         };
 
         $(document).on('click', 'span.clear-input', function (event) {
@@ -243,6 +236,7 @@
             updateButtonStates();
         });
 
+        // Buttons are enabled when at least one checkbox is checked.
         function updateButtonStates() {
             if (!$('input[name="dictionaries"]:checked').length) {
                 $('#btn-delete-selected').attr('disabled', true);

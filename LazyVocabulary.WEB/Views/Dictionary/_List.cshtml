@@ -32,28 +32,31 @@
                              src="@Url.Content("~/Content/Images/flags/" + item.TargetLanguageImagePath)" />
                     </td>
                     <td class="toggle-menu-icon">
-                        <a href='javascript:;' class='toggle' id="toggle-@item.Id">
-                            <i class='fa fa-ellipsis-v'></i>
-                        </a>
-                        <ul class="menu" data-menu data-menu-toggle="#toggle-@item.Id">
-                            <li>
-                                <a href="/Translation/Index/@item.Id">Список переводов</a>
-                            </li>
-                            <li>
-                                <a href="/Translation/Create/@item.Id">Добавить перевод</a>
-                            </li>
-                            <li class="menu-separator"></li>
-                            <li>
-                                <a href="/Dictionary/Edit/@item.Id">Редактировать словарь</a>
-                            </li>
-                            <li>
-                                <a href="#" class="delete-dictionary" id="delete-@item.Id">Удалить словарь</a>
-                            </li>
-                            <li class="menu-separator"></li>
-                            <li>
-                                <a href="#">Экспортировать словарь в pdf</a>
-                            </li>
-                        </ul>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                Действие
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu pull-right">
+                                <li>
+                                    <a href="/Translation/Index/@item.Id">Список переводов</a>
+                                </li>
+                                <li>
+                                    <a href="/Translation/Create/@item.Id">Добавить перевод</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="/Dictionary/Edit/@item.Id">Редактировать словарь</a>
+                                </li>
+                                <li>
+                                    <a href="javascript;" class="delete-dictionary" id="delete-@item.Id">Удалить словарь</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">Экспортировать словарь в pdf</a>
+                                </li>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
             }

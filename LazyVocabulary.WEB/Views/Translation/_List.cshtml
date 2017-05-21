@@ -31,17 +31,20 @@
                         }
                     </td>
                     <td class="toggle-menu-icon">
-                        <a href='javascript:;' class='toggle' id="toggle-@item.Id">
-                            <i class='fa fa-ellipsis-v'></i>
-                        </a>
-                        <ul class="menu" data-menu data-menu-toggle="#toggle-@item.Id">
-                            <li>
-                                <a href="/Translation/Edit/@item.Id">Редактировать перевод</a>
-                            </li>
-                            <li>
-                                <a href="#" class="delete-translation" id="delete-@item.Id">Удалить перевод</a>
-                            </li>
-                        </ul>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                Действие
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu pull-right">
+                                <li>
+                                    <a href="/Translation/Edit/@item.Id">Редактировать перевод</a>
+                                </li>
+                                <li>
+                                    <a href="javascript;" class="delete-translation" id="delete-@item.Id">Удалить перевод</a>
+                                </li>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
             }

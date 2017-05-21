@@ -24,9 +24,6 @@ namespace LazyVocabulary.Web.Controllers
             _dictionaryService = dService;
         }
 
-        // http://stackoverflow.com/questions/21616052/binding-arrays-in-asp-net-mvc-without-index
-        // http://jsfiddle.net/716d58kw/
-
         // GET: Translation/1
         [HttpGet]
         public ActionResult Index(int? id)
