@@ -52,7 +52,7 @@ namespace LazyVocabulary.Web.Controllers
                 CreatedAt = profile.CreatedAt.ToString("d MMMM, yyyy HH:mm"),
                 UpdatedAt = profile.UpdatedAt.ToString("d MMMM, yyyy HH:mm"),
                 AvatarImagePath = profile.AvatarImagePath,
-                //UserName = profile.UserName,
+                UserName = User.Identity.Name,
                 //Email = profile.Email,
             };
 

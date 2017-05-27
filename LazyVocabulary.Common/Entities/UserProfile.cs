@@ -25,10 +25,6 @@ namespace LazyVocabulary.Common.Entities
 
         public ApplicationUser ApplicationUser { get; set; }
 
-        //public string UserName { get; set; }
-
-        //public string Email { get; set; }
-
         public LocaleLanguage Locale { get; set; }
 
         private static readonly Dictionary<LocaleLanguage, CultureInfo> _cultures;
@@ -43,11 +39,8 @@ namespace LazyVocabulary.Common.Entities
             Locale = _defaultLocale;
         }
 
-        public UserProfile(string locale, string userName, string email) : this()
+        public UserProfile(string locale) : this()
         {
-            //UserName = userName;
-            //Email = email;
-
             try
             {
                 Locale = (LocaleLanguage)Enum.Parse(typeof(LocaleLanguage), locale, true);
