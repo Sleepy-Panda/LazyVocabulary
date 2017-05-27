@@ -1,0 +1,123 @@
+﻿@using LazyVocabulary.Web.Models;
+@model IndexProfileViewModel
+
+@{
+    ViewBag.Title = "Мой профиль";
+}
+
+<div class="breadcrump-container">
+    <a href="/Home/Index">Главная</a>
+    <span class="separator"></span>
+    Мои профиль
+</div>
+
+<div class="top-buttons-container">
+    <div class="row">
+        <a href="/Profile/ChangeAvatar" class="btn btn-info pull-right">
+            <i class="fa fa-plus"></i> Изменить аватар
+        </a>
+        <a href="/Profile/ChangeSettings" class="btn btn-info pull-right">
+            <i class="fa fa-plus"></i> Изменить настройки
+        </a>
+        <a href="/Account/ChangePassword" class="btn btn-info pull-right">
+            <i class="fa fa-plus"></i> Изменить пароль
+        </a>
+    </div>
+</div>
+
+<div class="container">
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="top">
+        <div class="card hovercard">
+            <div class="card-background">
+                <img src="~/Content/Images/cover-1.jpg">
+            </div>
+            <div class="avatar-wrapper">
+                <div class="circular-landscape">
+                    <img class="avatar-image-big" src="~/Content/Images/cover-1.jpg" />
+                </div>
+            </div>
+            @*<div class="card-info">
+                <h1><span>Kuku epta blya</span></h1>
+            </div>*@
+        </div>
+    </div>
+
+    <div class="top">
+        <div class="form-group">
+            <h3>@Model.UserName</h3>
+            @Model.Email
+        </div>
+
+        <div class="form-group">
+            <label>Полное имя</label>
+            <div>
+                @{
+                    var fullName = String.Empty;
+
+                    if (!String.IsNullOrEmpty(Model.Name))
+                    {
+                        fullName += Model.Name + " ";
+                    }
+
+                    if (!String.IsNullOrEmpty(Model.Surname))
+                    {
+                        fullName += Model.Surname;
+                    }
+                }
+
+                @if (String.IsNullOrEmpty(fullName))
+                {
+                    <span class="text-muted"><i>Информация не указана.</i></span>
+                }
+                else
+                {
+                    <span>@fullName</span>
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Дата рождения</label>
+            <div>
+                @if (String.IsNullOrEmpty(Model.DateOfBirth))
+                {
+                    <span class="text-muted"><i>Информация не указана.</i></span>
+                }
+                else
+                {
+                    <span>@Model.DateOfBirth</span>
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Дата создания профиля</label>
+            <div>
+                @if (String.IsNullOrEmpty(Model.CreatedAt))
+                {
+                    <span class="text-muted"><i>Информация не указана.</i></span>
+                }
+                else
+                {
+                    <span>@Model.CreatedAt</span>
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Дата обновления профиля</label>
+            <div>
+                @if (String.IsNullOrEmpty(Model.UpdatedAt))
+                {
+                    <span class="text-muted"><i>Информация не указана.</i></span>
+                }
+                else
+                {
+                    <span>@Model.UpdatedAt</span>
+                }
+            </div>
+        </div>
+    </div>
+</div>

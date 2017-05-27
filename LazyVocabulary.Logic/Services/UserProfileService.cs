@@ -47,6 +47,29 @@ namespace LazyVocabulary.Logic.Services
             return resultWithData;
         }
 
+        //public ResultWithData<UserProfile> GetByUserId(string userId)
+        //{
+        //    var resultWithData = new ResultWithData<UserProfile>();
+
+        //    try
+        //    {
+        //        var profile = _database.Users
+        //            .Find(u => u.ApplicationUser.Id == userId)
+        //            .SingleOrDefault();
+
+        //        resultWithData.ResultData = profile;
+        //        resultWithData.Success = true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        resultWithData.Success = false;
+        //        resultWithData.Message = ex.Message;
+        //        resultWithData.StackTrace = ex.StackTrace;
+        //    }
+
+        //    return resultWithData;
+        //}
+
         //public async Task<ResultWithData<int>> CreateDefaultProfileForUserAsync()
         //{
         //    var resultWithData = new ResultWithData<int>();

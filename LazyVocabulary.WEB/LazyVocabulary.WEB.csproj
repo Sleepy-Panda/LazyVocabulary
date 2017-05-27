@@ -173,6 +173,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DictionaryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\TranslationController.cs" />
     <Compile Include="Filters\RedirectOnExceptionAttribute.cs" />
     <Compile Include="Filters\SetCultureAttribute.cs" />
@@ -184,6 +185,7 @@
     <Compile Include="Models\DetailsDictionaryViewModel.cs" />
     <Compile Include="Models\EditDictionaryViewModel.cs" />
     <Compile Include="Models\IndexDictionaryViewModel.cs" />
+    <Compile Include="Models\IndexProfileViewModel.cs" />
     <Compile Include="Models\IndexTranslationViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
@@ -276,6 +278,7 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Dictionary\_List.cshtml" />
     <Content Include="Views\Translation\_List.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

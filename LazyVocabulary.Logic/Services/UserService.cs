@@ -55,6 +55,27 @@ namespace LazyVocabulary.Logic.Services
             return UserManager;
         }
 
+        public async Task<ResultWithData<ApplicationUser>> GetByUserId(string userId)
+        {
+            var resultWithData = new ResultWithData<ApplicationUser>();
+
+            try
+            {
+                var user = await UserManager.FindByIdAsync(userId);
+
+                resultWithData.ResultData = user;
+                resultWithData.Success = true;
+            }
+            catch (Exception ex)
+            {
+                resultWithData.Success = false;
+                resultWithData.Message = ex.Message;
+                resultWithData.StackTrace = ex.StackTrace;
+            }
+
+            return resultWithData;
+        }
+
         public async Task<ResultWithData<string>> CreateUserAsync(dynamic userFromView)
         {
             var resultWithData = new ResultWithData<string>();
@@ -65,7 +86,6 @@ namespace LazyVocabulary.Logic.Services
                 {
                     UserName = userFromView.UserName,
                     Email = userFromView.Email,
-                    UserProfile = new UserProfile(userFromView.Locale.ToString()),
                     Token = TokenGeneratorHelper.GetToken(),
                 };
 
@@ -83,7 +103,36 @@ namespace LazyVocabulary.Logic.Services
                     throw new Exception(errors);
                 }
 
+                // Add user profile.
+                appUser.UserProfile = new UserProfile(
+                    userFromView.Locale.ToString(),
+                    userFromView.UserName,
+                    userFromView.Email
+                );
+                UserManager.Update(appUser);
+
                 resultWithData.ResultData = appUser.Token;
+                resultWithData.Success = true;
+            }
+            catch (Exception ex)
+            {
+                resultWithData.Success = false;
+                resultWithData.Message = ex.Message;
+                resultWithData.StackTrace = ex.StackTrace;
+            }
+
+            return resultWithData;
+        }
+
+        public async Task<ResultWithData<UserProfile>> GetProfileByUserId(string userId)
+        {
+            var resultWithData = new ResultWithData<UserProfile>();
+
+            try
+            {
+                var user = await UserManager.FindByIdAsync(userId);
+
+                resultWithData.ResultData = user.UserProfile;
                 resultWithData.Success = true;
             }
             catch (Exception ex)
@@ -157,12 +206,7 @@ namespace LazyVocabulary.Logic.Services
                     DefaultAuthenticationTypes.ApplicationCookie
                 );
 
-                if (claim == null)
-                {
-                    throw new Exception("Can't create an identity claim.");
-                }
-
-                result.ResultData = claim;
+                result.ResultData = claim ?? throw new Exception("Can't create an identity claim.");
                 result.Success = true;
             }
             catch (Exception ex)
