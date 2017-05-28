@@ -14,13 +14,13 @@
 <div class="top-buttons-container">
     <div class="row">
         <a href="/Profile/ChangeAvatar" class="btn btn-info pull-right">
-            <i class="fa fa-plus"></i> Изменить аватар
+            <i class="fa fa-photo"></i> Изменить аватар
         </a>
         <a href="/Profile/ChangeSettings" class="btn btn-info pull-right">
-            <i class="fa fa-plus"></i> Изменить настройки
+            <i class="fa fa-gear"></i> Изменить настройки
         </a>
         <a href="/Account/ChangePassword" class="btn btn-info pull-right">
-            <i class="fa fa-plus"></i> Изменить пароль
+            <i class="fa fa-key"></i> Изменить пароль
         </a>
     </div>
 </div>
@@ -55,83 +55,109 @@
         </div>
     </div>
 
-    <div class="top">
-        <h3>@Model.UserName</h3>
+    <div class="form-horizontal">
+        <div class="col-md-6">
+            <h3>@Model.UserName</h3>
 
-        <div class="form-group">
-            <label>Связанный email</label>
-            <div>
-                <span>@Model.Email</span>
+            <div class="form-group">
+                <label>Связанный email</label>
+                <div>
+                    <span>@Model.Email</span>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label>Полное имя</label>
-            <div>
-                @{
-                    var fullName = String.Empty;
+            <div class="form-group">
+                <label>Полное имя</label>
+                <div>
+                    @{
+                        var fullName = String.Empty;
 
-                    if (!String.IsNullOrEmpty(Model.Name))
-                    {
-                        fullName += Model.Name + " ";
+                        if (!String.IsNullOrEmpty(Model.Name))
+                        {
+                            fullName += Model.Name + " ";
+                        }
+
+                        if (!String.IsNullOrEmpty(Model.Surname))
+                        {
+                            fullName += Model.Surname;
+                        }
                     }
 
-                    if (!String.IsNullOrEmpty(Model.Surname))
+                    @if (String.IsNullOrEmpty(fullName))
                     {
-                        fullName += Model.Surname;
+                        <span class="text-muted"><i>Информация не указана.</i></span>
                     }
-                }
+                    else
+                    {
+                        <span>@fullName</span>
+                    }
+                </div>
+            </div>
 
-                @if (String.IsNullOrEmpty(fullName))
-                {
-                    <span class="text-muted"><i>Информация не указана.</i></span>
-                }
-                else
-                {
-                    <span>@fullName</span>
-                }
+            <div class="form-group">
+                <label>Дата рождения</label>
+                <div>
+                    @if (String.IsNullOrEmpty(Model.DateOfBirth))
+                    {
+                        <span class="text-muted"><i>Информация не указана.</i></span>
+                    }
+                    else
+                    {
+                        <span>@Model.DateOfBirth</span>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Дата создания профиля</label>
+                <div>
+                    @if (String.IsNullOrEmpty(Model.CreatedAt))
+                    {
+                        <span class="text-muted"><i>Информация не указана.</i></span>
+                    }
+                    else
+                    {
+                        <span>@Model.CreatedAt</span>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Дата обновления профиля</label>
+                <div>
+                    @if (String.IsNullOrEmpty(Model.UpdatedAt))
+                    {
+                        <span class="text-muted"><i>Информация не указана.</i></span>
+                    }
+                    else
+                    {
+                        <span>@Model.UpdatedAt</span>
+                    }
+                </div>
             </div>
         </div>
+        <div class="col-md-6">
+            <h3>Статистика</h3>
 
-        <div class="form-group">
-            <label>Дата рождения</label>
-            <div>
-                @if (String.IsNullOrEmpty(Model.DateOfBirth))
-                {
-                    <span class="text-muted"><i>Информация не указана.</i></span>
-                }
-                else
-                {
-                    <span>@Model.DateOfBirth</span>
-                }
+            <div class="form-group">
+                <label>Количество словарей</label>
+                <div>
+                    <span>@Model.DictionariesCount</span>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label>Дата создания профиля</label>
-            <div>
-                @if (String.IsNullOrEmpty(Model.CreatedAt))
-                {
-                    <span class="text-muted"><i>Информация не указана.</i></span>
-                }
-                else
-                {
-                    <span>@Model.CreatedAt</span>
-                }
+            <div class="form-group">
+                <label>Количество подписчиков</label>
+                <div>
+                    <span>@Model.SubscribersCount</span>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label>Дата обновления профиля</label>
-            <div>
-                @if (String.IsNullOrEmpty(Model.UpdatedAt))
-                {
-                    <span class="text-muted"><i>Информация не указана.</i></span>
-                }
-                else
-                {
-                    <span>@Model.UpdatedAt</span>
-                }
+            <div class="form-group">
+                <label>Количество подписок</label>
+                <div>
+                    <span>@Model.SubscriptionsCount</span>
+                </div>
             </div>
         </div>
     </div>

@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
 namespace LazyVocabulary.Web.Models
 {
-    public class IndexProfileViewModel
+    public class OverviewProfileViewModel
     {
-        public int Id { get; set; }
+        public string OwnerId { get; set; }
 
         public string Name { get; set; }
 
@@ -14,13 +17,9 @@ namespace LazyVocabulary.Web.Models
 
         public string CreatedAt { get; set; }
 
-        public string UpdatedAt { get; set; }
-
         public string AvatarImagePath { get; set; }
 
         public string UserName { get; set; }
-
-        public string Email { get; set; }
 
         public int DictionariesCount { get; set; }
 

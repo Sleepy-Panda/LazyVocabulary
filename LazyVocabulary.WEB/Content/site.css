@@ -500,16 +500,16 @@ td.toggle-menu-icon {
 }
 
 #wrapper.toggled {
-    padding-left: 200px;
+    padding-left: 250px;
 }
 
 #sidebar-wrapper {
     z-index: 1000;
     position: fixed;
-    left: 200px;
+    left: 250px;
     width: 0;
     height: 100%;
-    margin-left: -200px;
+    margin-left: -250px;
     overflow-y: auto;
     background: #222;
     --box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.25);
@@ -521,17 +521,17 @@ td.toggle-menu-icon {
 }
 
 #wrapper.toggled #sidebar-wrapper {
-    width: 200px;
+    width: 250px;
 }
 
 #page-content-wrapper {
-    margin-bottom: 200px;
+    margin-bottom: 250px;
 }
 
 .sidebar-nav {
     position: absolute;
     top: 0;
-    width: 200px;
+    width: 250px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -572,17 +572,17 @@ td.toggle-menu-icon {
     padding-right: 10px;
 }
 
-.sidebar-nav > .sidebar-brand {
-    height: 65px;
-    font-size: 18px;
+.sidebar-nav > .sidebar-top {
+    height: 65px;   
     line-height: 60px;
 }
 
-.sidebar-nav > .sidebar-brand a {
-    color: #999999;
+.sidebar-nav > .sidebar-top span {
+    color: #fff;
+    font-size: 18px;
 }
 
-.sidebar-nav > .sidebar-brand a:hover {
+.sidebar-nav > .sidebar-top a:hover {
     color: #fff;
     background: none;
 }
@@ -684,4 +684,10 @@ td.toggle-menu-icon {
     border-radius: 4px;
     background: rgba(255, 255, 255, 0.1);
     color: rgba(0, 0, 0, 0.5);
+}
+
+.ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }

@@ -40,6 +40,7 @@ namespace LazyVocabulary.Web.Controllers
             string userId = User.Identity.GetUserId();
 
             var resultWithDataProfile = await UserService.GetProfileByUserId(userId);
+            var resultWithDataUser = await UserService.GetByUserId(userId);
             var resultWithDataEmail = await UserService.GetEmailByUserId(userId);
 
             if (!resultWithDataProfile.Success)
@@ -48,6 +49,7 @@ namespace LazyVocabulary.Web.Controllers
             }
 
             var profile = resultWithDataProfile.ResultData;
+            var user = resultWithDataUser.ResultData;
 
             var model = new IndexProfileViewModel
             {
@@ -60,6 +62,44 @@ namespace LazyVocabulary.Web.Controllers
                 AvatarImagePath = GetAvatarImagePath(userId),
                 UserName = User.Identity.Name,
                 Email = resultWithDataEmail.ResultData,
+                DictionariesCount = user.Dictionaries.Count,
+                SubscribersCount = user.SubscriberSubscriptions.Count,
+                SubscriptionsCount = user.TargetSubscriptions.Count,
+            };
+
+            return View(model);
+        }
+
+        // GET: Profile/Overview?ownerId=1
+        [HttpGet]
+        public async Task<ActionResult> Overview(string ownerId)
+        {
+            string userId = User.Identity.GetUserId();
+
+            var resultWithDataProfile = await UserService.GetProfileByUserId(ownerId);
+            var resultWithDataUser = await UserService.GetByUserId(ownerId);
+
+            if (!resultWithDataProfile.Success || !resultWithDataUser.Success)
+            {
+                // TODO
+            }
+
+            var profile = resultWithDataProfile.ResultData;
+            var user = resultWithDataUser.ResultData;
+
+            var model = new OverviewProfileViewModel
+            {
+                OwnerId = ownerId,
+                Name = profile.Name,
+                Surname = profile.Surname,
+                DateOfBirth = profile.DateOfBirth?.ToString("d MMMM, yyyy"),
+                CreatedAt = profile.CreatedAt.ToString("d MMMM, yyyy HH:mm"),
+                AvatarImagePath = GetAvatarImagePath(ownerId),
+                UserName = User.Identity.Name,
+                // TODO only public
+                DictionariesCount = user.Dictionaries.Count,
+                SubscribersCount = user.SubscriberSubscriptions.Count,
+                SubscriptionsCount = user.TargetSubscriptions.Count,
             };
 
             return View(model);
