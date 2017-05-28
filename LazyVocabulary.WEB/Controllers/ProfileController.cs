@@ -76,14 +76,14 @@ namespace LazyVocabulary.Web.Controllers
 
                 if (String.IsNullOrEmpty(path))
                 {
-                    path = ConfigurationHelper.DefaultAvatar;
+                    return null;
                 }
 
                 return Path.Combine(ConfigurationHelper.AvatarFolder, Path.GetFileName(path));
             }
             catch (Exception ex)
             {
-                return ConfigurationHelper.DefaultAvatar;
+                return null;
             }
         }
     }

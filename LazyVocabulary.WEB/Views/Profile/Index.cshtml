@@ -31,11 +31,25 @@
     <div class="top">
         <div class="card hovercard">
             <div class="card-background">
-                <img src="@Model.AvatarImagePath">
+                @if (@Model.AvatarImagePath == null)
+                {
+                    <img src="~/Content/Images/cover-1.jpg">
+                }
+                else
+                {
+                    <img src="@Model.AvatarImagePath">
+                }               
             </div>
             <div class="avatar-wrapper">
                 <div class="circular-landscape">
-                    <img class="avatar-image-big" src="@Model.AvatarImagePath" />
+                    @if (@Model.AvatarImagePath == null)
+                    {
+                        <img class="avatar-image-big" src="~/Content/Images/avatars/default.png">
+                    }
+                    else
+                    {
+                        <img class="avatar-image-big" src="@Model.AvatarImagePath">
+                    }
                 </div>
             </div>
         </div>
