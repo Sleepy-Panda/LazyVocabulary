@@ -69,6 +69,11 @@
     <Compile Include="Mapping\SubscriptionMapping.cs" />
     <Compile Include="Mapping\TranslatedPhraseMapping.cs" />
     <Compile Include="Mapping\UserProfileMapping.cs" />
+    <Compile Include="Migrations\201705281502317_InitialCreate.cs" />
+    <Compile Include="Migrations\201705281502317_InitialCreate.Designer.cs">
+      <DependentUpon>201705281502317_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DictionaryRepository.cs" />
     <Compile Include="Repositories\SourcePhraseRepository.cs" />
@@ -88,6 +93,11 @@
       <Project>{27776F56-5C24-406F-9CFF-8342F5965F12}</Project>
       <Name>LazyVocabulary.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201705281502317_InitialCreate.resx">
+      <DependentUpon>201705281502317_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
