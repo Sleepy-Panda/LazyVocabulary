@@ -97,6 +97,54 @@ namespace LazyVocabulary.Logic.Services
             return resultWithData;
         }
 
+        public Result SetUpdatedAtForProfile(string userId)
+        {
+            var resultWithData = new Result();
+
+            try
+            {
+                var user = UserManager.FindById(userId);
+
+                // Update time for user profile.
+                user.UserProfile.UpdatedAt = DateTime.Now;
+                UserManager.Update(user);
+
+                resultWithData.Success = true;
+            }
+            catch (Exception ex)
+            {
+                resultWithData.Success = false;
+                resultWithData.Message = ex.Message;
+                resultWithData.StackTrace = ex.StackTrace;
+            }
+
+            return resultWithData;
+        }
+
+        public async Task<Result> SetUpdatedAtForProfileAsync(string userId)
+        {
+            var resultWithData = new Result();
+
+            try
+            {
+                var user = await UserManager.FindByIdAsync(userId);
+
+                // Update time for user profile.
+                user.UserProfile.UpdatedAt = DateTime.Now;
+                await UserManager.UpdateAsync(user);
+
+                resultWithData.Success = true;
+            }
+            catch (Exception ex)
+            {
+                resultWithData.Success = false;
+                resultWithData.Message = ex.Message;
+                resultWithData.StackTrace = ex.StackTrace;
+            }
+
+            return resultWithData;
+        }
+
         public async Task<ResultWithData<string>> CreateUserAsync(dynamic userFromView)
         {
             var resultWithData = new ResultWithData<string>();

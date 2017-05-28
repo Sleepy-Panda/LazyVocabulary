@@ -72,7 +72,7 @@ namespace LazyVocabulary.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangeAvatar(HttpPostedFileBase file)
+        public async Task<ActionResult> ChangeAvatar(HttpPostedFileBase file)
         {
             try
             {
@@ -93,11 +93,13 @@ namespace LazyVocabulary.Web.Controllers
                     string fileName = $"{ userId }{ Path.GetExtension(file.FileName) }";
                     string path = Path.Combine(folder, fileName);
                     file.SaveAs(path);
+
+                    await UserService.SetUpdatedAtForProfileAsync(userId);
                 }
             }
             catch (Exception ex)
             {
-
+                // TODO
             }
 
             return RedirectToAction("Index", "Profile");

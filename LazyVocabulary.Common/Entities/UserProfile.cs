@@ -21,7 +21,7 @@ namespace LazyVocabulary.Common.Entities
 
         public DateTime PasswordUpdatedAt { get; set; }
 
-        public ApplicationUser ApplicationUser { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
         public LocaleLanguage Locale { get; set; }
 
