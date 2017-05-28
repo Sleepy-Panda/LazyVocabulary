@@ -1,0 +1,52 @@
+﻿@using LazyVocabulary.Web.Models;
+@model IndexProfileViewModel
+
+@{
+    ViewBag.Title = "Мой профиль";
+}
+
+<div class="breadcrump-container">
+    <a href="/Home/Index">Главная</a>
+    <span class="separator"></span>
+    <a href="/Profile/Index">Мой профиль</a>
+    <span class="separator"></span>
+    Изменить аватар
+</div>
+
+<div class="top-buttons-container">
+    <div class="row">
+        <button id="btn-upload-image" type="submit" class="btn btn-info pull-right" disabled>
+            <i class="fa fa-upload"></i> Загрузить изображение
+        </button> 
+    </div>
+</div>
+
+<div class="container">
+    <h3>Загрузка изображения</h3>
+    <p>Выберите изображение доступного формата: jpg, jpeg или png.</p>
+
+    @using (Html.BeginForm("ChangeAvatar", "Profile", FormMethod.Post, new { enctype = "multipart/form-data", id = "form" }))
+    {
+        <div class="form-group">
+            <label class="required" for="file">Выберите изображение</label>
+            <input type="file" id="file" style="width: 100%;" accept=".jpg,.jpeg,.png" />
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $('#btn-upload-image').click(function () {
+            $('#form').submit();
+        });
+
+        $('#file').change(function () {
+            if ($('#file').get(0).files.length !== 0) {
+                $('#btn-upload-image').attr('disabled', false);
+            }
+            else {
+                $('#btn-upload-image').attr('disabled', true);
+            }
+        });
+    </script>
+}

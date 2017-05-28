@@ -21,8 +21,7 @@ namespace LazyVocabulary.DataAccess.EF
 
         public ApplicationContext()
         {
-            //Database.SetInitializer<ApplicationContext>(new DbInitializer());
-            //Database.Initialize(true);
+
         }
 
         public ApplicationContext(string conectionString) 

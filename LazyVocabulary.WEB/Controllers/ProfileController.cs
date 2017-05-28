@@ -34,6 +34,7 @@ namespace LazyVocabulary.Web.Controllers
         }
 
         // GET: Profile
+        [HttpGet]
         public async Task<ActionResult> Index()
         {
             string userId = User.Identity.GetUserId();
@@ -64,12 +65,49 @@ namespace LazyVocabulary.Web.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public ActionResult ChangeAvatar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChangeAvatar(HttpPostedFileBase file)
+        {
+            try
+            {
+                if (file != null)
+                {
+                    string userId = User.Identity.GetUserId();
+                    var folder = Server.MapPath(ConfigurationHelper.AvatarFolder);
+
+                    var existingFile = Directory
+                    .GetFiles(folder, $"{ userId }.*", SearchOption.TopDirectoryOnly)
+                    .SingleOrDefault();
+
+                    if (existingFile != null)
+                    {
+                        System.IO.File.Delete(existingFile);
+                    }
+
+                    string fileName = $"{ userId }{ Path.GetExtension(file.FileName) }";
+                    string path = Path.Combine(folder, fileName);
+                    file.SaveAs(path);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return RedirectToAction("Index", "Profile");
+        }
+
         private string GetAvatarImagePath(string userId)
         {
             try
             {
-                var folder = ConfigurationHelper.AvatarFolder;
-                folder = Server.MapPath(folder);
+                var folder = Server.MapPath(ConfigurationHelper.AvatarFolder);
                 var path = Directory
                     .GetFiles(folder, $"{ userId }.*", SearchOption.TopDirectoryOnly)
                     .SingleOrDefault();
