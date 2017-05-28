@@ -29,10 +29,6 @@ namespace LazyVocabulary.DataAccess.Mapping
             Property(u => u.PasswordUpdatedAt)
                 .IsRequired();
 
-            Property(u => u.AvatarImagePath)
-                .IsRequired()
-                .HasMaxLength(256);
-
             Property(u => u.Locale)
                 .IsRequired();
         }

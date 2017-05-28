@@ -105,9 +105,7 @@ namespace LazyVocabulary.Logic.Services
 
                 // Add user profile.
                 appUser.UserProfile = new UserProfile(
-                    userFromView.Locale.ToString(),
-                    userFromView.UserName,
-                    userFromView.Email
+                    userFromView.Locale.ToString()
                 );
                 UserManager.Update(appUser);
 
@@ -206,7 +204,12 @@ namespace LazyVocabulary.Logic.Services
                     DefaultAuthenticationTypes.ApplicationCookie
                 );
 
-                result.ResultData = claim ?? throw new Exception("Can't create an identity claim.");
+                if (claim == null)
+                {
+                    throw new Exception("Can't create an identity claim.");
+                }
+
+                result.ResultData = claim;
                 result.Success = true;
             }
             catch (Exception ex)

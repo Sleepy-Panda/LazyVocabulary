@@ -51,7 +51,6 @@ namespace LazyVocabulary.Web.Controllers
                 DateOfBirth = profile.DateOfBirth?.ToString("d MMMM, yyyy"),
                 CreatedAt = profile.CreatedAt.ToString("d MMMM, yyyy HH:mm"),
                 UpdatedAt = profile.UpdatedAt.ToString("d MMMM, yyyy HH:mm"),
-                AvatarImagePath = profile.AvatarImagePath,
                 UserName = User.Identity.Name,
                 //Email = profile.Email,
             };

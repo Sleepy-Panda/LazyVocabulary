@@ -21,8 +21,6 @@ namespace LazyVocabulary.Common.Entities
 
         public DateTime PasswordUpdatedAt { get; set; }
 
-        public string AvatarImagePath { get; set; }
-
         public ApplicationUser ApplicationUser { get; set; }
 
         public LocaleLanguage Locale { get; set; }
@@ -35,7 +33,6 @@ namespace LazyVocabulary.Common.Entities
             CreatedAt = DateTime.Now;
             UpdatedAt = DateTime.Now;
             PasswordUpdatedAt = DateTime.Now;
-            AvatarImagePath = "default_avatar.png";
             Locale = _defaultLocale;
         }
 
