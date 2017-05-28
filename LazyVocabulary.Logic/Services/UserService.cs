@@ -76,6 +76,27 @@ namespace LazyVocabulary.Logic.Services
             return resultWithData;
         }
 
+        public async Task<ResultWithData<string>> GetEmailByUserId(string userId)
+        {
+            var resultWithData = new ResultWithData<string>();
+
+            try
+            {
+                var user = await UserManager.FindByIdAsync(userId);
+
+                resultWithData.ResultData = user.Email;
+                resultWithData.Success = true;
+            }
+            catch (Exception ex)
+            {
+                resultWithData.Success = false;
+                resultWithData.Message = ex.Message;
+                resultWithData.StackTrace = ex.StackTrace;
+            }
+
+            return resultWithData;
+        }
+
         public async Task<ResultWithData<string>> CreateUserAsync(dynamic userFromView)
         {
             var resultWithData = new ResultWithData<string>();

@@ -36,5 +36,21 @@ namespace LazyVocabulary.Logic.Helpers
                 return Int32.Parse(ConfigurationManager.AppSettings["SmtpClientPort"]);
             }
         }
+
+        public static string AvatarFolder
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["AvatarFolder"];
+            }
+        }
+
+        public static string DefaultAvatar
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["DefaultAvatar"];
+            }
+        }
     }
 }

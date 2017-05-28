@@ -1,7 +1,11 @@
-﻿using LazyVocabulary.Logic.Services;
+﻿using LazyVocabulary.Logic.Helpers;
+using LazyVocabulary.Logic.Services;
 using LazyVocabulary.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using System;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -34,14 +38,15 @@ namespace LazyVocabulary.Web.Controllers
         {
             string userId = User.Identity.GetUserId();
 
-            var resultWithData = await UserService.GetProfileByUserId(userId);
+            var resultWithDataProfile = await UserService.GetProfileByUserId(userId);
+            var resultWithDataEmail = await UserService.GetEmailByUserId(userId);
 
-            if (!resultWithData.Success)
+            if (!resultWithDataProfile.Success)
             {
                 // TODO
             }
 
-            var profile = resultWithData.ResultData;
+            var profile = resultWithDataProfile.ResultData;
 
             var model = new IndexProfileViewModel
             {
@@ -51,11 +56,35 @@ namespace LazyVocabulary.Web.Controllers
                 DateOfBirth = profile.DateOfBirth?.ToString("d MMMM, yyyy"),
                 CreatedAt = profile.CreatedAt.ToString("d MMMM, yyyy HH:mm"),
                 UpdatedAt = profile.UpdatedAt.ToString("d MMMM, yyyy HH:mm"),
+                AvatarImagePath = GetAvatarImagePath(userId),
                 UserName = User.Identity.Name,
-                //Email = profile.Email,
+                Email = resultWithDataEmail.ResultData,
             };
 
             return View(model);
+        }
+
+        private string GetAvatarImagePath(string userId)
+        {
+            try
+            {
+                var folder = ConfigurationHelper.AvatarFolder;
+                folder = Server.MapPath(folder);
+                var path = Directory
+                    .GetFiles(folder, $"{ userId }.*", SearchOption.TopDirectoryOnly)
+                    .SingleOrDefault();
+
+                if (String.IsNullOrEmpty(path))
+                {
+                    path = ConfigurationHelper.DefaultAvatar;
+                }
+
+                return Path.Combine(ConfigurationHelper.AvatarFolder, Path.GetFileName(path));
+            }
+            catch (Exception ex)
+            {
+                return ConfigurationHelper.DefaultAvatar;
+            }
         }
     }
 }
