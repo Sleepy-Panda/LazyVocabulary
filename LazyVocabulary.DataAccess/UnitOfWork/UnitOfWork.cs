@@ -16,6 +16,7 @@ namespace LazyVocabulary.DataAccess.UnitOfWork
         private DictionaryRepository _dictionaryRepository;
         private SourcePhraseRepository _sourcePhraseRepository;
         private TranslatedPhraseRepository _translatedPhraseRepository;
+        private SubscriptionRepository _subscriptionRepository;
 
         public UnitOfWork(string connectionString)
         {
@@ -84,6 +85,19 @@ namespace LazyVocabulary.DataAccess.UnitOfWork
                 }
 
                 return _translatedPhraseRepository;
+            }
+        }
+
+        public IRepository<Subscription> Subscriptions
+        {
+            get
+            {
+                if (_subscriptionRepository == null)
+                {
+                    _subscriptionRepository = new SubscriptionRepository(_db);
+                }
+
+                return _subscriptionRepository;
             }
         }
 

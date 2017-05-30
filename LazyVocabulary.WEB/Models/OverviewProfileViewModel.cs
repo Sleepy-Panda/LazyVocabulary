@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace LazyVocabulary.Web.Models
+﻿namespace LazyVocabulary.Web.Models
 {
     public class OverviewProfileViewModel
     {
-        public string OwnerId { get; set; }
+        public string TargetUserId { get; set; }
 
         public string Name { get; set; }
 
@@ -26,5 +21,7 @@ namespace LazyVocabulary.Web.Models
         public int SubscribersCount { get; set; }
 
         public int SubscriptionsCount { get; set; }
+
+        public bool CanSubscribe { get; set; }
     }
 }
