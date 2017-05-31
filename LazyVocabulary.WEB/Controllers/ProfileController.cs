@@ -98,7 +98,7 @@ namespace LazyVocabulary.Web.Controllers
             var resultWithDataSubscribtionsCount = _subscriptionService.GetSubscriptionsCountByUserId(targetUserId);
             var resultWithDataCanSubscribe = _subscriptionService.CanSubscribe(userId, targetUserId);
 
-            if (!resultWithDataProfile.Success || !resultWithDataUser.Success)
+            if (!resultWithDataProfile.Success || !resultWithDataUser.Success || !resultWithDataUserName.Success)
             {
                 // TODO
             }

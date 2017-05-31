@@ -2,6 +2,7 @@
 using LazyVocabulary.DataAccess.Interfaces;
 using LazyVocabulary.Logic.OperationDetails;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -43,6 +44,12 @@ namespace LazyVocabulary.Logic.Services
 
             try
             {
+                if (userId == targetUserId)
+                {
+                    result.Success = true;
+                    return result;
+                }
+
                 var exists = _database.Subscriptions
                     .Find(s => s.SubscriberId == userId && s.TargetId == targetUserId)
                     .SingleOrDefault() != null;
@@ -77,6 +84,12 @@ namespace LazyVocabulary.Logic.Services
 
             try
             {
+                if (userId == targetUserId)
+                {
+                    result.Success = true;
+                    return result;
+                }
+
                 var subscription = _database.Subscriptions
                     .Find(s => s.SubscriberId == userId && s.TargetId == targetUserId)
                     .SingleOrDefault();
@@ -108,6 +121,50 @@ namespace LazyVocabulary.Logic.Services
                 resultWithData.ResultData = _database.Subscriptions
                     .Find(s => s.TargetId == userId)
                     .Count();
+                resultWithData.Success = true;
+            }
+            catch (Exception ex)
+            {
+                resultWithData.Success = false;
+                resultWithData.Message = ex.Message;
+                resultWithData.StackTrace = ex.StackTrace;
+            }
+
+            return resultWithData;
+        }
+
+        public ResultWithData<List<UserProfile>> GetSubscribersByUserId(string userId)
+        {
+            var resultWithData = new ResultWithData<List<UserProfile>>();
+
+            try
+            {
+                resultWithData.ResultData = _database.Subscriptions
+                    .Find(s => s.TargetId == userId)
+                    .Select(s => s.Subscriber.UserProfile)
+                    .ToList();
+                resultWithData.Success = true;
+            }
+            catch (Exception ex)
+            {
+                resultWithData.Success = false;
+                resultWithData.Message = ex.Message;
+                resultWithData.StackTrace = ex.StackTrace;
+            }
+
+            return resultWithData;
+        }
+
+        public ResultWithData<List<UserProfile>> GetSubscriptionsByUserId(string userId)
+        {
+            var resultWithData = new ResultWithData<List<UserProfile>>();
+
+            try
+            {
+                resultWithData.ResultData = _database.Subscriptions
+                    .Find(s => s.SubscriberId == userId)
+                    .Select(s => s.Target.UserProfile)
+                    .ToList();
                 resultWithData.Success = true;
             }
             catch (Exception ex)
