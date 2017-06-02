@@ -8,14 +8,22 @@
 
     @Styles.Render("~/Content/homecss")
     @Styles.Render("~/Content/ripple-effect.css")
+    @Styles.Render("~/Content/home-preloader.css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+
     @RenderBody()
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Scripts/ripple-effect.js")
+    @Scripts.Render("~/Scripts/home-preloader.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>
