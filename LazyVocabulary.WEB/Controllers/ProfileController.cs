@@ -39,9 +39,9 @@ namespace LazyVocabulary.Web.Controllers
         {
             string userId = User.Identity.GetUserId();
 
-            var resultWithDataProfile = await UserService.GetProfileByUserId(userId);
-            var resultWithDataUser = await UserService.GetByUserId(userId);
-            var resultWithDataEmail = await UserService.GetEmailByUserId(userId);
+            var resultWithDataProfile = await UserService.GetProfileByUserIdAsync(userId);
+            var resultWithDataUser = await UserService.GetByUserIdAsync(userId);
+            var resultWithDataEmail = await UserService.GetEmailByUserIdAsync(userId);
 
             if (!resultWithDataProfile.Success)
             {
@@ -76,8 +76,8 @@ namespace LazyVocabulary.Web.Controllers
         {
             string userId = User.Identity.GetUserId();
 
-            var resultWithDataProfile = await UserService.GetProfileByUserId(ownerId);
-            var resultWithDataUser = await UserService.GetByUserId(ownerId);
+            var resultWithDataProfile = await UserService.GetProfileByUserIdAsync(ownerId);
+            var resultWithDataUser = await UserService.GetByUserIdAsync(ownerId);
 
             if (!resultWithDataProfile.Success || !resultWithDataUser.Success)
             {
