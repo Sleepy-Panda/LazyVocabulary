@@ -9,6 +9,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using LazyVocabulary.Logic.Helpers;
+using System.Data.Entity;
 
 namespace LazyVocabulary.Logic.Services
 {
@@ -279,6 +280,83 @@ namespace LazyVocabulary.Logic.Services
                 }
 
                 result.ResultData = claim;
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+                result.StackTrace = ex.StackTrace;
+            }
+
+            return result;
+        }
+
+        public async Task<ResultWithData<string>> GetAuthTokenAsync(string email, string password)
+        {
+            var result = new ResultWithData<string>();
+
+            try
+            {
+                ApplicationUser appUser;
+                var appUserByEmail = await UserManager.FindByEmailAsync(email);
+
+                if (appUserByEmail != null)
+                {
+                    appUser = await UserManager.FindAsync(appUserByEmail.UserName, password);
+                }
+                else
+                {
+                    throw new Exception("Invalid login or password.");
+                }
+
+                if (appUser == null)
+                {
+                    throw new Exception("Invalid login or password.");
+                }
+
+                var token = appUser.Token;
+
+                if (String.IsNullOrEmpty(token))
+                {
+                    throw new Exception("Invalid auth token.");
+                }
+
+                result.ResultData = token;
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+                result.StackTrace = ex.StackTrace;
+            }
+
+            return result;
+        }
+
+        public async Task<ResultWithData<string>> GetUserNameByTokenAsync(string token)
+        {
+            if (String.IsNullOrEmpty(token))
+            {
+                throw new Exception("Invalid auth token.");
+            }
+
+            var result = new ResultWithData<string>();
+
+            try
+            {
+                var appUser = await _context.Users
+                    .SingleOrDefaultAsync(u => u.Token == token);
+
+                if (appUser != null)
+                {
+                    throw new Exception("Invalid auth token.");
+                }
+
+                var userName = appUser.UserName;
+
+                result.ResultData = userName;
                 result.Success = true;
             }
             catch (Exception ex)
