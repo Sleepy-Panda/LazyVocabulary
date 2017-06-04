@@ -70,7 +70,7 @@ namespace LazyVocabulary.Logic.Services
             return resultWithData;
         }
 
-        public async Task<Result> Create(dynamic translationFromView)
+        public async Task<Result> CreateAsync(dynamic translationFromView)
         {
             var result = new Result();
 
@@ -113,7 +113,7 @@ namespace LazyVocabulary.Logic.Services
             return result;
         }
 
-        public async Task<Result> Delete(int sourcePhraseId)
+        public async Task<Result> DeleteAsync(int sourcePhraseId)
         {
             var result = new Result();
 
@@ -142,7 +142,7 @@ namespace LazyVocabulary.Logic.Services
             return result;
         }
 
-        public async Task<Result> Copy(int sourcePhraseId, int dictionaryId)
+        public async Task<Result> CopyAsync(int sourcePhraseId, int dictionaryId)
         {
             var result = new Result();
 

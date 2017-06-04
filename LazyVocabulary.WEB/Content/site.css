@@ -824,3 +824,7 @@ a.btn-custom.btn-gray:not([disabled]):focus {
     background-color: #F2F4F5;
     color: #333;
 }
+
+.modal-footer .btn-custom.btn-blue {
+    margin-left: 15px;
+}

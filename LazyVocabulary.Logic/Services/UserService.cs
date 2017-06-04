@@ -56,7 +56,7 @@ namespace LazyVocabulary.Logic.Services
             return UserManager;
         }
 
-        public async Task<ResultWithData<ApplicationUser>> GetByUserId(string userId)
+        public async Task<ResultWithData<ApplicationUser>> GetByUserIdAsync(string userId)
         {
             var resultWithData = new ResultWithData<ApplicationUser>();
 
@@ -77,7 +77,7 @@ namespace LazyVocabulary.Logic.Services
             return resultWithData;
         }
 
-        public async Task<ResultWithData<string>> GetEmailByUserId(string userId)
+        public async Task<ResultWithData<string>> GetEmailByUserIdAsync(string userId)
         {
             var resultWithData = new ResultWithData<string>();
 
@@ -192,7 +192,7 @@ namespace LazyVocabulary.Logic.Services
             return resultWithData;
         }
 
-        public async Task<ResultWithData<UserProfile>> GetProfileByUserId(string userId)
+        public async Task<ResultWithData<UserProfile>> GetProfileByUserIdAsync(string userId)
         {
             var resultWithData = new ResultWithData<UserProfile>();
 
