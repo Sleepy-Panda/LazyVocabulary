@@ -284,10 +284,10 @@
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\ChangeAvatar.cshtml" />
     <Content Include="Views\Profile\Overview.cshtml" />
+    <Content Include="Views\Subscription\Subscriptions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Subscription\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
