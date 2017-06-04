@@ -124,7 +124,7 @@ namespace LazyVocabulary.Web.Controllers
                 model.Add(modelItem);
             }
 
-            return View();
+            return View("Subscriptions", model);
         }
 
         [HttpGet]
