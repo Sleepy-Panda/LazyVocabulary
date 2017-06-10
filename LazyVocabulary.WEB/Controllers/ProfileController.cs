@@ -42,9 +42,9 @@ namespace LazyVocabulary.Web.Controllers
         {
             string userId = User.Identity.GetUserId();
 
-            var resultWithDataProfile = await UserService.GetProfileByUserId(userId);
-            var resultWithDataUser = await UserService.GetByUserId(userId);
-            var resultWithDataEmail = await UserService.GetEmailByUserId(userId);
+            var resultWithDataProfile = await UserService.GetProfileByUserIdAsync(userId);
+            var resultWithDataUser = await UserService.GetByUserIdAsync(userId);
+            var resultWithDataEmail = await UserService.GetEmailByUserIdAsync(userId);
             var resultWithDataSubscribersCount = _subscriptionService.GetSubscribersCountByUserId(userId);
             var resultWithDataSubscribtionsCount = _subscriptionService.GetSubscriptionsCountByUserId(userId);
 
@@ -91,8 +91,8 @@ namespace LazyVocabulary.Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            var resultWithDataProfile = await UserService.GetProfileByUserId(targetUserId);
-            var resultWithDataUser = await UserService.GetByUserId(targetUserId);
+            var resultWithDataProfile = await UserService.GetProfileByUserIdAsync(targetUserId);
+            var resultWithDataUser = await UserService.GetByUserIdAsync(targetUserId);
             var resultWithDataUserName = await UserService.GetUserNameByUserId(userId);
             var resultWithDataSubscribersCount = _subscriptionService.GetSubscribersCountByUserId(targetUserId);
             var resultWithDataSubscribtionsCount = _subscriptionService.GetSubscriptionsCountByUserId(targetUserId);

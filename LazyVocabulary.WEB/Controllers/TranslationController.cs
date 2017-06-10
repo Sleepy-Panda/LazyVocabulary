@@ -161,7 +161,7 @@ namespace LazyVocabulary.Web.Controllers
             translation.Value = model.Value;
             translation.Translations = validTranslations;
 
-            var result = await _translationService.Create(translation);
+            var result = await _translationService.CreateAsync(translation);
 
             if (!result.Success)
             {
@@ -182,7 +182,7 @@ namespace LazyVocabulary.Web.Controllers
                 return Json(new { success = false }, JsonRequestBehavior.AllowGet);
             }
 
-            var result = await _translationService.Delete(id.Value);
+            var result = await _translationService.DeleteAsync(id.Value);
 
             if (!result.Success)
             {
@@ -201,7 +201,7 @@ namespace LazyVocabulary.Web.Controllers
                 return Json(new { success = false }, JsonRequestBehavior.AllowGet);
             }
 
-            var result = await _translationService.Copy(translationId.Value, dictionaryId.Value);
+            var result = await _translationService.CopyAsync(translationId.Value, dictionaryId.Value);
 
             if (!result.Success)
             {

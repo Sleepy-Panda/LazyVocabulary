@@ -139,7 +139,7 @@ namespace LazyVocabulary.Web.Controllers
             dictionary.SourceLanguageId = model.SourceLanguageId;
             dictionary.TargetLanguageId = model.TargetLanguageId;
 
-            var result = await _dictionaryService.Create(dictionary);
+            var result = await _dictionaryService.CreateAsync(dictionary);
 
             if (!result.Success)
             {
@@ -251,7 +251,7 @@ namespace LazyVocabulary.Web.Controllers
             dictionary.SourceLanguageId = model.SourceLanguageId;
             dictionary.TargetLanguageId = model.TargetLanguageId;
 
-            var result = await _dictionaryService.Update(dictionary);
+            var result = await _dictionaryService.UpdateAsync(dictionary);
 
             if (!result.Success)
             {
@@ -311,7 +311,7 @@ namespace LazyVocabulary.Web.Controllers
                 return Json(new { success = false }, JsonRequestBehavior.AllowGet);
             }
 
-            var result = await _dictionaryService.Delete(id.Value);
+            var result = await _dictionaryService.DeleteAsync(id.Value);
 
             if (!result.Success)
             {

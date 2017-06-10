@@ -1,11 +1,9 @@
-﻿using LazyVocabulary.Logic.OperationDetails;
-using LazyVocabulary.Common.Entities;
+﻿using LazyVocabulary.Common.Entities;
 using LazyVocabulary.DataAccess.Interfaces;
+using LazyVocabulary.Logic.OperationDetails;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LazyVocabulary.Logic.Services
 {

@@ -128,7 +128,7 @@ namespace LazyVocabulary.Logic.Services
             return resultWithData;
         }
 
-        public async Task<Result> Create(dynamic dictionaryFromView)
+        public async Task<Result> CreateAsync(dynamic dictionaryFromView)
         {
             var result = new Result();
 
@@ -157,7 +157,7 @@ namespace LazyVocabulary.Logic.Services
             return result;
         }
 
-        public async Task<Result> Update(dynamic dictionaryFromView)
+        public async Task<Result> UpdateAsync(dynamic dictionaryFromView)
         {
             var result = new Result();
 
@@ -188,7 +188,7 @@ namespace LazyVocabulary.Logic.Services
             return result;
         }
 
-        public async Task<Result> Delete(int dictionaryId)
+        public async Task<Result> DeleteAsync(int dictionaryId)
         {
             var result = new Result();
 
