@@ -126,6 +126,9 @@
   <data name="ChangeLanguage" xml:space="preserve">
     <value>Вы можете изменить язык отображения сайта:</value>
   </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>Отправить письмо</value>
+  </data>
   <data name="Details1" xml:space="preserve">
     <value>Эффективно управляйте электронными словарями и делитесь ими с другими пользователями.</value>
   </data>
@@ -158,6 +161,9 @@
   </data>
   <data name="Join" xml:space="preserve">
     <value>Присоединиться</value>
+  </data>
+  <data name="LeaveFeedback" xml:space="preserve">
+    <value>Оставьте Ваши замечания или предложения</value>
   </data>
   <data name="PageName" xml:space="preserve">
     <value>Добро пожаловать</value>

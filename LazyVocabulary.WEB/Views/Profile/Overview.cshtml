@@ -1,0 +1,204 @@
+﻿@using LazyVocabulary.Web.Models;
+@model OverviewProfileViewModel
+
+@{
+    ViewBag.Title = "Просмотр профиля " + Model.UserName;
+}
+
+<div class="breadcrump-container">
+    <a href="/Home/Index">Главная</a>
+    <span class="separator"></span>
+    Просмотр профиля @Model.UserName
+</div>
+
+<div class="top-buttons-container">
+    <div class="row">
+        @if (Model.CanSubscribe)
+        {
+            <button type="button" id="btn-subscribe" class="btn-custom btn-blue pull-right" title="Вы ещё не подписаны на данный профиль.">
+                <i class="fa fa-plus"></i> Подписаться
+            </button>
+
+            <button type="button" id="btn-unsubscribe" style="display:none;" class="btn-custom btn-blue pull-right" title="Вы уже подписаны на данный профиль.">
+                <i class="fa fa-remove"></i> Отписаться
+            </button>
+        }
+        else
+        {
+            <button type="button" id="btn-subscribe" style="display:none;" class="btn-custom btn-blue pull-right" title="Вы ещё не подписаны на данный профиль.">
+                <i class="fa fa-plus"></i> Подписаться
+            </button>
+
+            <button type="button" id="btn-unsubscribe" class="btn-custom btn-blue pull-right" title="Вы уже подписаны на данный профиль.">
+                <i class="fa fa-remove"></i> Отписаться
+            </button>
+        }
+    </div>
+</div>
+
+<div class="container">
+    @Html.HiddenFor(m => m.TargetUserId)
+
+    <div class="top">
+        <div class="card hovercard">
+            <div class="card-background">
+                @if (@Model.AvatarImagePath == null)
+                {
+                    <img src="~/Content/Images/cover-1.jpg">
+                }
+                else
+                {
+                    <img src="@Model.AvatarImagePath">
+                }
+            </div>
+            <div class="avatar-wrapper">
+                <div class="circular-landscape">
+                    @if (@Model.AvatarImagePath == null)
+                    {
+                        <img class="avatar-image-big" src="~/Content/Images/avatars/default.png">
+                    }
+                    else
+                    {
+                        <img class="avatar-image-big" src="@Model.AvatarImagePath">
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-horizontal">
+        <div class="col-md-6">
+            <h3>@Model.UserName</h3>
+
+            <div class="form-group">
+                <label>Полное имя</label>
+                <div>
+                    @{
+                        var fullName = String.Empty;
+
+                        if (!String.IsNullOrEmpty(Model.Name))
+                        {
+                            fullName += Model.Name + " ";
+                        }
+
+                        if (!String.IsNullOrEmpty(Model.Surname))
+                        {
+                            fullName += Model.Surname;
+                        }
+                    }
+
+                    @if (String.IsNullOrEmpty(fullName))
+                    {
+                        <span class="text-muted"><i>Информация не указана.</i></span>
+                    }
+                    else
+                    {
+                        <span>@fullName</span>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Дата рождения</label>
+                <div>
+                    @if (String.IsNullOrEmpty(Model.DateOfBirth))
+                    {
+                        <span class="text-muted"><i>Информация не указана.</i></span>
+                    }
+                    else
+                    {
+                        <span>@Model.DateOfBirth</span>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Дата создания профиля</label>
+                <div>
+                    @if (String.IsNullOrEmpty(Model.CreatedAt))
+                    {
+                        <span class="text-muted"><i>Информация не указана.</i></span>
+                    }
+                    else
+                    {
+                        <span>@Model.CreatedAt</span>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h3>Статистика</h3>
+
+            <div class="form-group">
+                <label>Количество словарей</label>
+                <div>
+                    <span>@Model.DictionariesCount</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Количество подписчиков</label>
+                <div>
+                    <span id="subscribers-count">@Model.SubscribersCount</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Количество подписок</label>
+                <div>
+                    <span>@Model.SubscriptionsCount</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).on('click', '#btn-subscribe', function (event) {
+            $.ajax({
+                type: 'POST',
+                url: '/Subscription/Subscribe?targetUserId=' + '@Model.TargetUserId',
+                contentType: 'application/json;charset=utf-8',
+                dataType: 'json',
+                success: function (result) {
+                    if (result.success == true) {
+                        $('#btn-subscribe').attr('style', 'display:none');
+                        $('#btn-unsubscribe').attr('style', 'display:block');
+                        var newCount = parseInt($('#subscribers-count').text()) + 1;
+                        $('#subscribers-count').text(newCount);
+                    }
+                    else {
+                        console.error('Cant subscribe.');
+                    }
+                },
+                error: function (response) {
+                    console.error('Cant subscribe.');
+                },
+            });
+        });
+
+        $(document).on('click', '#btn-unsubscribe', function (event) {
+            $.ajax({
+                type: 'POST',
+                url: '/Subscription/Unsubscribe?targetUserId=' + '@Model.TargetUserId',
+                contentType: 'application/json;charset=utf-8',
+                dataType: 'json',
+                success: function (result) {
+                    if (result.success == true) {
+                        $('#btn-subscribe').attr('style', 'display:block');
+                        $('#btn-unsubscribe').attr('style', 'display:none');
+                        var newCount = parseInt($('#subscribers-count').text()) - 1;
+                        $('#subscribers-count').text(newCount);
+                    }
+                    else {
+                        console.error('Cant subscribe.');
+                    }
+                },
+                error: function (response) {
+                    console.error('Cant subscribe.');
+                },
+            });
+        });
+    </script>
+}

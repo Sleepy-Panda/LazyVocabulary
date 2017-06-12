@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -16,9 +17,11 @@ namespace LazyVocabulary.Web.Controllers
     public class ProfileController : Controller
     {
         private UserService _userService;
+        private SubscriptionService _subscriptionService;
 
-        public ProfileController()
+        public ProfileController(SubscriptionService service)
         {
+            _subscriptionService = service;
         }
 
         public UserService UserService
@@ -42,6 +45,8 @@ namespace LazyVocabulary.Web.Controllers
             var resultWithDataProfile = await UserService.GetProfileByUserIdAsync(userId);
             var resultWithDataUser = await UserService.GetByUserIdAsync(userId);
             var resultWithDataEmail = await UserService.GetEmailByUserIdAsync(userId);
+            var resultWithDataSubscribersCount = _subscriptionService.GetSubscribersCountByUserId(userId);
+            var resultWithDataSubscribtionsCount = _subscriptionService.GetSubscriptionsCountByUserId(userId);
 
             if (!resultWithDataProfile.Success)
             {
@@ -63,8 +68,8 @@ namespace LazyVocabulary.Web.Controllers
                 UserName = User.Identity.Name,
                 Email = resultWithDataEmail.ResultData,
                 DictionariesCount = user.Dictionaries.Count,
-                SubscribersCount = user.SubscriberSubscriptions.Count,
-                SubscriptionsCount = user.TargetSubscriptions.Count,
+                SubscribersCount = resultWithDataSubscribersCount.ResultData,
+                SubscriptionsCount = resultWithDataSubscribtionsCount.ResultData,
             };
 
             return View(model);
@@ -72,14 +77,28 @@ namespace LazyVocabulary.Web.Controllers
 
         // GET: Profile/Overview?ownerId=1
         [HttpGet]
-        public async Task<ActionResult> Overview(string ownerId)
+        public async Task<ActionResult> Overview(string targetUserId)
         {
+            if (String.IsNullOrEmpty(targetUserId))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             string userId = User.Identity.GetUserId();
 
-            var resultWithDataProfile = await UserService.GetProfileByUserIdAsync(ownerId);
-            var resultWithDataUser = await UserService.GetByUserIdAsync(ownerId);
+            if (userId == targetUserId)
+            {
+                return RedirectToAction("Index");
+            }
 
-            if (!resultWithDataProfile.Success || !resultWithDataUser.Success)
+            var resultWithDataProfile = await UserService.GetProfileByUserIdAsync(targetUserId);
+            var resultWithDataUser = await UserService.GetByUserIdAsync(targetUserId);
+            var resultWithDataUserName = await UserService.GetUserNameByUserId(userId);
+            var resultWithDataSubscribersCount = _subscriptionService.GetSubscribersCountByUserId(targetUserId);
+            var resultWithDataSubscribtionsCount = _subscriptionService.GetSubscriptionsCountByUserId(targetUserId);
+            var resultWithDataCanSubscribe = _subscriptionService.CanSubscribe(userId, targetUserId);
+
+            if (!resultWithDataProfile.Success || !resultWithDataUser.Success || !resultWithDataUserName.Success)
             {
                 // TODO
             }
@@ -89,17 +108,18 @@ namespace LazyVocabulary.Web.Controllers
 
             var model = new OverviewProfileViewModel
             {
-                OwnerId = ownerId,
+                TargetUserId = targetUserId,
                 Name = profile.Name,
                 Surname = profile.Surname,
                 DateOfBirth = profile.DateOfBirth?.ToString("d MMMM, yyyy"),
                 CreatedAt = profile.CreatedAt.ToString("d MMMM, yyyy HH:mm"),
-                AvatarImagePath = GetAvatarImagePath(ownerId),
-                UserName = User.Identity.Name,
+                AvatarImagePath = GetAvatarImagePath(targetUserId),
+                UserName = resultWithDataUserName.ResultData,
                 // TODO only public
                 DictionariesCount = user.Dictionaries.Count,
-                SubscribersCount = user.SubscriberSubscriptions.Count,
-                SubscriptionsCount = user.TargetSubscriptions.Count,
+                SubscribersCount = resultWithDataSubscribersCount.ResultData,
+                SubscriptionsCount = resultWithDataSubscribtionsCount.ResultData,
+                CanSubscribe = resultWithDataCanSubscribe.ResultData,
             };
 
             return View(model);

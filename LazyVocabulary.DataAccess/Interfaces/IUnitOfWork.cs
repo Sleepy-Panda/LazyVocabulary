@@ -11,6 +11,7 @@ namespace LazyVocabulary.DataAccess.Interfaces
         IRepository<Dictionary> Dictionaries { get; }
         IRepository<SourcePhrase> SourcePhrases { get; }
         IRepository<TranslatedPhrase> TranslatedPhrases { get; }
+        IRepository<Subscription> Subscriptions { get; }
 
         void Save();
         Task SaveAsync();

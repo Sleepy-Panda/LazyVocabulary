@@ -1,0 +1,45 @@
+﻿@using LazyVocabulary.Resources.Views.Home;
+@using LazyVocabulary.Resources.Views.Menu;
+
+@{
+    ViewBag.Title = ThanksForFeedbackResource.PageName;
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+<div class="left-menu-container">
+    <div class="left-menu-item-container">
+        <a href="/Home/Index" title="@MenuForUnauthorizedResource.Home">
+            <i class="fa fa-home"></i>
+        </a>
+    </div>
+    <div class="left-menu-item-container">
+        <a href="/Account/Register" title="@MenuForUnauthorizedResource.Register">
+            <i class="fa fa-user-plus"></i>
+        </a>
+    </div>
+    <div class="left-menu-item-container">
+        <a href="/Account/Login" title="@MenuForUnauthorizedResource.Login">
+            <i class="fa fa-sign-in"></i>
+        </a>
+    </div>
+</div>
+
+<div id="cover">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3 form-box">
+                <div class="form-top">
+                    <div class="form-top-left">
+                        <h3>@ThanksForFeedbackResource.FormName</h3>
+                        <p>
+                            @ThanksForFeedbackResource.Thanks
+                        </p>
+                    </div>
+                    <div class="form-top-right">
+                        <i class="fa fa-thumbs-up"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -117,76 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AboutBeLazy" xml:space="preserve">
-    <value>BeLazy is an interesting way to learn something new every day. Store an electronic dictionary, improve your vocabulary and share it with friends anytime and anywhere. Join now!</value>
-  </data>
-  <data name="BeLazyIs" xml:space="preserve">
-    <value>BeLazy is...</value>
-  </data>
-  <data name="ChangeLanguage" xml:space="preserve">
-    <value>You can choose other language to display site pages:</value>
-  </data>
-  <data name="ContactUs" xml:space="preserve">
-    <value>Contact us</value>
-  </data>
-  <data name="Details1" xml:space="preserve">
-    <value>Effectively manage electronic dictionaries and share them with other users.</value>
-  </data>
-  <data name="Details2" xml:space="preserve">
-    <value>Add the word or expression in the dictionary, and the system will tell you the translation options based on the specified pair of languages.</value>
-  </data>
-  <data name="Details3" xml:space="preserve">
-    <value>Use our extension for Chrome browser to improve your vocabulary without taking your eyes off reading the text.</value>
-  </data>
-  <data name="English" xml:space="preserve">
-    <value>English (selected)</value>
-  </data>
-  <data name="Facebook" xml:space="preserve">
-    <value>Facebook</value>
-  </data>
-  <data name="Google" xml:space="preserve">
-    <value>Google</value>
-  </data>
-  <data name="Header1" xml:space="preserve">
-    <value>Wide opportunities</value>
-  </data>
-  <data name="Header2" xml:space="preserve">
-    <value>Accelerated interaction</value>
-  </data>
-  <data name="Header3" xml:space="preserve">
-    <value>Learning a language on any site</value>
-  </data>
-  <data name="Instagram" xml:space="preserve">
-    <value>Instagram</value>
-  </data>
-  <data name="Join" xml:space="preserve">
-    <value>Join us right now</value>
-  </data>
-  <data name="LeaveFeedback" xml:space="preserve">
-    <value>Leave your feedback here</value>
+  <data name="FormName" xml:space="preserve">
+    <value>Спасибо за отзыв</value>
   </data>
   <data name="PageName" xml:space="preserve">
-    <value>Welcome</value>
+    <value>Спасибо за отзыв</value>
   </data>
-  <data name="RecommendedLanguage" xml:space="preserve">
-    <value>Based on your preferences, we recommend you English language to display interface.</value>
-  </data>
-  <data name="Register" xml:space="preserve">
-    <value>Register now</value>
-  </data>
-  <data name="RegisterForFree" xml:space="preserve">
-    <value>Register for free!</value>
-  </data>
-  <data name="Russian" xml:space="preserve">
-    <value>Русский</value>
-  </data>
-  <data name="Twitter" xml:space="preserve">
-    <value>Twitter</value>
-  </data>
-  <data name="Vk" xml:space="preserve">
-    <value>VK</value>
-  </data>
-  <data name="WelcomeBeLazy" xml:space="preserve">
-    <value>Welcome BeLazy</value>
+  <data name="Thanks" xml:space="preserve">
+    <value>Спасибо за Ваше сообщение, мы постараемся ответить Вам в ближайшее время.</value>
   </data>
 </root>

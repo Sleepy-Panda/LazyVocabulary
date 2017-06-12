@@ -98,6 +98,48 @@ namespace LazyVocabulary.Logic.Services
             return resultWithData;
         }
 
+        public async Task<ResultWithData<string>> GetUserNameByUserId(string userId)
+        {
+            var resultWithData = new ResultWithData<string>();
+
+            try
+            {
+                var user = await UserManager.FindByIdAsync(userId);
+
+                resultWithData.ResultData = user.UserName;
+                resultWithData.Success = true;
+            }
+            catch (Exception ex)
+            {
+                resultWithData.Success = false;
+                resultWithData.Message = ex.Message;
+                resultWithData.StackTrace = ex.StackTrace;
+            }
+
+            return resultWithData;
+        }
+
+        public async Task<ResultWithData<string>> GetIdByUserName(string userName)
+        {
+            var resultWithData = new ResultWithData<string>();
+
+            try
+            {
+                var user = await UserManager.FindByNameAsync(userName);
+
+                resultWithData.ResultData = user.Id;
+                resultWithData.Success = true;
+            }
+            catch (Exception ex)
+            {
+                resultWithData.Success = false;
+                resultWithData.Message = ex.Message;
+                resultWithData.StackTrace = ex.StackTrace;
+            }
+
+            return resultWithData;
+        }
+
         public Result SetUpdatedAtForProfile(string userId)
         {
             var resultWithData = new Result();

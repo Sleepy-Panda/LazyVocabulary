@@ -165,7 +165,7 @@ namespace LazyVocabulary.Web.Controllers
                 $"<a href=\"{ href }\" " + 
                 $"title=\"Подтвердить email\">Подтвердить email</a>";
 
-            var result = await EmailHelper.SendEmail(model.Email, "Подтверждение email", text);
+            var result = await EmailHelper.SendEmailToAsync(model.Email, "Подтверждение email", text);
 
             if (!result.Success)
             {

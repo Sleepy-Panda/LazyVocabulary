@@ -174,12 +174,14 @@
     <Compile Include="Controllers\DictionaryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\SubscriptionController.cs" />
     <Compile Include="Controllers\TranslationController.cs" />
     <Compile Include="Filters\RedirectOnExceptionAttribute.cs" />
     <Compile Include="Filters\SetCultureAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ContactUsViewModel.cs" />
     <Compile Include="Models\CreateDictionaryViewModel.cs" />
     <Compile Include="Models\CreateTranslationViewModel.cs" />
     <Compile Include="Models\DetailsDictionaryViewModel.cs" />
@@ -191,6 +193,7 @@
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\ResetPasswordViewModel.cs" />
     <Compile Include="Models\OverviewProfileViewModel.cs" />
+    <Compile Include="Models\SubscriptionViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Util\SetCultureAttributeModule.cs" />
@@ -283,6 +286,10 @@
     <Content Include="Views\Translation\_List.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\ChangeAvatar.cshtml" />
+    <Content Include="Views\Profile\Overview.cshtml" />
+    <Content Include="Views\Subscription\Subscriptions.cshtml" />
+    <Content Include="Views\Home\ContactUs.cshtml" />
+    <Content Include="Views\Home\ThanksForFeedback.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
