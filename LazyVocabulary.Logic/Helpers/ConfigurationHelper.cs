@@ -13,6 +13,14 @@ namespace LazyVocabulary.Logic.Helpers
             }
         }
 
+        public static string FeedbackReceiverEmail
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["FeedbackReceiverEmail"];
+            }
+        }
+
         public static string CredentialPassword
         {
             get

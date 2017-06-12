@@ -111,6 +111,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AccountVerifyTokenErrorResource.en.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Home\ContactUsResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContactUsResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\ContactUsResource.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContactUsResource.en.resx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Home\HomeIndexResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -120,6 +130,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HomeIndexResource.en.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\ThanksForFeedbackResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ThanksForFeedbackResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\ThanksForFeedbackResource.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ThanksForFeedbackResource.en.resx</DependentUpon>
     </Compile>
     <Compile Include="Views\Menu\MenuForUnauthorizedResource.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -189,6 +209,14 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AccountVerifyTokenErrorResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Home\ContactUsResource.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ContactUsResource.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Home\ContactUsResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ContactUsResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Home\HomeIndexResource.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>HomeIndexResource.en.Designer.cs</LastGenOutput>
@@ -196,6 +224,14 @@
     <EmbeddedResource Include="Views\Home\HomeIndexResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>HomeIndexResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Home\ThanksForFeedbackResource.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ThanksForFeedbackResource.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Home\ThanksForFeedbackResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ThanksForFeedbackResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Menu\MenuForUnauthorizedResource.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

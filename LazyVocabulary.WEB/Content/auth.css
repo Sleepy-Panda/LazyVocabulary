@@ -159,7 +159,7 @@ p {
 }
 
 .form-bottom textarea {
-	height: 100px;
+	height: 150px !important;
 }
 
 .form-bottom button.btn {
@@ -223,13 +223,6 @@ textarea.form-control {
         -ms-transition: all .3s ease-in-out; 
          -o-transition: all .3s ease-in-out;
             transition: all .3s ease-in-out;
-}
-
-textarea, 
-textarea.form-control {
-	padding-top: 10px;
-	padding-bottom: 10px;
-	line-height: 30px;
 }
 
 input[type="text"]:focus, 

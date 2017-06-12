@@ -88,6 +88,15 @@ namespace LazyVocabulary.Resources.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Отправить письмо.
+        /// </summary>
+        public static string ContactUs {
+            get {
+                return ResourceManager.GetString("ContactUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Эффективно управляйте электронными словарями и делитесь ими с другими пользователями..
         /// </summary>
         public static string Details1 {
@@ -183,6 +192,15 @@ namespace LazyVocabulary.Resources.Views.Home {
         public static string Join {
             get {
                 return ResourceManager.GetString("Join", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Оставьте Ваши замечания или предложения.
+        /// </summary>
+        public static string LeaveFeedback {
+            get {
+                return ResourceManager.GetString("LeaveFeedback", resourceCulture);
             }
         }
         

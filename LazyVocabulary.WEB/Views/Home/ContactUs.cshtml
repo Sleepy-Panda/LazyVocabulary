@@ -1,0 +1,72 @@
+﻿@using LazyVocabulary.Web.Models;
+@using LazyVocabulary.Resources.Views.Home;
+@using LazyVocabulary.Resources.Views.Menu;
+
+@model ContactUsViewModel
+    
+@{
+    ViewBag.Title = ContactUsResource.PageName;
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+<div class="left-menu-container">
+    <div class="left-menu-item-container">
+        <a href="/Home/Index" title="@MenuForUnauthorizedResource.Home">
+            <i class="fa fa-home"></i>
+        </a>
+    </div>
+    <div class="left-menu-item-container">
+        <a href="/Account/Register" title="@MenuForUnauthorizedResource.Register">
+            <i class="fa fa-user-plus"></i>
+        </a>
+    </div>
+    <div class="left-menu-item-container">
+        <a href="/Account/Login" title="@MenuForUnauthorizedResource.Login">
+            <i class="fa fa-sign-in"></i>
+        </a>
+    </div>
+</div>
+
+<div id="cover">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3 form-box">
+                <div class="form-top">
+                    <div class="form-top-left">
+                        <h3>@ContactUsResource.FormName</h3>
+                        <p>@ContactUsResource.FormInstructions</p>
+                    </div>
+                    <div class="form-top-right">
+                        <i class="fa fa-envelope-o"></i>
+                    </div>
+                </div>
+                <div class="form-bottom">
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    @using (Html.BeginForm("ContactUs", "Home", FormMethod.Post, new { @class = "login-form", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = ContactUsResource.EmailPlaceholder })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Subject, new { @class = "form-control", @placeholder = ContactUsResource.SubjectPlaceholder })
+                            @Html.ValidationMessageFor(m => m.Subject, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextAreaFor(m => m.Text, new { @class = "form-control", @placeholder = ContactUsResource.TextPlaceholder })
+                            @Html.ValidationMessageFor(m => m.Text, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn" data-ripple><i class="fa fa-envelope-o"></i> @ContactUsResource.Send</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/app-js/localization.js")
+}
