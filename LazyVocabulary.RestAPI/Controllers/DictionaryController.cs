@@ -38,7 +38,7 @@ namespace LazyVocabulary.RestAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> AddToDictionary(string token, string value, string[] translations)
+        public async Task<IHttpActionResult> AddToDictionary(string token, string value, [FromUri] string[] translations)
         {
             var resultWithData = await UserService.GetUserIdByTokenAsync(token);
 
