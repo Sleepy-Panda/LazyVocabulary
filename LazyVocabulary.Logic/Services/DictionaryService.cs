@@ -157,6 +157,48 @@ namespace LazyVocabulary.Logic.Services
             return result;
         }
 
+        public async Task<ResultWithData<int>> CreateForPluginAsync(string userId, string name, string description, int sourceLanguageId, int targetLanguageId)
+        {
+            var resultWithData = new ResultWithData<int>();
+
+            try
+            {
+                var existing = _database.Dictionaries
+                    .Find(d => d.Name == name)
+                    .SingleOrDefault();
+
+                if (existing != null)
+                {
+                    resultWithData.ResultData = existing.Id;
+                    resultWithData.Success = true;
+
+                    return resultWithData;
+                }
+
+                var dictionary = new Dictionary
+                {
+                    Name = name,
+                    Description = description,
+                    ApplicationUserId = userId,
+                    SourceLanguageId = sourceLanguageId,
+                    TargetLanguageId = targetLanguageId,
+                };
+                _database.Dictionaries.Create(dictionary);
+                await _database.SaveAsync();
+
+                resultWithData.ResultData = dictionary.Id;
+                resultWithData.Success = true;
+            }
+            catch (Exception ex)
+            {
+                resultWithData.Success = false;
+                resultWithData.Message = ex.Message;
+                resultWithData.StackTrace = ex.StackTrace;
+            }
+
+            return resultWithData;
+        }
+
         public async Task<Result> UpdateAsync(dynamic dictionaryFromView)
         {
             var result = new Result();

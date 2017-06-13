@@ -75,6 +75,9 @@
     <Reference Include="Microsoft.Owin.Security.OAuth">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
@@ -118,11 +121,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\DictionaryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -130,7 +136,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -146,6 +154,10 @@
     <ProjectReference Include="..\LazyVocabulary.Common\LazyVocabulary.Common.csproj">
       <Project>{27776F56-5C24-406F-9CFF-8342F5965F12}</Project>
       <Name>LazyVocabulary.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LazyVocabulary.DataAccess\LazyVocabulary.DataAccess.csproj">
+      <Project>{797CC3AA-C35B-4FF2-9D25-B3EEBE365E7B}</Project>
+      <Name>LazyVocabulary.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\LazyVocabulary.Logic\LazyVocabulary.Logic.csproj">
       <Project>{25C0BB32-88B3-40FB-BE15-A2439D4B256C}</Project>

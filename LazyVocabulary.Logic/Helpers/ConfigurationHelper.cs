@@ -52,5 +52,21 @@ namespace LazyVocabulary.Logic.Helpers
                 return ConfigurationManager.AppSettings["DefaultAvatar"];
             }
         }
+
+        public static string DictionaryNameForPluginRuEn
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["DictionaryNameForPluginRuEn"];
+            }
+        }
+
+        public static string DictionaryDescriptionForPluginRuEn
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["DictionaryDescriptionForPluginRuEn"];
+            }
+        }
     }
 }

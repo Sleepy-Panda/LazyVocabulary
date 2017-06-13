@@ -36,5 +36,27 @@ namespace LazyVocabulary.Logic.Services
 
             return resultWithData;
         }
+
+        public ResultWithData<int> GetIdByCode(string code)
+        {
+            var resultWithData = new ResultWithData<int>();
+
+            try
+            {
+                resultWithData.ResultData = _database.Languages
+                    .Find(l => l.Code == code)
+                    .FirstOrDefault().Id;
+
+                resultWithData.Success = true;
+            }
+            catch (Exception ex)
+            {
+                resultWithData.Success = false;
+                resultWithData.Message = ex.Message;
+                resultWithData.StackTrace = ex.StackTrace;
+            }
+
+            return resultWithData;
+        }
     }
 }
