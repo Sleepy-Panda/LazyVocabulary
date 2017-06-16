@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LazyVocabulary.Web.Models
+﻿namespace LazyVocabulary.Web.Models
 {
     public class IndexProfileViewModel
     {

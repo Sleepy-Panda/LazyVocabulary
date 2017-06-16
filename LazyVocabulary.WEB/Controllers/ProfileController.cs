@@ -4,6 +4,7 @@ using LazyVocabulary.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -18,10 +19,12 @@ namespace LazyVocabulary.Web.Controllers
     {
         private UserService _userService;
         private SubscriptionService _subscriptionService;
+        private UserProfileService _userProfileService;
 
-        public ProfileController(SubscriptionService service)
+        public ProfileController(SubscriptionService service, UserProfileService userProfileService)
         {
             _subscriptionService = service;
+            _userProfileService = userProfileService;
         }
 
         public UserService UserService
@@ -73,6 +76,60 @@ namespace LazyVocabulary.Web.Controllers
             };
 
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Edit()
+        {
+            var userId = User.Identity.GetUserId();
+            var resultWithDataProfile = await UserService.GetProfileByUserIdAsync(userId);
+
+            if (!resultWithDataProfile.Success)
+            {
+                // TODO
+            }
+
+            var profile = resultWithDataProfile.ResultData;
+
+            var model = new EditProfileViewModel
+            {
+                Id = profile.Id,
+                Name = profile.Name,
+                Surname = profile.Surname,
+                DateOfBirth = profile.DateOfBirth?.ToString("dd.MM.yyyy"),
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(EditProfileViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Result = "Error";
+                return PartialView("_Edit", model);
+            }
+
+            dynamic profile = new ExpandoObject();
+            profile.Id = model.Id;
+            profile.Name = model.Name;
+            profile.Surname = model.Surname;
+            profile.DateOfBirth = model.DateOfBirth != null 
+                ? DateTime.Parse(model.DateOfBirth)
+                : (DateTime?) null;
+
+            var result = await _userProfileService.UpdateAsync(profile);
+
+            if (!result.Success)
+            {
+                ViewBag.Result = "Error";
+                return PartialView("_Edit", model);
+            }
+
+            ViewBag.Result = "Success";
+            return PartialView("_Edit");
         }
 
         // GET: Profile/Overview?ownerId=1

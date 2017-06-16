@@ -186,6 +186,7 @@
     <Compile Include="Models\CreateTranslationViewModel.cs" />
     <Compile Include="Models\DetailsDictionaryViewModel.cs" />
     <Compile Include="Models\EditDictionaryViewModel.cs" />
+    <Compile Include="Models\EditProfileViewModel.cs" />
     <Compile Include="Models\IndexDictionaryViewModel.cs" />
     <Compile Include="Models\IndexProfileViewModel.cs" />
     <Compile Include="Models\IndexTranslationViewModel.cs" />
@@ -290,6 +291,8 @@
     <Content Include="Views\Subscription\Subscriptions.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
     <Content Include="Views\Home\ThanksForFeedback.cshtml" />
+    <Content Include="Views\Profile\Edit.cshtml" />
+    <Content Include="Views\Profile\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

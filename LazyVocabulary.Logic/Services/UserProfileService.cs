@@ -4,6 +4,7 @@ using LazyVocabulary.Logic.OperationDetails;
 using System;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LazyVocabulary.Logic.Services
 {
@@ -47,59 +48,34 @@ namespace LazyVocabulary.Logic.Services
             return resultWithData;
         }
 
-        //public ResultWithData<UserProfile> GetByUserId(string userId)
-        //{
-        //    var resultWithData = new ResultWithData<UserProfile>();
+        public async Task<Result> UpdateAsync(dynamic profileFromView)
+        {
+            var result = new Result();
 
-        //    try
-        //    {
-        //        var profile = _database.Users
-        //            .Find(u => u.ApplicationUser.Id == userId)
-        //            .SingleOrDefault();
+            try
+            {
+                var profile = new UserProfile
+                {
+                    Id = profileFromView.Id,
+                    Name = profileFromView.Name,
+                    Surname = profileFromView.Surname,
+                    DateOfBirth = profileFromView.DateOfBirth,
+                    UpdatedAt = DateTime.Now,
+                };
+                _database.UserProfiles.Update(profile);
+                await _database.SaveAsync();
 
-        //        resultWithData.ResultData = profile;
-        //        resultWithData.Success = true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        resultWithData.Success = false;
-        //        resultWithData.Message = ex.Message;
-        //        resultWithData.StackTrace = ex.StackTrace;
-        //    }
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+                result.StackTrace = ex.StackTrace;
+            }
 
-        //    return resultWithData;
-        //}
-
-        //public async Task<ResultWithData<int>> CreateDefaultProfileForUserAsync()
-        //{
-        //    var resultWithData = new ResultWithData<int>();
-
-        //    try
-        //    {
-        //        var profile = new UserProfile
-        //        {
-        //            CreatedAt = DateTime.Now,
-        //            UpdatedAt = DateTime.Now,
-        //            PasswordUpdatedAt = DateTime.Now,
-        //            AvatarImagePath = "default_avatar.png",
-        //            Locale = LocaleLanguage.Ru,
-        //        };
-
-        //        _database.UserProfiles.Create(profile);
-        //        await _database.SaveAsync();
-
-        //        resultWithData.ResultData = profile.Id;
-        //        resultWithData.Success = true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        resultWithData.Success = false;
-        //        resultWithData.Message = ex.Message;
-        //        resultWithData.StackTrace = ex.StackTrace;
-        //    }
-
-        //    return resultWithData;
-        //}
+            return result;
+        }
 
         private bool disposed = false;
 

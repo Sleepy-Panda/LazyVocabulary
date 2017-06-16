@@ -28,14 +28,18 @@ namespace LazyVocabulary.Web.Filters
                 exception = exception.InnerException;
             }
 
+            // Internal Server Error.
+            var code = 500;
+
             if (exception is HttpException)
             {
-                // как посмотреть статусный код?
+                code = (exception as HttpException).GetHttpCode();
                 exceptionContext.HttpContext.Response.Clear();
-                exceptionContext.HttpContext.Response.StatusCode = 404;
+                exceptionContext.HttpContext.Response.StatusCode = code;
             }
 
             exceptionContext.ExceptionHandled = true;
+            exceptionContext.HttpContext.Response.Redirect("/Home/Index");
         }
     }
 }
