@@ -411,6 +411,40 @@ namespace LazyVocabulary.Logic.Services
             return result;
         }
 
+        public async Task<ResultWithData<string>> GetUserIdByTokenAsync(string token)
+        {
+            if (String.IsNullOrEmpty(token))
+            {
+                throw new Exception("Invalid auth token.");
+            }
+
+            var result = new ResultWithData<string>();
+
+            try
+            {
+                var appUser = await _context.Users
+                    .SingleOrDefaultAsync(u => u.Token == token);
+
+                if (appUser == null)
+                {
+                    throw new Exception("Invalid auth token.");
+                }
+
+                var id = appUser.Id;
+
+                result.ResultData = id;
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+                result.StackTrace = ex.StackTrace;
+            }
+
+            return result;
+        }
+
         public bool IsUserNameAvailable(string userName)
         {
             bool result = _context.Users
