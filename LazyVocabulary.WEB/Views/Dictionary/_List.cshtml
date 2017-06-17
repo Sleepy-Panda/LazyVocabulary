@@ -1,4 +1,6 @@
 ﻿@using LazyVocabulary.Web.Models;
+@using LazyVocabulary.Resources.Views.Dictionary;
+
 @model IEnumerable<IndexDictionaryViewModel>
 
 @if (Model.Count() > 0)
@@ -14,14 +16,14 @@
                     <td>
                         <a href="/Translation/Index/@item.Id">@item.Name</a>
                         <br />
-                        <span class="text-muted">Количество записей:</span> @item.PhrasesCount
+                        <span class="text-muted">@IndexResource.RecordsCount</span> @item.PhrasesCount
                         <br />
                         @item.Description
                     </td>
                     <td class="details hidden-sm hidden-xs">
-                        <span class="text-muted">Создан:</span> @item.CreatedAt
+                        <span class="text-muted">@IndexResource.CreatedAt</span> @item.CreatedAt
                         <br />
-                        <span class="text-muted">Обновлён:</span> @item.UpdatedAt
+                        <span class="text-muted">@IndexResource.UpdatedAt</span> @item.UpdatedAt
                     </td>
                     <td class="flag">
                         <img class="flag-image" title="@item.SourceLanguageName"
@@ -34,22 +36,22 @@
                     <td class="toggle-menu-icon">
                         <div class="dropdown">
                             <button class="btn btn-custom btn-gray dropdown-toggle" type="button" data-toggle="dropdown">
-                                Действие
+                                @IndexResource.Action
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu pull-right">
                                 <li>
-                                    <a href="/Translation/Index/@item.Id">Список переводов</a>
+                                    <a href="/Translation/Index/@item.Id">@IndexResource.TranslationsList</a>
                                 </li>
                                 <li>
-                                    <a href="/Translation/Create/@item.Id">Добавить перевод</a>
+                                    <a href="/Translation/Create/@item.Id">@IndexResource.AddTranslation</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="/Dictionary/Edit/@item.Id">Редактировать словарь</a>
+                                    <a href="/Dictionary/Edit/@item.Id">@IndexResource.EditDictionary</a>
                                 </li>
                                 <li>
-                                    <a href="javascript;" class="delete-dictionary" id="delete-@item.Id">Удалить словарь</a>
+                                    <a href="javascript;" class="delete-dictionary" id="delete-@item.Id">@IndexResource.DeleteDictionary</a>
                                 </li>
                             </ul>
                         </div>
@@ -58,9 +60,9 @@
             }
         </tbody>
     </table>
-    <p id="there-is-no-dictionaries" class="text-muted" style="display:none;"><i>Вы не создали ни одного словаря.</i></p>
+    <p id="there-is-no-dictionaries" class="text-muted" style="display:none;"><i>@IndexResource.YouDidntCreateAnyDictionary</i></p>
 }
 else
 {
-    <p id="there-is-no-dictionaries" class="text-muted"><i>Вы не создали ни одного словаря.</i></p>
+    <p id="there-is-no-dictionaries" class="text-muted"><i>@IndexResource.YouDidntCreateAnyDictionary</i></p>
 }

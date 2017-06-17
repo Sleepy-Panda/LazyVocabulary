@@ -111,6 +111,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AccountVerifyTokenErrorResource.en.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Dictionary\IndexResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dictionary\IndexResource.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResource.en.resx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Home\ContactUsResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -208,6 +218,14 @@
     <EmbeddedResource Include="Views\Account\AccountVerifyTokenErrorResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AccountVerifyTokenErrorResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Dictionary\IndexResource.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResource.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Dictionary\IndexResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Home\ContactUsResource.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

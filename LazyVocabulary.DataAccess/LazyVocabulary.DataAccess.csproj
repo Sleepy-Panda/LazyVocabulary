@@ -59,7 +59,6 @@
   <ItemGroup>
     <Compile Include="EF\ApplicationContext.cs" />
     <Compile Include="EF\DbInitializer.cs" />
-    <Compile Include="Enums\DictionaryAccessModifier.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Mapping\ApplicationUserMapping.cs" />

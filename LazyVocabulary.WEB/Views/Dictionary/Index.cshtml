@@ -1,43 +1,35 @@
-﻿@{
+﻿@using LazyVocabulary.Resources.Views.Dictionary;
+
+@{
     ViewBag.Title = "Мои словари";
 }
 
 <div class="breadcrump-container">
-    <a href="/Home/Index">Главная</a>
+    <a href="/Home/Index">@IndexResource.Home</a>
     <span class="separator"></span>
-    Мои словари
+    @IndexResource.PageName
 </div>
 
 <div class="top-buttons-container">
     <div class="row">
         <a href="/Dictionary/Create" class="btn-custom btn-blue pull-right">
-            <i class="fa fa-plus"></i> Добавить словарь
+            <i class="fa fa-plus"></i> @IndexResource.ButtonCreateDictionary
         </a>
         <button id="btn-delete-selected" type="button" class="btn-custom btn-blue pull-right" disabled>
-            <i class="fa fa-remove"></i> Удалить выбранные
+            <i class="fa fa-remove"></i> @IndexResource.ButtonDeleteSelected
         </button>
         <button id="btn-select-all" type="button" class="btn-custom btn-gray pull-right">
-            <i class="fa fa-check-square-o"></i> Выделить все
+            <i class="fa fa-check-square-o"></i> @IndexResource.ButtonSelectAll
         </button>
         <button id="btn-deselect-all" type="button" class="btn-custom btn-gray pull-right">
-            <i class="fa fa-square-o"></i> Снять выделение
+            <i class="fa fa-square-o"></i> @IndexResource.ButtonDeselectAll
         </button>
     </div>
 </div>
 
 <div class="container">
-    <ul class="nav nav-tabs top" role="tablist">
-        <li class="nav-item active">
-            <a class="nav-link" href="#tab-pane-my" data-toggle="tab" role="tab">Мои словари</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#tab-pane-available" data-toggle="tab" role="tab">Доступные мне</a>
-        </li>
-    </ul>
-
-    <div class="tab-content">
-        <div class="tab-pane active" id="tab-pane-my" role="tabpanel">
-            @using (Ajax.BeginForm("Search", "Dictionary", new AjaxOptions
+    <div class="tab-pane active" id="tab-pane-my" role="tabpanel">
+        @using (Ajax.BeginForm("Search", "Dictionary", new AjaxOptions
             {
                 HttpMethod = "GET",
                 InsertionMode = InsertionMode.Replace,
@@ -47,82 +39,83 @@
                 LoadingElementId = "loader",
             }))
             {
-                <h3>Поиск словарей</h3>
-                <div class="form-group">
-                    <label for="searchPattern">Введите строку поиска</label>
-                    <div>
-                        @Html.TextBox("searchPattern", "", new { @class = "form-control inline" })
-                        <span class="fa fa-remove clear-input" title="Очистить поле"></span>
-                    </div>                  
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="searchDescriptions" value="true" /> Включая описания
-                    </label>
-                </div>
-
-                <div class="form-group">
-                    <button id="btn-submit-form" type="submit" class="btn-custom btn-gray">
-                        <i class="fa fa-search"></i> Найти словари
-                    </button>
-                </div>
-
-                <h3>Результаты поиска</h3>
-                <div id="target">
-                    @Html.Partial("_List")
-                </div>
-            }
-
-            <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">Подтвердите удаление</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>Вы уверены, что хотите удалить выбранный словарь со всеми переводами? Восстановить данные будет <b>невозможно.</b></p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn-custom btn-gray" data-dismiss="modal">
-                                <i class="fa fa-remove"></i> Закрыть
-                            </button>
-                            <button type="button" class="btn-custom btn-blue" id="btn-submit-delete">
-                                <i class="glyphicon glyphicon-ok"></i> Удалить
-                            </button>
-                        </div>
-                    </div>
+            <h3>Поиск словарей</h3>
+            <div class="form-group">
+                <label for="searchPattern">@IndexResource.SearchPattern</label>
+                <div>
+                    @Html.TextBox("searchPattern", "", new { @class = "form-control inline" })
+                    <span class="fa fa-remove clear-input" title="@IndexResource.ClearField"></span>
                 </div>
             </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="searchDescriptions" value="true" /> @IndexResource.IncludingDescriptions
+                </label>
+            </div>
 
-            <div class="modal fade" id="modal-delete-selected" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">Подтвердите удаление</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>Вы уверены, что хотите удалить все выбранные словари со всеми переводами? Восстановить данные будет <b>невозможно.</b></p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn-custom btn-gray" data-dismiss="modal">
-                                <i class="fa fa-remove"></i> Закрыть
-                            </button>
-                            <button type="button" class="btn-custom btn-blue" id="btn-submit-delete-selected">
-                                <i class="glyphicon glyphicon-ok"></i> Удалить
-                            </button>
-                        </div>
+            <div class="form-group">
+                <button id="btn-submit-form" type="submit" class="btn-custom btn-gray">
+                    <i class="fa fa-search"></i> @IndexResource.ButtonSearch
+                </button>
+            </div>
+
+            <h3>@IndexResource.SearchResults</h3>
+            <div id="target">
+                @Html.Partial("_List")
+            </div>
+        }
+
+        <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">@IndexResource.ConfirmDelete</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>@IndexResource.AreYouSure1 <b>@IndexResource.Impossible</b></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-custom btn-gray" data-dismiss="modal">
+                            <i class="fa fa-remove"></i> @IndexResource.ButtonClose
+                        </button>
+                        <button type="button" class="btn-custom btn-blue" id="btn-submit-delete">
+                            <i class="glyphicon glyphicon-ok"></i> @IndexResource.ButtonDelete
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="tab-pane" id="tab-pane-available" role="tabpanel">
-
+        <div class="modal fade" id="modal-delete-selected" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">@IndexResource.ConfirmDelete</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>@IndexResource.AreYouSure2 <b>@IndexResource.Impossible</b></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-custom btn-gray" data-dismiss="modal">
+                            <i class="fa fa-remove"></i> @IndexResource.ButtonClose
+                        </button>
+                        <button type="button" class="btn-custom btn-blue" id="btn-submit-delete-selected">
+                            <i class="glyphicon glyphicon-ok"></i> @IndexResource.ButtonDelete
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <div class="tab-pane" id="tab-pane-available" role="tabpanel">
+
+    </div>
 </div>
+
+
 
 @section Scripts {
     <script>
