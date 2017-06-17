@@ -2,6 +2,7 @@
 using LazyVocabulary.Common.Enums;
 using LazyVocabulary.Logic.Services;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Ninject;
 using System;
 using System.Globalization;
@@ -14,8 +15,19 @@ namespace LazyVocabulary.Web.Filters
 {
     public class SetCultureAttribute : FilterAttribute, IActionFilter
     {
-        [Inject]
-        public UserProfileService Service { get; set; }
+        private UserService _userService;
+
+        public UserService UserService
+        {
+            get
+            {
+                return _userService ?? HttpContext.Current.GetOwinContext().Get<UserService>();
+            }
+            private set
+            {
+                _userService = value;
+            }
+        }
 
         public SetCultureAttribute()
         {
@@ -37,7 +49,7 @@ namespace LazyVocabulary.Web.Filters
                 else
                 {
                     // Get culture from database and set cookie.
-                    var resultWithData = Service.GetCultureByUserId(filterContext.HttpContext.User.Identity.GetUserId());
+                    var resultWithData = UserService.GetCultureByUserId(filterContext.HttpContext.User.Identity.GetUserId());
 
                     if (!resultWithData.Success)
                     {

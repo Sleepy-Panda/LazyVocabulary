@@ -1,8 +1,6 @@
-﻿using LazyVocabulary.Common.Entities;
-using LazyVocabulary.DataAccess.Interfaces;
+﻿using LazyVocabulary.DataAccess.Interfaces;
 using LazyVocabulary.Logic.OperationDetails;
 using System;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,37 +13,6 @@ namespace LazyVocabulary.Logic.Services
         public UserProfileService(IUnitOfWork database)
         {
             _database = database;
-        }
-
-        public ResultWithData<CultureInfo> GetCultureByUserId(string userId)
-        {
-            var resultWithData = new ResultWithData<CultureInfo>();
-
-            try
-            {
-                var profile = _database.UserProfiles
-                    .Find(u => u.ApplicationUser.Id == userId)
-                    .SingleOrDefault();
-
-                if (profile == null)
-                {
-                    resultWithData.ResultData = UserProfile.DefaultCulture;
-                }
-                else
-                {
-                    resultWithData.ResultData = profile.UserCulture;
-                }
-                
-                resultWithData.Success = true;
-            }
-            catch (Exception ex)
-            {
-                resultWithData.Success = false;
-                resultWithData.Message = ex.Message;
-                resultWithData.StackTrace = ex.StackTrace;
-            }
-
-            return resultWithData;
         }
 
         public async Task<Result> UpdateAsync(dynamic profileFromView)

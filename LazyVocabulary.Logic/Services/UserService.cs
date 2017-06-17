@@ -10,6 +10,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using LazyVocabulary.Logic.Helpers;
 using System.Data.Entity;
+using System.Globalization;
 
 namespace LazyVocabulary.Logic.Services
 {
@@ -54,6 +55,35 @@ namespace LazyVocabulary.Logic.Services
         public ApplicationUserManager GetUserManager()
         {
             return UserManager;
+        }
+
+        public ResultWithData<CultureInfo> GetCultureByUserId(string userId)
+        {
+            var resultWithData = new ResultWithData<CultureInfo>();
+
+            try
+            {
+                var user = UserManager.FindById(userId);
+
+                if (user.UserProfile == null)
+                {
+                    resultWithData.ResultData = UserProfile.DefaultCulture;
+                }
+                else
+                {
+                    resultWithData.ResultData = user.UserProfile.UserCulture;
+                }
+
+                resultWithData.Success = true;
+            }
+            catch (Exception ex)
+            {
+                resultWithData.Success = false;
+                resultWithData.Message = ex.Message;
+                resultWithData.StackTrace = ex.StackTrace;
+            }
+
+            return resultWithData;
         }
 
         public async Task<ResultWithData<ApplicationUser>> GetByUserIdAsync(string userId)

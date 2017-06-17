@@ -45,7 +45,6 @@ namespace LazyVocabulary.Web.App_Start
         {
             var modules = new INinjectModule[] {
                 new ServiceModule("DefaultConnection"),
-                new SetCultureAttributeModule(),
             };
             var kernel = new StandardKernel(modules);
 
