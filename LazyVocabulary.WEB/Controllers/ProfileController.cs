@@ -132,6 +132,45 @@ namespace LazyVocabulary.Web.Controllers
             return PartialView("_Edit");
         }
 
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+            var model = new ChangePasswordViewModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Result = "Error";
+                return PartialView("_ChangePassword", model);
+            }
+
+            var userId = User.Identity.GetUserId();
+
+            dynamic user = new ExpandoObject();
+            user.UserId = userId;
+            user.Password = model.Password;
+            user.NewPassword = model.NewPassword;
+
+            var result = await UserService.ChangePasswordAsync(user);
+
+            if (!result.Success)
+            {
+                ViewBag.Result = "Error";
+                return PartialView("_ChangePassword", model);
+            }
+
+            await UserService.SetPasswordUpdatedAtForProfileAsync(userId);
+
+            ViewBag.Result = "Success";
+            return PartialView("_ChangePassword");
+        }
+
         // GET: Profile/Overview?ownerId=1
         [HttpGet]
         public async Task<ActionResult> Overview(string targetUserId)

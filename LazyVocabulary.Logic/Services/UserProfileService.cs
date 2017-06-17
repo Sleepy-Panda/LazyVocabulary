@@ -54,14 +54,15 @@ namespace LazyVocabulary.Logic.Services
 
             try
             {
-                var profile = new UserProfile
-                {
-                    Id = profileFromView.Id,
-                    Name = profileFromView.Name,
-                    Surname = profileFromView.Surname,
-                    DateOfBirth = profileFromView.DateOfBirth,
-                    UpdatedAt = DateTime.Now,
-                };
+                var profile = _database.UserProfiles
+                    .Find(u => u.Id == profileFromView.Id)
+                    .Single();
+
+                profile.Name = profileFromView.Name;
+                profile.Surname = profileFromView.Surname;
+                profile.DateOfBirth = profileFromView.DateOfBirth;
+                profile.UpdatedAt = DateTime.Now;
+
                 _database.UserProfiles.Update(profile);
                 await _database.SaveAsync();
 

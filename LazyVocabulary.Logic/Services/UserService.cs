@@ -188,6 +188,30 @@ namespace LazyVocabulary.Logic.Services
             return resultWithData;
         }
 
+        public async Task<Result> SetPasswordUpdatedAtForProfileAsync(string userId)
+        {
+            var resultWithData = new Result();
+
+            try
+            {
+                var user = await UserManager.FindByIdAsync(userId);
+
+                // Update time for user profile.
+                user.UserProfile.PasswordUpdatedAt = DateTime.Now;
+                await UserManager.UpdateAsync(user);
+
+                resultWithData.Success = true;
+            }
+            catch (Exception ex)
+            {
+                resultWithData.Success = false;
+                resultWithData.Message = ex.Message;
+                resultWithData.StackTrace = ex.StackTrace;
+            }
+
+            return resultWithData;
+        }
+
         public async Task<ResultWithData<string>> CreateUserAsync(dynamic userFromView)
         {
             var resultWithData = new ResultWithData<string>();
@@ -433,6 +457,42 @@ namespace LazyVocabulary.Logic.Services
                 var id = appUser.Id;
 
                 result.ResultData = id;
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+                result.StackTrace = ex.StackTrace;
+            }
+
+            return result;
+        }
+
+        public async Task<Result> ChangePasswordAsync(dynamic userFromView)
+        {
+            var result = new Result();
+
+            try
+            {
+                var identityResult = await UserManager.ChangePasswordAsync(
+                    userFromView.UserId, 
+                    userFromView.Password, 
+                    userFromView.NewPassword
+                );
+
+                if (!identityResult.Succeeded)
+                {
+                    var errors = String.Empty;
+
+                    foreach (var error in identityResult.Errors)
+                    {
+                        errors += $"{ error }{ Environment.NewLine }";
+                    }
+
+                    throw new Exception(errors);
+                }
+
                 result.Success = true;
             }
             catch (Exception ex)

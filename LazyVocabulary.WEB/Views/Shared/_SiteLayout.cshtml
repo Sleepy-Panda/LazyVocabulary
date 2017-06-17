@@ -21,30 +21,23 @@
                     <span>@User.Identity.Name</span>
                 </li>
                 <li>
-                    <a href="/Dictionary/Index" data-ripple><i class="fa fa-book"></i> Мои словари</a>
-                </li>
-                <li>
                     <a href="/Profile/Index" data-ripple><i class="fa fa-user"></i> Мой аккаунт</a>
                 </li>
                 <li>
-                    <a href="#" data-ripple><i class="fa fa-users"></i> Мои подписки</a>
+                    <a href="/Dictionary/Index" data-ripple><i class="fa fa-book"></i> Мои словари</a>
                 </li>
                 <li>
-                    <a href="#" data-ripple><i class="fa fa-bell"></i> Оповещения</a>
+                    <a href="/Dictionary/Create" data-ripple><i class="fa fa-user"></i> Добавить словарь</a>
                 </li>
                 <li>
-                    <a href="#" data-ripple><i class="fa fa-comment"></i> Комментарии</a>
-                </li>
-                <li>
-                    <a href="#" data-ripple><i class="fa fa-search"></i> Поиск</a>
+                    <a href="/Translation/Create" data-ripple><i class="fa fa-user"></i> Добавить перевод</a>
                 </li>
                 <li>
                     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
                     {
                         @Html.AntiForgeryToken()
                         <a href="javascript:document.getElementById('logoutForm').submit()" data-ripple><i class="fa fa-sign-out"></i> Выход</a>
-                    }
-                    
+                    }                   
                 </li>
             </ul>
         </div>
