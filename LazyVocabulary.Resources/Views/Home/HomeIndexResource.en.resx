@@ -117,11 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AboutBeLazy" xml:space="preserve">
-    <value>BeLazy is an interesting way to learn something new every day. Store an electronic dictionary, improve your vocabulary and share it with friends anytime and anywhere. Join now!</value>
-  </data>
-  <data name="BeLazyIs" xml:space="preserve">
-    <value>BeLazy is...</value>
+  <data name="AboutQuickDictionary" xml:space="preserve">
+    <value>QuickDictionary is an interesting way to learn something new every day. Store an electronic dictionary, improve your vocabulary and share it with friends anytime and anywhere. Join now!</value>
   </data>
   <data name="ChangeLanguage" xml:space="preserve">
     <value>You can choose other language to display site pages:</value>
@@ -168,6 +165,9 @@
   <data name="PageName" xml:space="preserve">
     <value>Welcome</value>
   </data>
+  <data name="QuickDictionaryIs" xml:space="preserve">
+    <value>QuickDictionary is...</value>
+  </data>
   <data name="RecommendedLanguage" xml:space="preserve">
     <value>Based on your preferences, we recommend you English language to display interface.</value>
   </data>
@@ -186,7 +186,7 @@
   <data name="Vk" xml:space="preserve">
     <value>VK</value>
   </data>
-  <data name="WelcomeBeLazy" xml:space="preserve">
-    <value>Welcome BeLazy</value>
+  <data name="WelcomeQuickDictionary" xml:space="preserve">
+    <value>Welcome QuickDictionary</value>
   </data>
 </root>

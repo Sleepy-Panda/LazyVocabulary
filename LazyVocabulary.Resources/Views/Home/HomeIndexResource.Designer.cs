@@ -61,20 +61,11 @@ namespace LazyVocabulary.Resources.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to BeLazy – это интересный способ каждый день узнавать что-то новое. Ведите электронный словарь, пополняйте словарный запас и делитесь им с друзьями в любое время и в любом месте. Присоединяйтесь!.
+        ///   Looks up a localized string similar to QuickDictionary – это интересный способ каждый день узнавать что-то новое. Ведите электронный словарь, пополняйте словарный запас и делитесь им с друзьями в любое время и в любом месте. Присоединяйтесь!.
         /// </summary>
-        public static string AboutBeLazy {
+        public static string AboutQuickDictionary {
             get {
-                return ResourceManager.GetString("AboutBeLazy", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to BeLazy - это....
-        /// </summary>
-        public static string BeLazyIs {
-            get {
-                return ResourceManager.GetString("BeLazyIs", resourceCulture);
+                return ResourceManager.GetString("AboutQuickDictionary", resourceCulture);
             }
         }
         
@@ -214,6 +205,15 @@ namespace LazyVocabulary.Resources.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to QuickDictionary - это....
+        /// </summary>
+        public static string QuickDictionaryIs {
+            get {
+                return ResourceManager.GetString("QuickDictionaryIs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Основываясь на Ваших предпочтениях, мы рекомендуем Вам русский язык интерфейса..
         /// </summary>
         public static string RecommendedLanguage {
@@ -268,11 +268,11 @@ namespace LazyVocabulary.Resources.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Добро пожаловать в BeLazy.
+        ///   Looks up a localized string similar to Добро пожаловать в QuickDictionary.
         /// </summary>
-        public static string WelcomeBeLazy {
+        public static string WelcomeQuickDictionary {
             get {
-                return ResourceManager.GetString("WelcomeBeLazy", resourceCulture);
+                return ResourceManager.GetString("WelcomeQuickDictionary", resourceCulture);
             }
         }
     }

@@ -117,11 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AboutBeLazy" xml:space="preserve">
-    <value>BeLazy – это интересный способ каждый день узнавать что-то новое. Ведите электронный словарь, пополняйте словарный запас и делитесь им с друзьями в любое время и в любом месте. Присоединяйтесь!</value>
-  </data>
-  <data name="BeLazyIs" xml:space="preserve">
-    <value>BeLazy - это...</value>
+  <data name="AboutQuickDictionary" xml:space="preserve">
+    <value>QuickDictionary – это интересный способ каждый день узнавать что-то новое. Ведите электронный словарь, пополняйте словарный запас и делитесь им с друзьями в любое время и в любом месте. Присоединяйтесь!</value>
   </data>
   <data name="ChangeLanguage" xml:space="preserve">
     <value>Вы можете изменить язык отображения сайта:</value>
@@ -168,6 +165,9 @@
   <data name="PageName" xml:space="preserve">
     <value>Добро пожаловать</value>
   </data>
+  <data name="QuickDictionaryIs" xml:space="preserve">
+    <value>QuickDictionary - это...</value>
+  </data>
   <data name="RecommendedLanguage" xml:space="preserve">
     <value>Основываясь на Ваших предпочтениях, мы рекомендуем Вам русский язык интерфейса.</value>
   </data>
@@ -186,7 +186,7 @@
   <data name="Vk" xml:space="preserve">
     <value>ВКонтакте</value>
   </data>
-  <data name="WelcomeBeLazy" xml:space="preserve">
-    <value>Добро пожаловать в BeLazy</value>
+  <data name="WelcomeQuickDictionary" xml:space="preserve">
+    <value>Добро пожаловать в QuickDictionary</value>
   </data>
 </root>
