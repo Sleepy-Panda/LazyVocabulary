@@ -151,6 +151,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ThanksForFeedbackResource.en.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Menu\MenuForAuthorizedResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MenuForAuthorizedResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu\MenuForAuthorizedResource.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MenuForAuthorizedResource.en.resx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Menu\MenuForUnauthorizedResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -250,6 +260,14 @@
     <EmbeddedResource Include="Views\Home\ThanksForFeedbackResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ThanksForFeedbackResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Menu\MenuForAuthorizedResource.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MenuForAuthorizedResource.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Menu\MenuForAuthorizedResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MenuForAuthorizedResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Menu\MenuForUnauthorizedResource.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
