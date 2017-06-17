@@ -99,6 +99,7 @@ namespace LazyVocabulary.Web.Controllers
                 Name = profile.Name,
                 Surname = profile.Surname,
                 DateOfBirth = profile.DateOfBirth?.ToString("dd.MM.yyyy"),
+                LocaleLanguage = profile.Locale,
             };
 
             return View(model);
@@ -121,6 +122,7 @@ namespace LazyVocabulary.Web.Controllers
             profile.DateOfBirth = model.DateOfBirth != null 
                 ? DateTime.Parse(model.DateOfBirth)
                 : (DateTime?) null;
+            profile.Locale = model.LocaleLanguage;
 
             var result = await _userProfileService.UpdateAsync(profile);
 
@@ -129,6 +131,8 @@ namespace LazyVocabulary.Web.Controllers
                 ViewBag.Result = "Error";
                 return PartialView("_Edit", model);
             }
+
+            AddOrUpdateLocaleCookie(model.LocaleLanguage.ToString().ToLower());
 
             ViewBag.Result = "Success";
             return PartialView("_Edit");
@@ -283,6 +287,21 @@ namespace LazyVocabulary.Web.Controllers
             {
                 return null;
             }
+        }
+
+        private void AddOrUpdateLocaleCookie(string locale)
+        {
+            HttpCookie cookie = HttpContext.Request.Cookies["locale"];
+
+            if (cookie == null)
+            {
+                cookie = new HttpCookie("locale");
+            }
+
+            cookie.Value = locale;
+            cookie.Expires = DateTime.Now.AddDays(30);
+
+            HttpContext.Response.Cookies.Add(cookie);
         }
     }
 }

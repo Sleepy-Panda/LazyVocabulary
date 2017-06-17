@@ -49,4 +49,10 @@
         @Html.TextBoxFor(m => m.DateOfBirth, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.DateOfBirth, "", new { @class = "text-danger" })
     </div>
+
+    <div class="form-group">
+        <label class="required" for="LocaleLanguage">Выберите язык отображения интерфейса</label>
+        @Html.EnumDropDownListFor(m => m.LocaleLanguage, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.LocaleLanguage, "", new { @class = "text-danger" })
+    </div>
 </div>

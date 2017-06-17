@@ -7,7 +7,6 @@ using System.Web.Mvc;
 namespace LazyVocabulary.Web.Controllers
 {
     [AllowAnonymous]
-    [RedirectOnException]
     [SetCulture]
     public class HomeController : Controller
     {

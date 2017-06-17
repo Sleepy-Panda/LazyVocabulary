@@ -29,6 +29,7 @@ namespace LazyVocabulary.Logic.Services
                 profile.Surname = profileFromView.Surname;
                 profile.DateOfBirth = profileFromView.DateOfBirth;
                 profile.UpdatedAt = DateTime.Now;
+                profile.Locale = profileFromView.Locale;
 
                 _database.UserProfiles.Update(profile);
                 await _database.SaveAsync();

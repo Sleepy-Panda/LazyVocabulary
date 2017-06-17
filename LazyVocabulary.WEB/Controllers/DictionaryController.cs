@@ -1,4 +1,5 @@
 ﻿using LazyVocabulary.Logic.Services;
+using LazyVocabulary.Web.Filters;
 using LazyVocabulary.Web.Models;
 using Microsoft.AspNet.Identity;
 using System;
@@ -12,6 +13,7 @@ using System.Web.Mvc;
 namespace LazyVocabulary.Web.Controllers
 {
     [Authorize]
+    [SetCulture]
     public class DictionaryController : Controller
     {
         private DictionaryService _dictionaryService;

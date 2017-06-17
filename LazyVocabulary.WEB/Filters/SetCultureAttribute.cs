@@ -95,7 +95,7 @@ namespace LazyVocabulary.Web.Filters
                 cookie = new HttpCookie("locale");
             }
 
-            cookie.Values["locale"] = locale;
+            cookie.Value = locale;
             cookie.Expires = DateTime.Now.AddDays(30);
 
             filterContext.HttpContext.Response.Cookies.Add(cookie);
